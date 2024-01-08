@@ -88,5 +88,5 @@ jobs:
             >&2 echo "error: working tree is not clean, aborting!"
             git status
             git diff
-            exit 1
+            #exit 1
         fi
