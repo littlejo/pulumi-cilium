@@ -1,0 +1,110 @@
+{
+    "name": "cilium",
+    "displayName": "Cilium",
+    "description": "A Pulumi package for creating and managing Cilium resources",
+    "keywords": [
+        "pulumi",
+        "cilium",
+        "category/network"
+    ],
+    "homepage": "https://github.com/littlejo/pulumi-cilium",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`cilium` Terraform Provider](https://github.com/littlejo/terraform-provider-cilium).",
+    "repository": "https://github.com/littlejo/pulumi-cilium",
+    "logoUrl": "https://raw.githubusercontent.com/littlejo/pulumi-cilium/main/docs/cilium.png",
+    "pluginDownloadURL": "github://api.github.com/littlejo/pulumi-cilium",
+    "publisher": "littlejo",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20",
+            "rootNamespace": "Pulumiverse"
+        },
+        "go": {
+            "importBasePath": "github.com/littlejo/pulumi-cilium/sdk/go/cilium",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "java": {
+            "basePackage": "com.littlejo",
+            "buildFiles": "",
+            "gradleNexusPublishPluginVersion": "",
+            "gradleTest": ""
+        },
+        "nodejs": {
+            "packageName": "@pulumiverse/cilium",
+            "packageDescription": "A Pulumi package for creating and managing Cilium resources",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/littlejo/terraform-provider-cilium)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cilium` repo](https://github.com/littlejo/pulumi-cilium/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cilium` repo](https://github.com/littlejo/terraform-provider-cilium/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "packageName": "pulumiverse_cilium",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/littlejo/terraform-provider-cilium)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cilium` repo](https://github.com/littlejo/pulumi-cilium/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cilium` repo](https://github.com/littlejo/terraform-provider-cilium/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "configPath": {
+                "type": "string",
+                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+            },
+            "context": {
+                "type": "string",
+                "description": "Context of kubeconfig file (Default: `default context`).\n"
+            },
+            "namespace": {
+                "type": "string",
+                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the cilium package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "configPath": {
+                "type": "string",
+                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+            },
+            "context": {
+                "type": "string",
+                "description": "Context of kubeconfig file (Default: `default context`).\n"
+            },
+            "namespace": {
+                "type": "string",
+                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+            }
+        },
+        "inputProperties": {
+            "configPath": {
+                "type": "string",
+                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+            },
+            "context": {
+                "type": "string",
+                "description": "Context of kubeconfig file (Default: `default context`).\n"
+            },
+            "namespace": {
+                "type": "string",
+                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "renames": {
+        "renamedProperties": {
+            "cilium:index:Provider": {
+                "configPath": "config_path"
+            }
+        },
+        "renamedConfigProperties": {
+            "configPath": "config_path"
+        }
+    }
+}
