@@ -106,5 +106,480 @@
                 "description": "Namespace to install cilium (Default: `kube-system`).\n"
             }
         }
+    },
+    "resources": {
+        "cilium:index/clustermesh:Clustermesh": {
+            "description": "Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumiverse/cilium\";\n\nconst exampleInstall = new cilium.Install(\"exampleInstall\", {\n    sets: [\n        \"cluster.name=clustermesh1\",\n        \"cluster.id=1\",\n        \"ipam.mode=kubernetes\",\n    ],\n    version: \"1.14.5\",\n});\nconst exampleClustermesh = new cilium.Clustermesh(\"exampleClustermesh\", {serviceType: \"LoadBalancer\"}, {\n    dependsOn: [exampleInstall],\n});\n```\n```python\nimport pulumi\nimport pulumiverse_cilium as cilium\n\nexample_install = cilium.Install(\"exampleInstall\",\n    sets=[\n        \"cluster.name=clustermesh1\",\n        \"cluster.id=1\",\n        \"ipam.mode=kubernetes\",\n    ],\n    version=\"1.14.5\")\nexample_clustermesh = cilium.Clustermesh(\"exampleClustermesh\", service_type=\"LoadBalancer\",\nopts=pulumi.ResourceOptions(depends_on=[example_install]))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumiverse.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleInstall = new Cilium.Install(\"exampleInstall\", new()\n    {\n        Sets = new[]\n        {\n            \"cluster.name=clustermesh1\",\n            \"cluster.id=1\",\n            \"ipam.mode=kubernetes\",\n        },\n        Version = \"1.14.5\",\n    });\n\n    var exampleClustermesh = new Cilium.Clustermesh(\"exampleClustermesh\", new()\n    {\n        ServiceType = \"LoadBalancer\",\n    }, new CustomResourceOptions\n    {\n        DependsOn = new[]\n        {\n            exampleInstall,\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleInstall, err := cilium.NewInstall(ctx, \"exampleInstall\", \u0026cilium.InstallArgs{\n\t\t\tSets: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"cluster.name=clustermesh1\"),\n\t\t\t\tpulumi.String(\"cluster.id=1\"),\n\t\t\t\tpulumi.String(\"ipam.mode=kubernetes\"),\n\t\t\t},\n\t\t\tVersion: pulumi.String(\"1.14.5\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = cilium.NewClustermesh(ctx, \"exampleClustermesh\", \u0026cilium.ClustermeshArgs{\n\t\t\tServiceType: pulumi.String(\"LoadBalancer\"),\n\t\t}, pulumi.DependsOn([]pulumi.Resource{\n\t\t\texampleInstall,\n\t\t}))\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Install;\nimport com.pulumi.cilium.InstallArgs;\nimport com.pulumi.cilium.Clustermesh;\nimport com.pulumi.cilium.ClustermeshArgs;\nimport com.pulumi.resources.CustomResourceOptions;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleInstall = new Install(\"exampleInstall\", InstallArgs.builder()        \n            .sets(            \n                \"cluster.name=clustermesh1\",\n                \"cluster.id=1\",\n                \"ipam.mode=kubernetes\")\n            .version(\"1.14.5\")\n            .build());\n\n        var exampleClustermesh = new Clustermesh(\"exampleClustermesh\", ClustermeshArgs.builder()        \n            .serviceType(\"LoadBalancer\")\n            .build(), CustomResourceOptions.builder()\n                .dependsOn(exampleInstall)\n                .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleInstall:\n    type: cilium:Install\n    properties:\n      sets:\n        - cluster.name=clustermesh1\n        - cluster.id=1\n        - ipam.mode=kubernetes\n      version: 1.14.5\n  exampleClustermesh:\n    type: cilium:Clustermesh\n    properties:\n      serviceType: LoadBalancer\n    options:\n      dependson:\n        - ${exampleInstall}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "enableExternalWorkloads": {
+                    "type": "boolean",
+                    "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
+                },
+                "enableKvStoreMesh": {
+                    "type": "boolean",
+                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "serviceType": {
+                    "type": "string",
+                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                },
+                "wait": {
+                    "type": "boolean",
+                    "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                }
+            },
+            "required": [
+                "enableExternalWorkloads",
+                "enableKvStoreMesh",
+                "namespace",
+                "serviceType",
+                "wait"
+            ],
+            "inputProperties": {
+                "enableExternalWorkloads": {
+                    "type": "boolean",
+                    "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
+                },
+                "enableKvStoreMesh": {
+                    "type": "boolean",
+                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "serviceType": {
+                    "type": "string",
+                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                },
+                "wait": {
+                    "type": "boolean",
+                    "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Clustermesh resources.\n",
+                "properties": {
+                    "enableExternalWorkloads": {
+                        "type": "boolean",
+                        "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
+                    },
+                    "enableKvStoreMesh": {
+                        "type": "boolean",
+                        "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    },
+                    "serviceType": {
+                        "type": "string",
+                        "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                    },
+                    "wait": {
+                        "type": "boolean",
+                        "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cilium:index/clustermeshConnection:ClustermeshConnection": {
+            "description": "Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumiverse/cilium\";\n\nconst example = new cilium.ClustermeshConnection(\"example\", {destinationContext: \"context-2\"});\n```\n```python\nimport pulumi\nimport pulumiverse_cilium as cilium\n\nexample = cilium.ClustermeshConnection(\"example\", destination_context=\"context-2\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumiverse.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.ClustermeshConnection(\"example\", new()\n    {\n        DestinationContext = \"context-2\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewClustermeshConnection(ctx, \"example\", \u0026cilium.ClustermeshConnectionArgs{\n\t\t\tDestinationContext: pulumi.String(\"context-2\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.ClustermeshConnection;\nimport com.pulumi.cilium.ClustermeshConnectionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ClustermeshConnection(\"example\", ClustermeshConnectionArgs.builder()        \n            .destinationContext(\"context-2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:ClustermeshConnection\n    properties:\n      destinationContext: context-2\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "destinationContext": {
+                    "type": "string",
+                    "description": "Kubernetes configuration context of destination cluster\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                }
+            },
+            "required": [
+                "destinationContext",
+                "namespace"
+            ],
+            "inputProperties": {
+                "destinationContext": {
+                    "type": "string",
+                    "description": "Kubernetes configuration context of destination cluster\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ClustermeshConnection resources.\n",
+                "properties": {
+                    "destinationContext": {
+                        "type": "string",
+                        "description": "Kubernetes configuration context of destination cluster\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cilium:index/config:Config": {
+            "description": "Config resource for Cilium. This is equivalent to cilium cli: `cilium config`: It manages the cilium Kubernetes ConfigMap resource\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumiverse/cilium\";\n\nconst example = new cilium.Config(\"example\", {\n    key: \"debug\",\n    value: \"true\",\n});\n```\n```python\nimport pulumi\nimport pulumiverse_cilium as cilium\n\nexample = cilium.Config(\"example\",\n    key=\"debug\",\n    value=\"true\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumiverse.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Config(\"example\", new()\n    {\n        Key = \"debug\",\n        Value = \"true\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewConfig(ctx, \"example\", \u0026cilium.ConfigArgs{\n\t\t\tKey:   pulumi.String(\"debug\"),\n\t\t\tValue: pulumi.String(\"true\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Config;\nimport com.pulumi.cilium.ConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Config(\"example\", ConfigArgs.builder()        \n            .key(\"debug\")\n            .value(\"true\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Config\n    properties:\n      key: debug\n      value: 'true'\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Key of the config\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "restart": {
+                    "type": "boolean",
+                    "description": "Restart Cilium pods (Default: `true`).\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value of the key\n"
+                }
+            },
+            "required": [
+                "key",
+                "namespace",
+                "restart",
+                "value"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "Key of the config\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "restart": {
+                    "type": "boolean",
+                    "description": "Restart Cilium pods (Default: `true`).\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value of the key\n"
+                }
+            },
+            "requiredInputs": [
+                "key",
+                "value"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Config resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "Key of the config\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    },
+                    "restart": {
+                        "type": "boolean",
+                        "description": "Restart Cilium pods (Default: `true`).\n"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Value of the key\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cilium:index/hubble:Hubble": {
+            "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumiverse/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport pulumiverse_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumiverse.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Hubble;\nimport com.pulumi.cilium.HubbleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()        \n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "relay": {
+                    "type": "boolean",
+                    "description": "Deploy Hubble Relay (Default: `true`).\n"
+                },
+                "ui": {
+                    "type": "boolean",
+                    "description": "Enable Hubble UI (Default: `false`).\n"
+                }
+            },
+            "required": [
+                "namespace",
+                "relay",
+                "ui"
+            ],
+            "inputProperties": {
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "relay": {
+                    "type": "boolean",
+                    "description": "Deploy Hubble Relay (Default: `true`).\n"
+                },
+                "ui": {
+                    "type": "boolean",
+                    "description": "Enable Hubble UI (Default: `false`).\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Hubble resources.\n",
+                "properties": {
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    },
+                    "relay": {
+                        "type": "boolean",
+                        "description": "Deploy Hubble Relay (Default: `true`).\n"
+                    },
+                    "ui": {
+                        "type": "boolean",
+                        "description": "Enable Hubble UI (Default: `false`).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cilium:index/install:Install": {
+            "description": "Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumiverse/cilium\";\nimport * as kind from \"@pulumi/kind\";\n\nconst examplekind_cluster = new kind.index.Kind_cluster(\"examplekind_cluster\", {\n    name: \"test-cluster\",\n    kindConfig: [{\n        kind: \"Cluster\",\n        apiVersion: \"kind.x-k8s.io/v1alpha4\",\n        node: [\n            {\n                role: \"control-plane\",\n            },\n            {\n                role: \"worker\",\n            },\n        ],\n        networking: [{\n            disableDefaultCni: true,\n        }],\n    }],\n});\nconst exampleInstall = new cilium.Install(\"exampleInstall\", {\n    sets: [\n        \"ipam.mode=kubernetes\",\n        \"ipam.operator.replicas=1\",\n        \"tunnel=vxlan\",\n    ],\n    version: \"1.14.5\",\n});\n```\n```python\nimport pulumi\nimport pulumi_kind as kind\nimport pulumiverse_cilium as cilium\n\nexamplekind_cluster = kind.index.Kind_cluster(\"examplekind_cluster\",\n    name=test-cluster,\n    kind_config=[{\n        kind: Cluster,\n        apiVersion: kind.x-k8s.io/v1alpha4,\n        node: [\n            {\n                role: control-plane,\n            },\n            {\n                role: worker,\n            },\n        ],\n        networking: [{\n            disableDefaultCni: True,\n        }],\n    }])\nexample_install = cilium.Install(\"exampleInstall\",\n    sets=[\n        \"ipam.mode=kubernetes\",\n        \"ipam.operator.replicas=1\",\n        \"tunnel=vxlan\",\n    ],\n    version=\"1.14.5\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumiverse.Cilium;\nusing Kind = Pulumi.Kind;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var examplekind_cluster = new Kind.Index.Kind_cluster(\"examplekind_cluster\", new()\n    {\n        Name = \"test-cluster\",\n        KindConfig = new[]\n        {\n            \n            {\n                { \"kind\", \"Cluster\" },\n                { \"apiVersion\", \"kind.x-k8s.io/v1alpha4\" },\n                { \"node\", new[]\n                {\n                    \n                    {\n                        { \"role\", \"control-plane\" },\n                    },\n                    \n                    {\n                        { \"role\", \"worker\" },\n                    },\n                } },\n                { \"networking\", new[]\n                {\n                    \n                    {\n                        { \"disableDefaultCni\", true },\n                    },\n                } },\n            },\n        },\n    });\n\n    var exampleInstall = new Cilium.Install(\"exampleInstall\", new()\n    {\n        Sets = new[]\n        {\n            \"ipam.mode=kubernetes\",\n            \"ipam.operator.replicas=1\",\n            \"tunnel=vxlan\",\n        },\n        Version = \"1.14.5\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-kind/sdk/v1/go/kind\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := index.NewKind_cluster(ctx, \"examplekind_cluster\", \u0026index.Kind_clusterArgs{\n\t\t\tName: \"test-cluster\",\n\t\t\tKindConfig: []map[string]interface{}{\n\t\t\t\tmap[string]interface{}{\n\t\t\t\t\t\"kind\":       \"Cluster\",\n\t\t\t\t\t\"apiVersion\": \"kind.x-k8s.io/v1alpha4\",\n\t\t\t\t\t\"node\": []map[string]interface{}{\n\t\t\t\t\t\tmap[string]interface{}{\n\t\t\t\t\t\t\t\"role\": \"control-plane\",\n\t\t\t\t\t\t},\n\t\t\t\t\t\tmap[string]interface{}{\n\t\t\t\t\t\t\t\"role\": \"worker\",\n\t\t\t\t\t\t},\n\t\t\t\t\t},\n\t\t\t\t\t\"networking\": []map[string]interface{}{\n\t\t\t\t\t\tmap[string]interface{}{\n\t\t\t\t\t\t\t\"disableDefaultCni\": true,\n\t\t\t\t\t\t},\n\t\t\t\t\t},\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = cilium.NewInstall(ctx, \"exampleInstall\", \u0026cilium.InstallArgs{\n\t\t\tSets: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"ipam.mode=kubernetes\"),\n\t\t\t\tpulumi.String(\"ipam.operator.replicas=1\"),\n\t\t\t\tpulumi.String(\"tunnel=vxlan\"),\n\t\t\t},\n\t\t\tVersion: pulumi.String(\"1.14.5\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.kind.kind_cluster;\nimport com.pulumi.kind.Kind_clusterArgs;\nimport com.pulumi.cilium.Install;\nimport com.pulumi.cilium.InstallArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var examplekind_cluster = new Kind_cluster(\"examplekind_cluster\", Kind_clusterArgs.builder()        \n            .name(\"test-cluster\")\n            .kindConfig(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))\n            .build());\n\n        var exampleInstall = new Install(\"exampleInstall\", InstallArgs.builder()        \n            .sets(            \n                \"ipam.mode=kubernetes\",\n                \"ipam.operator.replicas=1\",\n                \"tunnel=vxlan\")\n            .version(\"1.14.5\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  examplekind_cluster:\n    type: kind:kind_cluster\n    properties:\n      name: test-cluster\n      kindConfig:\n        - kind: Cluster\n          apiVersion: kind.x-k8s.io/v1alpha4\n          node:\n            - role: control-plane\n            - role: worker\n          networking:\n            - disableDefaultCni: true\n  exampleInstall:\n    type: cilium:Install\n    properties:\n      sets:\n        - ipam.mode=kubernetes\n        - ipam.operator.replicas=1\n        - tunnel=vxlan\n      version: 1.14.5\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "dataPath": {
+                    "type": "string",
+                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
+                },
+                "reset": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                },
+                "reuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                },
+                "sets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).\n"
+                },
+                "values": {
+                    "type": "string",
+                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version of Cilium (Default: `v1.14.4`).\n"
+                },
+                "wait": {
+                    "type": "boolean",
+                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                }
+            },
+            "required": [
+                "dataPath",
+                "namespace",
+                "repository",
+                "reset",
+                "reuse",
+                "sets",
+                "values",
+                "version",
+                "wait"
+            ],
+            "inputProperties": {
+                "dataPath": {
+                    "type": "string",
+                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                },
+                "repository": {
+                    "type": "string",
+                    "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
+                },
+                "reset": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                },
+                "reuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                },
+                "sets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).\n"
+                },
+                "values": {
+                    "type": "string",
+                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version of Cilium (Default: `v1.14.4`).\n"
+                },
+                "wait": {
+                    "type": "boolean",
+                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Install resources.\n",
+                "properties": {
+                    "dataPath": {
+                        "type": "string",
+                        "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    },
+                    "repository": {
+                        "type": "string",
+                        "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
+                    },
+                    "reset": {
+                        "type": "boolean",
+                        "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                    },
+                    "reuse": {
+                        "type": "boolean",
+                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                    },
+                    "sets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).\n"
+                    },
+                    "values": {
+                        "type": "string",
+                        "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                    },
+                    "version": {
+                        "type": "string",
+                        "description": "Version of Cilium (Default: `v1.14.4`).\n"
+                    },
+                    "wait": {
+                        "type": "boolean",
+                        "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "cilium:index/kubeproxyFree:KubeproxyFree": {
+            "description": "Disable Kube-Proxy DaemonSet, equivalent to: `kubectl -n kube-system patch daemonset kube-proxy -p '\"spec\": {\"template\": {\"spec\": {\"nodeSelector\": {\"non-existing\": \"true\"}}}}'`.\n",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of DaemonSet (Default: `kube-proxy`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                }
+            },
+            "required": [
+                "name",
+                "namespace"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of DaemonSet (Default: `kube-proxy`).\n"
+                },
+                "namespace": {
+                    "type": "string",
+                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering KubeproxyFree resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of DaemonSet (Default: `kube-proxy`).\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "cilium:index/getHelmValues:getHelmValues": {
+            "description": "Helm values of cilium\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumi/cilium\";\nimport * as local from \"@pulumi/local\";\n\nconst exampleHelmValues = cilium.getHelmValues({});\nconst examplelocal_file = new local.index.Local_file(\"examplelocal_file\", {\n    content: exampleHelmValues.yaml,\n    filename: `${path.module}/values.yaml`,\n});\n```\n```python\nimport pulumi\nimport pulumi_cilium as cilium\nimport pulumi_local as local\n\nexample_helm_values = cilium.get_helm_values()\nexample_file = local.File(\"exampleFile\",\n    content=example_helm_values.yaml,\n    filename=f\"{path['module']}/values.yaml\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\nusing Local = Pulumi.Local;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleHelmValues = Cilium.GetHelmValues.Invoke();\n\n    var exampleFile = new Local.File(\"exampleFile\", new()\n    {\n        Content = exampleHelmValues.Apply(getHelmValuesResult =\u003e getHelmValuesResult.Yaml),\n        Filename = $\"{path.Module}/values.yaml\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-local/sdk/go/local\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleHelmValues, err := cilium.GetHelmValues(ctx, nil, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = local.NewFile(ctx, \"exampleFile\", \u0026local.FileArgs{\n\t\t\tContent:  *pulumi.String(exampleHelmValues.Yaml),\n\t\t\tFilename: pulumi.String(fmt.Sprintf(\"%v/values.yaml\", path.Module)),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.CiliumFunctions;\nimport com.pulumi.cilium.inputs.GetHelmValuesArgs;\nimport com.pulumi.local.File;\nimport com.pulumi.local.FileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var exampleHelmValues = CiliumFunctions.getHelmValues();\n\n        var exampleFile = new File(\"exampleFile\", FileArgs.builder()        \n            .content(exampleHelmValues.applyValue(getHelmValuesResult -\u003e getHelmValuesResult.yaml()))\n            .filename(String.format(\"%s/values.yaml\", path.module()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleFile:\n    type: local:File\n    properties:\n      content: ${exampleHelmValues.yaml}\n      filename: ${path.module}/values.yaml\nvariables:\n  exampleHelmValues:\n    fn::invoke:\n      Function: cilium:getHelmValues\n      Arguments: {}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getHelmValues.\n",
+                "properties": {
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace of cilium (Default: `kube-system`).\n"
+                    },
+                    "release": {
+                        "type": "string",
+                        "description": "Helm release (Default: `cilium.Install`).\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getHelmValues.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "namespace": {
+                        "type": "string",
+                        "description": "Namespace of cilium (Default: `kube-system`).\n"
+                    },
+                    "release": {
+                        "type": "string",
+                        "description": "Helm release (Default: `cilium.Install`).\n"
+                    },
+                    "yaml": {
+                        "type": "string",
+                        "description": "Yaml output\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "yaml",
+                    "id"
+                ]
+            }
+        }
     }
 }

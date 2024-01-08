@@ -128,7 +128,7 @@ func Provider() tfbridge.ProviderInfo {
 			// "aws_iam_role": {
 			//   Tok: makeResource(mainMod, "aws_iam_role"),
 			// },
-			"cilium":                        {Tok: makeResource(mainMod, "cilium")},
+			"cilium":                        {Tok: makeResource(mainMod, "cilium_install")},
 			"cilium_clustermesh":            {Tok: makeResource(mainMod, "cilium_clustermesh")},
 			"cilium_clustermesh_connection": {Tok: makeResource(mainMod, "cilium_clustermesh_connection")},
 			"cilium_config":                 {Tok: makeResource(mainMod, "cilium_config")},
