@@ -61,7 +61,7 @@ jobs:
     - name: Set PreRelease Version
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
     - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@3fa32b8bb5620a2c1afe798654bbad59f9da4906
+      uses: goreleaser/goreleaser-action@e0e636a9515af0b3b3fa2d5c5fa440e36d49812b
       with:
         args: -p 3 release --clean
         version: latest
