@@ -1,6 +1,29 @@
 {
     "renames": {
+        "resources": {
+            "cilium:index/clustermesh:Clustermesh": "cilium_clustermesh",
+            "cilium:index/clustermeshConnection:ClustermeshConnection": "cilium_clustermesh_connection",
+            "cilium:index/config:Config": "cilium_config",
+            "cilium:index/hubble:Hubble": "cilium_hubble",
+            "cilium:index/install:Install": "cilium",
+            "cilium:index/kubeproxyFree:KubeproxyFree": "cilium_kubeproxy_free"
+        },
+        "functions": {
+            "cilium:index/getHelmValues:getHelmValues": "cilium_helm_values"
+        },
         "renamedProperties": {
+            "cilium:index/clustermesh:Clustermesh": {
+                "enableExternalWorkloads": "enable_external_workloads",
+                "enableKvStoreMesh": "enable_kv_store_mesh",
+                "serviceType": "service_type"
+            },
+            "cilium:index/clustermeshConnection:ClustermeshConnection": {
+                "destinationContext": "destination_context"
+            },
+            "cilium:index/install:Install": {
+                "dataPath": "data_path",
+                "sets": "set"
+            },
             "cilium:index:Provider": {
                 "configPath": "config_path"
             }
