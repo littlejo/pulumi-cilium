@@ -17,7 +17,7 @@ def readme():
         return "cilium Pulumi Package - Development Version"
 
 
-setup(name='pulumiverse_cilium',
+setup(name='littlejo_cilium',
       python_requires='>=3.7',
       version=VERSION,
       description="A Pulumi package for creating and managing Cilium resources",
@@ -31,7 +31,7 @@ setup(name='pulumiverse_cilium',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumiverse_cilium': [
+          'littlejo_cilium': [
               'py.typed',
               'pulumi-plugin.json',
           ]

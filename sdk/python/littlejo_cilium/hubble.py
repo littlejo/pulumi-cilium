@@ -139,7 +139,7 @@ class Hubble(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.Hubble("example", ui=True)
         ```
@@ -163,7 +163,7 @@ class Hubble(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.Hubble("example", ui=True)
         ```
