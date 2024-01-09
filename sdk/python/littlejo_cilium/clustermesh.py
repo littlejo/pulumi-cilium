@@ -205,7 +205,7 @@ class Clustermesh(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example_install = cilium.Install("exampleInstall",
             sets=[
@@ -239,7 +239,7 @@ class Clustermesh(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example_install = cilium.Install("exampleInstall",
             sets=[

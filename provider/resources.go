@@ -143,7 +143,7 @@ func Provider() tfbridge.ProviderInfo {
 			"cilium_helm_values": {Tok: makeDataSource(mainMod, "cilium_helm_values")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@pulumiverse/cilium",
+			PackageName: "@littlejo/cilium",
 
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
@@ -159,7 +159,7 @@ func Provider() tfbridge.ProviderInfo {
 			//Overlay: &tfbridge.OverlayInfo{},
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName: "pulumiverse_cilium",
+			PackageName: "littlejo_cilium",
 
 			// List any Python dependencies and their version ranges
 			Requires: map[string]string{

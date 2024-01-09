@@ -170,7 +170,7 @@ class Config(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.Config("example",
             key="debug",
@@ -197,7 +197,7 @@ class Config(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.Config("example",
             key="debug",

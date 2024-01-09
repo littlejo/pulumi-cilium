@@ -337,8 +337,8 @@ class Install(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import littlejo_cilium as cilium
         import pulumi_kind as kind
-        import pulumiverse_cilium as cilium
 
         examplekind_cluster = kind.index.Kind_cluster("examplekind_cluster",
             name=test-cluster,
@@ -391,8 +391,8 @@ class Install(pulumi.CustomResource):
 
         ```python
         import pulumi
+        import littlejo_cilium as cilium
         import pulumi_kind as kind
-        import pulumiverse_cilium as cilium
 
         examplekind_cluster = kind.index.Kind_cluster("examplekind_cluster",
             name=test-cluster,

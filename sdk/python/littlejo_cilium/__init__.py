@@ -16,10 +16,10 @@ from .provider import *
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
-    import pulumiverse_cilium.config as __config
+    import littlejo_cilium.config as __config
     config = __config
 else:
-    config = _utilities.lazy_import('pulumiverse_cilium.config')
+    config = _utilities.lazy_import('littlejo_cilium.config')
 
 _utilities.register(
     resource_modules="""
@@ -27,7 +27,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/clustermesh",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/clustermesh:Clustermesh": "Clustermesh"
   }
@@ -35,7 +35,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/clustermeshConnection",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/clustermeshConnection:ClustermeshConnection": "ClustermeshConnection"
   }
@@ -43,7 +43,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/config",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/config:Config": "Config"
   }
@@ -51,7 +51,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/hubble",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/hubble:Hubble": "Hubble"
   }
@@ -59,7 +59,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/install",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/install:Install": "Install"
   }
@@ -67,7 +67,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "mod": "index/kubeproxyFree",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/kubeproxyFree:KubeproxyFree": "KubeproxyFree"
   }
@@ -79,7 +79,7 @@ _utilities.register(
  {
   "pkg": "cilium",
   "token": "pulumi:providers:cilium",
-  "fqn": "pulumiverse_cilium",
+  "fqn": "littlejo_cilium",
   "class": "Provider"
  }
 ]

@@ -106,7 +106,7 @@ class ClustermeshConnection(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.ClustermeshConnection("example", destination_context="context-2")
         ```
@@ -129,7 +129,7 @@ class ClustermeshConnection(pulumi.CustomResource):
 
         ```python
         import pulumi
-        import pulumiverse_cilium as cilium
+        import littlejo_cilium as cilium
 
         example = cilium.ClustermeshConnection("example", destination_context="context-2")
         ```
