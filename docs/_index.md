@@ -30,3 +30,18 @@ return nil
 ```
 
 {{% /choosable %}}
+
+{{% choosable language python %}}
+
+```python
+"""Deploy cilium"""
+example_install = cilium.Install("exampleInstall",
+    sets=[
+        "ipam.mode=kubernetes",
+        "ipam.operator.replicas=1",
+        "tunnel=vxlan",
+    ],
+    version="1.14.5")
+```
+
+{{% /choosable %}}
