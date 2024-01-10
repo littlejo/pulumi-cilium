@@ -1,6 +1,6 @@
 module github.com/littlejo/pulumi-cilium/provider
 
-go 1.21.5
+go 1.21.6
 
 require (
 	github.com/ettle/strcase v0.1.1
