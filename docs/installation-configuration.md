@@ -9,6 +9,7 @@ layout: installation
 The Pulumi Cilium provider is available as a package in all Pulumi languages:
 
 * Go: [`github.com/littlejo/pulumi-cilium/sdk/go/cilium`](https://pkg.go.dev/github.com/littlejo/pulumi-cilium/sdk/go/cilium)
+* Python
 
 ## Configuration
 
