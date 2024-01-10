@@ -11,13 +11,13 @@ This package is available for several languages/platforms:
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
 ```bash
-npm install @pulumiverse/cilium
+npm install @littlejo/cilium
 ```
 
 or `yarn`:
 
 ```bash
-yarn add @pulumiverse/cilium
+yarn add @littlejo/cilium
 ```
 
 ### Python
@@ -25,7 +25,7 @@ yarn add @pulumiverse/cilium
 To use from Python, install using `pip`:
 
 ```bash
-pip install pulumiverse_cilium
+pip install littlejo-cilium
 ```
 
 ### Go
@@ -41,7 +41,7 @@ go get github.com/littlejo/pulumi-cilium/sdk/go/...
 To use from .NET, install using `dotnet add package`:
 
 ```bash
-dotnet add package Pulumiverse.Cilium
+dotnet add package Littlejo.Cilium
 ```
 
 ## Reference
