@@ -172,7 +172,7 @@ jobs:
           - "11"
         language:
           - go
-          #- python
+          - python
           #- nodejs
           #- dotnet
           # - java
