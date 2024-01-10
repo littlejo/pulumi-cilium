@@ -296,7 +296,7 @@ provider we created to ensure everything is working properly.
     pulumi new typescript
     # (Go through the prompts with the default values)
     npm install
-    yarn link @pulumiverse/cilium
+    yarn link @littlejo/cilium
     ```
 
 1. Create a minimal program for the provider, i.e. one that creates the
