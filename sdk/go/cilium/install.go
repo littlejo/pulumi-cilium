@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart
@@ -234,12 +233,6 @@ func (i *Install) ToInstallOutputWithContext(ctx context.Context) InstallOutput 
 	return pulumi.ToOutputWithContext(ctx, i).(InstallOutput)
 }
 
-func (i *Install) ToOutput(ctx context.Context) pulumix.Output[*Install] {
-	return pulumix.Output[*Install]{
-		OutputState: i.ToInstallOutputWithContext(ctx).OutputState,
-	}
-}
-
 // InstallArrayInput is an input type that accepts InstallArray and InstallArrayOutput values.
 // You can construct a concrete instance of `InstallArrayInput` via:
 //
@@ -263,12 +256,6 @@ func (i InstallArray) ToInstallArrayOutput() InstallArrayOutput {
 
 func (i InstallArray) ToInstallArrayOutputWithContext(ctx context.Context) InstallArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(InstallArrayOutput)
-}
-
-func (i InstallArray) ToOutput(ctx context.Context) pulumix.Output[[]*Install] {
-	return pulumix.Output[[]*Install]{
-		OutputState: i.ToInstallArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // InstallMapInput is an input type that accepts InstallMap and InstallMapOutput values.
@@ -296,12 +283,6 @@ func (i InstallMap) ToInstallMapOutputWithContext(ctx context.Context) InstallMa
 	return pulumi.ToOutputWithContext(ctx, i).(InstallMapOutput)
 }
 
-func (i InstallMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Install] {
-	return pulumix.Output[map[string]*Install]{
-		OutputState: i.ToInstallMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type InstallOutput struct{ *pulumi.OutputState }
 
 func (InstallOutput) ElementType() reflect.Type {
@@ -314,12 +295,6 @@ func (o InstallOutput) ToInstallOutput() InstallOutput {
 
 func (o InstallOutput) ToInstallOutputWithContext(ctx context.Context) InstallOutput {
 	return o
-}
-
-func (o InstallOutput) ToOutput(ctx context.Context) pulumix.Output[*Install] {
-	return pulumix.Output[*Install]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
@@ -381,12 +356,6 @@ func (o InstallArrayOutput) ToInstallArrayOutputWithContext(ctx context.Context)
 	return o
 }
 
-func (o InstallArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Install] {
-	return pulumix.Output[[]*Install]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o InstallArrayOutput) Index(i pulumi.IntInput) InstallOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Install {
 		return vs[0].([]*Install)[vs[1].(int)]
@@ -405,12 +374,6 @@ func (o InstallMapOutput) ToInstallMapOutput() InstallMapOutput {
 
 func (o InstallMapOutput) ToInstallMapOutputWithContext(ctx context.Context) InstallMapOutput {
 	return o
-}
-
-func (o InstallMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Install] {
-	return pulumix.Output[map[string]*Install]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o InstallMapOutput) MapIndex(k pulumi.StringInput) InstallOutput {

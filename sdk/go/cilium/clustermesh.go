@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
@@ -176,12 +175,6 @@ func (i *Clustermesh) ToClustermeshOutputWithContext(ctx context.Context) Cluste
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshOutput)
 }
 
-func (i *Clustermesh) ToOutput(ctx context.Context) pulumix.Output[*Clustermesh] {
-	return pulumix.Output[*Clustermesh]{
-		OutputState: i.ToClustermeshOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ClustermeshArrayInput is an input type that accepts ClustermeshArray and ClustermeshArrayOutput values.
 // You can construct a concrete instance of `ClustermeshArrayInput` via:
 //
@@ -205,12 +198,6 @@ func (i ClustermeshArray) ToClustermeshArrayOutput() ClustermeshArrayOutput {
 
 func (i ClustermeshArray) ToClustermeshArrayOutputWithContext(ctx context.Context) ClustermeshArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshArrayOutput)
-}
-
-func (i ClustermeshArray) ToOutput(ctx context.Context) pulumix.Output[[]*Clustermesh] {
-	return pulumix.Output[[]*Clustermesh]{
-		OutputState: i.ToClustermeshArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ClustermeshMapInput is an input type that accepts ClustermeshMap and ClustermeshMapOutput values.
@@ -238,12 +225,6 @@ func (i ClustermeshMap) ToClustermeshMapOutputWithContext(ctx context.Context) C
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshMapOutput)
 }
 
-func (i ClustermeshMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Clustermesh] {
-	return pulumix.Output[map[string]*Clustermesh]{
-		OutputState: i.ToClustermeshMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ClustermeshOutput struct{ *pulumi.OutputState }
 
 func (ClustermeshOutput) ElementType() reflect.Type {
@@ -256,12 +237,6 @@ func (o ClustermeshOutput) ToClustermeshOutput() ClustermeshOutput {
 
 func (o ClustermeshOutput) ToClustermeshOutputWithContext(ctx context.Context) ClustermeshOutput {
 	return o
-}
-
-func (o ClustermeshOutput) ToOutput(ctx context.Context) pulumix.Output[*Clustermesh] {
-	return pulumix.Output[*Clustermesh]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Enable support for external workloads, such as VMs (Default: `false`).
@@ -303,12 +278,6 @@ func (o ClustermeshArrayOutput) ToClustermeshArrayOutputWithContext(ctx context.
 	return o
 }
 
-func (o ClustermeshArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Clustermesh] {
-	return pulumix.Output[[]*Clustermesh]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ClustermeshArrayOutput) Index(i pulumi.IntInput) ClustermeshOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Clustermesh {
 		return vs[0].([]*Clustermesh)[vs[1].(int)]
@@ -327,12 +296,6 @@ func (o ClustermeshMapOutput) ToClustermeshMapOutput() ClustermeshMapOutput {
 
 func (o ClustermeshMapOutput) ToClustermeshMapOutputWithContext(ctx context.Context) ClustermeshMapOutput {
 	return o
-}
-
-func (o ClustermeshMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Clustermesh] {
-	return pulumix.Output[map[string]*Clustermesh]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ClustermeshMapOutput) MapIndex(k pulumi.StringInput) ClustermeshOutput {

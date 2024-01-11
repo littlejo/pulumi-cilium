@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
@@ -133,12 +132,6 @@ func (i *ClustermeshConnection) ToClustermeshConnectionOutputWithContext(ctx con
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshConnectionOutput)
 }
 
-func (i *ClustermeshConnection) ToOutput(ctx context.Context) pulumix.Output[*ClustermeshConnection] {
-	return pulumix.Output[*ClustermeshConnection]{
-		OutputState: i.ToClustermeshConnectionOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ClustermeshConnectionArrayInput is an input type that accepts ClustermeshConnectionArray and ClustermeshConnectionArrayOutput values.
 // You can construct a concrete instance of `ClustermeshConnectionArrayInput` via:
 //
@@ -162,12 +155,6 @@ func (i ClustermeshConnectionArray) ToClustermeshConnectionArrayOutput() Cluster
 
 func (i ClustermeshConnectionArray) ToClustermeshConnectionArrayOutputWithContext(ctx context.Context) ClustermeshConnectionArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshConnectionArrayOutput)
-}
-
-func (i ClustermeshConnectionArray) ToOutput(ctx context.Context) pulumix.Output[[]*ClustermeshConnection] {
-	return pulumix.Output[[]*ClustermeshConnection]{
-		OutputState: i.ToClustermeshConnectionArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ClustermeshConnectionMapInput is an input type that accepts ClustermeshConnectionMap and ClustermeshConnectionMapOutput values.
@@ -195,12 +182,6 @@ func (i ClustermeshConnectionMap) ToClustermeshConnectionMapOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(ClustermeshConnectionMapOutput)
 }
 
-func (i ClustermeshConnectionMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ClustermeshConnection] {
-	return pulumix.Output[map[string]*ClustermeshConnection]{
-		OutputState: i.ToClustermeshConnectionMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ClustermeshConnectionOutput struct{ *pulumi.OutputState }
 
 func (ClustermeshConnectionOutput) ElementType() reflect.Type {
@@ -213,12 +194,6 @@ func (o ClustermeshConnectionOutput) ToClustermeshConnectionOutput() Clustermesh
 
 func (o ClustermeshConnectionOutput) ToClustermeshConnectionOutputWithContext(ctx context.Context) ClustermeshConnectionOutput {
 	return o
-}
-
-func (o ClustermeshConnectionOutput) ToOutput(ctx context.Context) pulumix.Output[*ClustermeshConnection] {
-	return pulumix.Output[*ClustermeshConnection]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Kubernetes configuration context of destination cluster
@@ -245,12 +220,6 @@ func (o ClustermeshConnectionArrayOutput) ToClustermeshConnectionArrayOutputWith
 	return o
 }
 
-func (o ClustermeshConnectionArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ClustermeshConnection] {
-	return pulumix.Output[[]*ClustermeshConnection]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ClustermeshConnectionArrayOutput) Index(i pulumi.IntInput) ClustermeshConnectionOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ClustermeshConnection {
 		return vs[0].([]*ClustermeshConnection)[vs[1].(int)]
@@ -269,12 +238,6 @@ func (o ClustermeshConnectionMapOutput) ToClustermeshConnectionMapOutput() Clust
 
 func (o ClustermeshConnectionMapOutput) ToClustermeshConnectionMapOutputWithContext(ctx context.Context) ClustermeshConnectionMapOutput {
 	return o
-}
-
-func (o ClustermeshConnectionMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ClustermeshConnection] {
-	return pulumix.Output[map[string]*ClustermeshConnection]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ClustermeshConnectionMapOutput) MapIndex(k pulumi.StringInput) ClustermeshConnectionOutput {
