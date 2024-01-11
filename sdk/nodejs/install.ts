@@ -99,7 +99,7 @@ export class Install extends pulumi.CustomResource {
      */
     public readonly values!: pulumi.Output<string>;
     /**
-     * Version of Cilium (Default: `v1.14.4`).
+     * Version of Cilium (Default: `v1.14.5`).
      */
     public readonly version!: pulumi.Output<string>;
     /**
@@ -179,7 +179,7 @@ export interface InstallState {
      */
     values?: pulumi.Input<string>;
     /**
-     * Version of Cilium (Default: `v1.14.4`).
+     * Version of Cilium (Default: `v1.14.5`).
      */
     version?: pulumi.Input<string>;
     /**
@@ -221,7 +221,7 @@ export interface InstallArgs {
      */
     values?: pulumi.Input<string>;
     /**
-     * Version of Cilium (Default: `v1.14.4`).
+     * Version of Cilium (Default: `v1.14.5`).
      */
     version?: pulumi.Input<string>;
     /**
