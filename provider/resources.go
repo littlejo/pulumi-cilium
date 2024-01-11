@@ -176,7 +176,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
-			RootNamespace: "Pulumiverse",
+			RootNamespace: "Littlejo",
 
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
