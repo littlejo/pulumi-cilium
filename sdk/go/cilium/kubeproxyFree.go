@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Disable Kube-Proxy DaemonSet, equivalent to: `kubectl -n kube-system patch daemonset kube-proxy -p '"spec": {"template": {"spec": {"nodeSelector": {"non-existing": "true"}}}}'`.
@@ -107,12 +106,6 @@ func (i *KubeproxyFree) ToKubeproxyFreeOutputWithContext(ctx context.Context) Ku
 	return pulumi.ToOutputWithContext(ctx, i).(KubeproxyFreeOutput)
 }
 
-func (i *KubeproxyFree) ToOutput(ctx context.Context) pulumix.Output[*KubeproxyFree] {
-	return pulumix.Output[*KubeproxyFree]{
-		OutputState: i.ToKubeproxyFreeOutputWithContext(ctx).OutputState,
-	}
-}
-
 // KubeproxyFreeArrayInput is an input type that accepts KubeproxyFreeArray and KubeproxyFreeArrayOutput values.
 // You can construct a concrete instance of `KubeproxyFreeArrayInput` via:
 //
@@ -136,12 +129,6 @@ func (i KubeproxyFreeArray) ToKubeproxyFreeArrayOutput() KubeproxyFreeArrayOutpu
 
 func (i KubeproxyFreeArray) ToKubeproxyFreeArrayOutputWithContext(ctx context.Context) KubeproxyFreeArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(KubeproxyFreeArrayOutput)
-}
-
-func (i KubeproxyFreeArray) ToOutput(ctx context.Context) pulumix.Output[[]*KubeproxyFree] {
-	return pulumix.Output[[]*KubeproxyFree]{
-		OutputState: i.ToKubeproxyFreeArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // KubeproxyFreeMapInput is an input type that accepts KubeproxyFreeMap and KubeproxyFreeMapOutput values.
@@ -169,12 +156,6 @@ func (i KubeproxyFreeMap) ToKubeproxyFreeMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(KubeproxyFreeMapOutput)
 }
 
-func (i KubeproxyFreeMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*KubeproxyFree] {
-	return pulumix.Output[map[string]*KubeproxyFree]{
-		OutputState: i.ToKubeproxyFreeMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type KubeproxyFreeOutput struct{ *pulumi.OutputState }
 
 func (KubeproxyFreeOutput) ElementType() reflect.Type {
@@ -187,12 +168,6 @@ func (o KubeproxyFreeOutput) ToKubeproxyFreeOutput() KubeproxyFreeOutput {
 
 func (o KubeproxyFreeOutput) ToKubeproxyFreeOutputWithContext(ctx context.Context) KubeproxyFreeOutput {
 	return o
-}
-
-func (o KubeproxyFreeOutput) ToOutput(ctx context.Context) pulumix.Output[*KubeproxyFree] {
-	return pulumix.Output[*KubeproxyFree]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Name of DaemonSet (Default: `kube-proxy`).
@@ -219,12 +194,6 @@ func (o KubeproxyFreeArrayOutput) ToKubeproxyFreeArrayOutputWithContext(ctx cont
 	return o
 }
 
-func (o KubeproxyFreeArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*KubeproxyFree] {
-	return pulumix.Output[[]*KubeproxyFree]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o KubeproxyFreeArrayOutput) Index(i pulumi.IntInput) KubeproxyFreeOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *KubeproxyFree {
 		return vs[0].([]*KubeproxyFree)[vs[1].(int)]
@@ -243,12 +212,6 @@ func (o KubeproxyFreeMapOutput) ToKubeproxyFreeMapOutput() KubeproxyFreeMapOutpu
 
 func (o KubeproxyFreeMapOutput) ToKubeproxyFreeMapOutputWithContext(ctx context.Context) KubeproxyFreeMapOutput {
 	return o
-}
-
-func (o KubeproxyFreeMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*KubeproxyFree] {
-	return pulumix.Output[map[string]*KubeproxyFree]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o KubeproxyFreeMapOutput) MapIndex(k pulumi.StringInput) KubeproxyFreeOutput {

@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Helm values of cilium
@@ -115,12 +114,6 @@ func (o GetHelmValuesResultOutput) ToGetHelmValuesResultOutput() GetHelmValuesRe
 
 func (o GetHelmValuesResultOutput) ToGetHelmValuesResultOutputWithContext(ctx context.Context) GetHelmValuesResultOutput {
 	return o
-}
-
-func (o GetHelmValuesResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetHelmValuesResult] {
-	return pulumix.Output[GetHelmValuesResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The provider-assigned unique ID for this managed resource.

@@ -9,7 +9,6 @@ import (
 
 	"github.com/littlejo/pulumi-cilium/sdk/go/cilium/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble
@@ -143,12 +142,6 @@ func (i *Hubble) ToHubbleOutputWithContext(ctx context.Context) HubbleOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(HubbleOutput)
 }
 
-func (i *Hubble) ToOutput(ctx context.Context) pulumix.Output[*Hubble] {
-	return pulumix.Output[*Hubble]{
-		OutputState: i.ToHubbleOutputWithContext(ctx).OutputState,
-	}
-}
-
 // HubbleArrayInput is an input type that accepts HubbleArray and HubbleArrayOutput values.
 // You can construct a concrete instance of `HubbleArrayInput` via:
 //
@@ -172,12 +165,6 @@ func (i HubbleArray) ToHubbleArrayOutput() HubbleArrayOutput {
 
 func (i HubbleArray) ToHubbleArrayOutputWithContext(ctx context.Context) HubbleArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(HubbleArrayOutput)
-}
-
-func (i HubbleArray) ToOutput(ctx context.Context) pulumix.Output[[]*Hubble] {
-	return pulumix.Output[[]*Hubble]{
-		OutputState: i.ToHubbleArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // HubbleMapInput is an input type that accepts HubbleMap and HubbleMapOutput values.
@@ -205,12 +192,6 @@ func (i HubbleMap) ToHubbleMapOutputWithContext(ctx context.Context) HubbleMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(HubbleMapOutput)
 }
 
-func (i HubbleMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Hubble] {
-	return pulumix.Output[map[string]*Hubble]{
-		OutputState: i.ToHubbleMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type HubbleOutput struct{ *pulumi.OutputState }
 
 func (HubbleOutput) ElementType() reflect.Type {
@@ -223,12 +204,6 @@ func (o HubbleOutput) ToHubbleOutput() HubbleOutput {
 
 func (o HubbleOutput) ToHubbleOutputWithContext(ctx context.Context) HubbleOutput {
 	return o
-}
-
-func (o HubbleOutput) ToOutput(ctx context.Context) pulumix.Output[*Hubble] {
-	return pulumix.Output[*Hubble]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Namespace in which to install (Default: `kube-system`).
@@ -260,12 +235,6 @@ func (o HubbleArrayOutput) ToHubbleArrayOutputWithContext(ctx context.Context) H
 	return o
 }
 
-func (o HubbleArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Hubble] {
-	return pulumix.Output[[]*Hubble]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o HubbleArrayOutput) Index(i pulumi.IntInput) HubbleOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Hubble {
 		return vs[0].([]*Hubble)[vs[1].(int)]
@@ -284,12 +253,6 @@ func (o HubbleMapOutput) ToHubbleMapOutput() HubbleMapOutput {
 
 func (o HubbleMapOutput) ToHubbleMapOutputWithContext(ctx context.Context) HubbleMapOutput {
 	return o
-}
-
-func (o HubbleMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Hubble] {
-	return pulumix.Output[map[string]*Hubble]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o HubbleMapOutput) MapIndex(k pulumi.StringInput) HubbleOutput {
