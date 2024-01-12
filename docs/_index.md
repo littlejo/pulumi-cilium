@@ -1,7 +1,7 @@
 ---
 title: Cilium
 meta_desc: Provides an overview of the Cilium Provider for Pulumi.
-layout: overview
+layout: package
 ---
 
 The Cilium provider for Pulumi can be used to provision any of the cloud resources available in Cilium.
@@ -10,7 +10,23 @@ The Cilium provider must be configured with credentials to deploy and update res
 
 ## Example
 
-{{< chooser language "go" >}}
+{{< chooser language "python,go" />}}
+
+{{% choosable language python %}}
+
+```python
+"""Deploy cilium"""
+example_install = cilium.Install("exampleInstall",
+    sets=[
+        "ipam.mode=kubernetes",
+        "ipam.operator.replicas=1",
+        "tunnel=vxlan",
+    ],
+    version="1.14.5")
+```
+
+{{% /choosable %}}
+
 {{% choosable language go %}}
 
 ```golang
@@ -27,21 +43,6 @@ if err != nil {
         return err
 }
 return nil
-```
-
-{{% /choosable %}}
-
-{{% choosable language python %}}
-
-```python
-"""Deploy cilium"""
-example_install = cilium.Install("exampleInstall",
-    sets=[
-        "ipam.mode=kubernetes",
-        "ipam.operator.replicas=1",
-        "tunnel=vxlan",
-    ],
-    version="1.14.5")
 ```
 
 {{% /choosable %}}
