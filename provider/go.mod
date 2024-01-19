@@ -4,7 +4,7 @@ go 1.21.6
 
 require (
 	github.com/ettle/strcase v0.2.0
-	github.com/littlejo/terraform-provider-cilium v0.1.3
+	github.com/littlejo/terraform-provider-cilium v0.1.4
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.24.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.71.0
 	github.com/pulumi/pulumi/sdk/v3 v3.101.1
@@ -129,7 +129,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v1.0.2 // indirect
 	github.com/evanphx/json-patch v5.7.0+incompatible // indirect
 	github.com/exponent-io/jsonpath v0.0.0-20151013193312-d6023ce2651d // indirect
-	github.com/fatih/color v1.15.0 // indirect
+	github.com/fatih/color v1.16.0 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gedex/inflector v0.0.0-20170307190818-16278e9db813 // indirect
@@ -200,7 +200,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/hcl/v2 v2.19.1 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.4.2 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.5.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.20.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.3 // indirect
@@ -234,7 +234,7 @@ require (
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
-	github.com/mattn/go-isatty v0.0.19 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
@@ -296,7 +296,7 @@ require (
 	github.com/pulumi/pulumi/pkg/v3 v3.101.1 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
-	github.com/rogpeppe/go-internal v1.11.0 // indirect
+	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/rubenv/sql-migrate v1.5.2 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
@@ -366,7 +366,7 @@ require (
 	golang.org/x/term v0.15.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
-	golang.org/x/tools v0.16.0 // indirect
+	golang.org/x/tools v0.16.1 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.153.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
@@ -381,17 +381,17 @@ require (
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	helm.sh/helm/v3 v3.13.3 // indirect
-	k8s.io/api v0.29.0 // indirect
-	k8s.io/apiextensions-apiserver v0.29.0-rc.1 // indirect
-	k8s.io/apimachinery v0.29.0 // indirect
-	k8s.io/apiserver v0.29.0-rc.1 // indirect
-	k8s.io/cli-runtime v0.29.0 // indirect
-	k8s.io/client-go v0.29.0 // indirect
-	k8s.io/component-base v0.29.0-rc.1 // indirect
+	helm.sh/helm/v3 v3.14.0 // indirect
+	k8s.io/api v0.29.1 // indirect
+	k8s.io/apiextensions-apiserver v0.29.0 // indirect
+	k8s.io/apimachinery v0.29.1 // indirect
+	k8s.io/apiserver v0.29.0 // indirect
+	k8s.io/cli-runtime v0.29.1 // indirect
+	k8s.io/client-go v0.29.1 // indirect
+	k8s.io/component-base v0.29.0 // indirect
 	k8s.io/klog/v2 v2.110.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20231010175941-2dd684a91f00 // indirect
-	k8s.io/kubectl v0.28.4 // indirect
+	k8s.io/kubectl v0.29.0 // indirect
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
 	lukechampine.com/frand v1.4.2 // indirect
 	oras.land/oras-go v1.2.4 // indirect
