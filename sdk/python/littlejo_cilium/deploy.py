@@ -8,13 +8,11 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
-from . import outputs
-from ._inputs import *
 
-__all__ = ['InstallArgs', 'Install']
+__all__ = ['DeployArgs', 'Deploy']
 
 @pulumi.input_type
-class InstallArgs:
+class DeployArgs:
     def __init__(__self__, *,
                  data_path: Optional[pulumi.Input[str]] = None,
                  repository: Optional[pulumi.Input[str]] = None,
@@ -25,14 +23,16 @@ class InstallArgs:
                  version: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None):
         """
-        The set of arguments for constructing a Install resource.
+        The set of arguments for constructing a Deploy resource.
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+               option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+               `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         if data_path is not None:
@@ -92,7 +92,8 @@ class InstallArgs:
     @pulumi.getter
     def reuse(self) -> Optional[pulumi.Input[bool]]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+        option takes precedence over HelmResetValues (Default: `true`).
         """
         return pulumi.get(self, "reuse")
 
@@ -104,7 +105,8 @@ class InstallArgs:
     @pulumi.getter
     def sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+        `[]`).
         """
         return pulumi.get(self, "sets")
 
@@ -128,7 +130,7 @@ class InstallArgs:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of Cilium (Default: `v1.14.5`).
+        Version of Cilium (Default: `v1.15.4`).
         """
         return pulumi.get(self, "version")
 
@@ -150,9 +152,8 @@ class InstallArgs:
 
 
 @pulumi.input_type
-class _InstallState:
+class _DeployState:
     def __init__(__self__, *,
-                 ca: Optional[pulumi.Input['InstallCaArgs']] = None,
                  data_path: Optional[pulumi.Input[str]] = None,
                  helm_values: Optional[pulumi.Input[str]] = None,
                  repository: Optional[pulumi.Input[str]] = None,
@@ -163,20 +164,19 @@ class _InstallState:
                  version: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None):
         """
-        Input properties used for looking up and filtering Install resources.
-        :param pulumi.Input['InstallCaArgs'] ca: Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+        Input properties used for looking up and filtering Deploy resources.
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] helm_values: Helm values (`helm get values -n kube-system cilium`)
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+               option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+               `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
-        if ca is not None:
-            pulumi.set(__self__, "ca", ca)
         if data_path is not None:
             pulumi.set(__self__, "data_path", data_path)
         if helm_values is not None:
@@ -195,18 +195,6 @@ class _InstallState:
             pulumi.set(__self__, "version", version)
         if wait is not None:
             pulumi.set(__self__, "wait", wait)
-
-    @property
-    @pulumi.getter
-    def ca(self) -> Optional[pulumi.Input['InstallCaArgs']]:
-        """
-        Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
-        """
-        return pulumi.get(self, "ca")
-
-    @ca.setter
-    def ca(self, value: Optional[pulumi.Input['InstallCaArgs']]):
-        pulumi.set(self, "ca", value)
 
     @property
     @pulumi.getter(name="dataPath")
@@ -260,7 +248,8 @@ class _InstallState:
     @pulumi.getter
     def reuse(self) -> Optional[pulumi.Input[bool]]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+        option takes precedence over HelmResetValues (Default: `true`).
         """
         return pulumi.get(self, "reuse")
 
@@ -272,7 +261,8 @@ class _InstallState:
     @pulumi.getter
     def sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+        `[]`).
         """
         return pulumi.get(self, "sets")
 
@@ -296,7 +286,7 @@ class _InstallState:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of Cilium (Default: `v1.14.5`).
+        Version of Cilium (Default: `v1.15.4`).
         """
         return pulumi.get(self, "version")
 
@@ -317,7 +307,7 @@ class _InstallState:
         pulumi.set(self, "wait", value)
 
 
-class Install(pulumi.CustomResource):
+class Deploy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -332,33 +322,35 @@ class Install(pulumi.CustomResource):
                  wait: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Create a Install resource with the given unique name, props, and options.
+        Create a Deploy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+               option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+               `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[InstallArgs] = None,
+                 args: Optional[DeployArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a Install resource with the given unique name, props, and options.
+        Create a Deploy resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
-        :param InstallArgs args: The arguments to use to populate this resource's properties.
+        :param DeployArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(InstallArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(DeployArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -382,7 +374,7 @@ class Install(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = InstallArgs.__new__(InstallArgs)
+            __props__ = DeployArgs.__new__(DeployArgs)
 
             __props__.__dict__["data_path"] = data_path
             __props__.__dict__["repository"] = repository
@@ -392,12 +384,9 @@ class Install(pulumi.CustomResource):
             __props__.__dict__["values"] = values
             __props__.__dict__["version"] = version
             __props__.__dict__["wait"] = wait
-            __props__.__dict__["ca"] = None
             __props__.__dict__["helm_values"] = None
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["ca"])
-        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
-        super(Install, __self__).__init__(
-            'cilium:index/install:Install',
+        super(Deploy, __self__).__init__(
+            'cilium:index/deploy:Deploy',
             resource_name,
             __props__,
             opts)
@@ -406,7 +395,6 @@ class Install(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            ca: Optional[pulumi.Input[pulumi.InputType['InstallCaArgs']]] = None,
             data_path: Optional[pulumi.Input[str]] = None,
             helm_values: Optional[pulumi.Input[str]] = None,
             repository: Optional[pulumi.Input[str]] = None,
@@ -415,30 +403,30 @@ class Install(pulumi.CustomResource):
             sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             values: Optional[pulumi.Input[str]] = None,
             version: Optional[pulumi.Input[str]] = None,
-            wait: Optional[pulumi.Input[bool]] = None) -> 'Install':
+            wait: Optional[pulumi.Input[bool]] = None) -> 'Deploy':
         """
-        Get an existing Install resource's state with the given name, id, and optional extra
+        Get an existing Deploy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['InstallCaArgs']] ca: Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] helm_values: Helm values (`helm get values -n kube-system cilium`)
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+               option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+               `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _InstallState.__new__(_InstallState)
+        __props__ = _DeployState.__new__(_DeployState)
 
-        __props__.__dict__["ca"] = ca
         __props__.__dict__["data_path"] = data_path
         __props__.__dict__["helm_values"] = helm_values
         __props__.__dict__["repository"] = repository
@@ -448,15 +436,7 @@ class Install(pulumi.CustomResource):
         __props__.__dict__["values"] = values
         __props__.__dict__["version"] = version
         __props__.__dict__["wait"] = wait
-        return Install(resource_name, opts=opts, __props__=__props__)
-
-    @property
-    @pulumi.getter
-    def ca(self) -> pulumi.Output['outputs.InstallCa']:
-        """
-        Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
-        """
-        return pulumi.get(self, "ca")
+        return Deploy(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="dataPath")
@@ -494,7 +474,8 @@ class Install(pulumi.CustomResource):
     @pulumi.getter
     def reuse(self) -> pulumi.Output[bool]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This
+        option takes precedence over HelmResetValues (Default: `true`).
         """
         return pulumi.get(self, "reuse")
 
@@ -502,7 +483,8 @@ class Install(pulumi.CustomResource):
     @pulumi.getter
     def sets(self) -> pulumi.Output[Sequence[str]]:
         """
-        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
+        Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
+        `[]`).
         """
         return pulumi.get(self, "sets")
 
@@ -518,7 +500,7 @@ class Install(pulumi.CustomResource):
     @pulumi.getter
     def version(self) -> pulumi.Output[str]:
         """
-        Version of Cilium (Default: `v1.14.5`).
+        Version of Cilium (Default: `v1.15.4`).
         """
         return pulumi.get(self, "version")
 

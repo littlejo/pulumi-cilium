@@ -45,8 +45,6 @@ type Config struct {
 
 	// Key of the config
 	Key pulumi.StringOutput `pulumi:"key"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringOutput `pulumi:"namespace"`
 	// Restart Cilium pods (Default: `true`).
 	Restart pulumi.BoolOutput `pulumi:"restart"`
 	// Value of the key
@@ -91,8 +89,6 @@ func GetConfig(ctx *pulumi.Context,
 type configState struct {
 	// Key of the config
 	Key *string `pulumi:"key"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Restart Cilium pods (Default: `true`).
 	Restart *bool `pulumi:"restart"`
 	// Value of the key
@@ -102,8 +98,6 @@ type configState struct {
 type ConfigState struct {
 	// Key of the config
 	Key pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Restart Cilium pods (Default: `true`).
 	Restart pulumi.BoolPtrInput
 	// Value of the key
@@ -117,8 +111,6 @@ func (ConfigState) ElementType() reflect.Type {
 type configArgs struct {
 	// Key of the config
 	Key string `pulumi:"key"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Restart Cilium pods (Default: `true`).
 	Restart *bool `pulumi:"restart"`
 	// Value of the key
@@ -129,8 +121,6 @@ type configArgs struct {
 type ConfigArgs struct {
 	// Key of the config
 	Key pulumi.StringInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Restart Cilium pods (Default: `true`).
 	Restart pulumi.BoolPtrInput
 	// Value of the key
@@ -227,11 +217,6 @@ func (o ConfigOutput) ToConfigOutputWithContext(ctx context.Context) ConfigOutpu
 // Key of the config
 func (o ConfigOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.Key }).(pulumi.StringOutput)
-}
-
-// Namespace in which to install (Default: `kube-system`).
-func (o ConfigOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v *Config) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
 }
 
 // Restart Cilium pods (Default: `true`).

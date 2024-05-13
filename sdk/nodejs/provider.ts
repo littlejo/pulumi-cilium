@@ -26,6 +26,10 @@ export class Provider extends pulumi.ProviderResource {
     }
 
     /**
+     * The content of kube config file (Default: ``).
+     */
+    public readonly configContent!: pulumi.Output<string | undefined>;
+    /**
      * A path to a kube config file (Default: `~/.kube/config`).
      */
     public readonly configPath!: pulumi.Output<string | undefined>;
@@ -33,6 +37,10 @@ export class Provider extends pulumi.ProviderResource {
      * Context of kubeconfig file (Default: `default context`).
      */
     public readonly context!: pulumi.Output<string | undefined>;
+    /**
+     * Helm Release to install cilium (Default: `cilium`).
+     */
+    public readonly helmRelease!: pulumi.Output<string | undefined>;
     /**
      * Namespace to install cilium (Default: `kube-system`).
      */
@@ -49,8 +57,10 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
+            resourceInputs["configContent"] = args ? args.configContent : undefined;
             resourceInputs["configPath"] = args ? args.configPath : undefined;
             resourceInputs["context"] = args ? args.context : undefined;
+            resourceInputs["helmRelease"] = args ? args.helmRelease : undefined;
             resourceInputs["namespace"] = args ? args.namespace : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -63,6 +73,10 @@ export class Provider extends pulumi.ProviderResource {
  */
 export interface ProviderArgs {
     /**
+     * The content of kube config file (Default: ``).
+     */
+    configContent?: pulumi.Input<string>;
+    /**
      * A path to a kube config file (Default: `~/.kube/config`).
      */
     configPath?: pulumi.Input<string>;
@@ -70,6 +84,10 @@ export interface ProviderArgs {
      * Context of kubeconfig file (Default: `default context`).
      */
     context?: pulumi.Input<string>;
+    /**
+     * Helm Release to install cilium (Default: `cilium`).
+     */
+    helmRelease?: pulumi.Input<string>;
     /**
      * Namespace to install cilium (Default: `kube-system`).
      */

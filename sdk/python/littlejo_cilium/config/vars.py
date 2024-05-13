@@ -16,6 +16,13 @@ __config__ = pulumi.Config('cilium')
 
 class _ExportableConfig(types.ModuleType):
     @property
+    def config_content(self) -> Optional[str]:
+        """
+        The content of kube config file (Default: ``).
+        """
+        return __config__.get('configContent')
+
+    @property
     def config_path(self) -> Optional[str]:
         """
         A path to a kube config file (Default: `~/.kube/config`).
@@ -28,6 +35,13 @@ class _ExportableConfig(types.ModuleType):
         Context of kubeconfig file (Default: `default context`).
         """
         return __config__.get('context')
+
+    @property
+    def helm_release(self) -> Optional[str]:
+        """
+        Helm Release to install cilium (Default: `cilium`).
+        """
+        return __config__.get('helmRelease')
 
     @property
     def namespace(self) -> Optional[str]:

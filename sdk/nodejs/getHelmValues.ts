@@ -21,28 +21,11 @@ import * as utilities from "./utilities";
  * });
  * ```
  */
-export function getHelmValues(args?: GetHelmValuesArgs, opts?: pulumi.InvokeOptions): Promise<GetHelmValuesResult> {
-    args = args || {};
+export function getHelmValues(opts?: pulumi.InvokeOptions): Promise<GetHelmValuesResult> {
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cilium:index/getHelmValues:getHelmValues", {
-        "namespace": args.namespace,
-        "release": args.release,
     }, opts);
-}
-
-/**
- * A collection of arguments for invoking getHelmValues.
- */
-export interface GetHelmValuesArgs {
-    /**
-     * Namespace of cilium (Default: `kube-system`).
-     */
-    namespace?: string;
-    /**
-     * Helm release (Default: `cilium.Install`).
-     */
-    release?: string;
 }
 
 /**
@@ -53,14 +36,6 @@ export interface GetHelmValuesResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
-    /**
-     * Namespace of cilium (Default: `kube-system`).
-     */
-    readonly namespace?: string;
-    /**
-     * Helm release (Default: `cilium.Install`).
-     */
-    readonly release?: string;
     /**
      * Yaml output
      */
@@ -83,20 +58,6 @@ export interface GetHelmValuesResult {
  * });
  * ```
  */
-export function getHelmValuesOutput(args?: GetHelmValuesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHelmValuesResult> {
-    return pulumi.output(args).apply((a: any) => getHelmValues(a, opts))
-}
-
-/**
- * A collection of arguments for invoking getHelmValues.
- */
-export interface GetHelmValuesOutputArgs {
-    /**
-     * Namespace of cilium (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
-    /**
-     * Helm release (Default: `cilium.Install`).
-     */
-    release?: pulumi.Input<string>;
+export function getHelmValuesOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetHelmValuesResult> {
+    return pulumi.output(getHelmValues(opts))
 }

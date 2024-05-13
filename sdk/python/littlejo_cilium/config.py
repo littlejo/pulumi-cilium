@@ -16,19 +16,15 @@ class ConfigArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[str],
                  value: pulumi.Input[str],
-                 namespace: Optional[pulumi.Input[str]] = None,
                  restart: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a Config resource.
         :param pulumi.Input[str] key: Key of the config
         :param pulumi.Input[str] value: Value of the key
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] restart: Restart Cilium pods (Default: `true`).
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "value", value)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if restart is not None:
             pulumi.set(__self__, "restart", restart)
 
@@ -58,18 +54,6 @@ class ConfigArgs:
 
     @property
     @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
-
-    @property
-    @pulumi.getter
     def restart(self) -> Optional[pulumi.Input[bool]]:
         """
         Restart Cilium pods (Default: `true`).
@@ -85,20 +69,16 @@ class ConfigArgs:
 class _ConfigState:
     def __init__(__self__, *,
                  key: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  restart: Optional[pulumi.Input[bool]] = None,
                  value: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Config resources.
         :param pulumi.Input[str] key: Key of the config
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] restart: Restart Cilium pods (Default: `true`).
         :param pulumi.Input[str] value: Value of the key
         """
         if key is not None:
             pulumi.set(__self__, "key", key)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if restart is not None:
             pulumi.set(__self__, "restart", restart)
         if value is not None:
@@ -115,18 +95,6 @@ class _ConfigState:
     @key.setter
     def key(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "key", value)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
     @property
     @pulumi.getter
@@ -159,7 +127,6 @@ class Config(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  key: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  restart: Optional[pulumi.Input[bool]] = None,
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -180,7 +147,6 @@ class Config(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] key: Key of the config
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] restart: Restart Cilium pods (Default: `true`).
         :param pulumi.Input[str] value: Value of the key
         """
@@ -220,7 +186,6 @@ class Config(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  key: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  restart: Optional[pulumi.Input[bool]] = None,
                  value: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -235,7 +200,6 @@ class Config(pulumi.CustomResource):
             if key is None and not opts.urn:
                 raise TypeError("Missing required property 'key'")
             __props__.__dict__["key"] = key
-            __props__.__dict__["namespace"] = namespace
             __props__.__dict__["restart"] = restart
             if value is None and not opts.urn:
                 raise TypeError("Missing required property 'value'")
@@ -251,7 +215,6 @@ class Config(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             key: Optional[pulumi.Input[str]] = None,
-            namespace: Optional[pulumi.Input[str]] = None,
             restart: Optional[pulumi.Input[bool]] = None,
             value: Optional[pulumi.Input[str]] = None) -> 'Config':
         """
@@ -262,7 +225,6 @@ class Config(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] key: Key of the config
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] restart: Restart Cilium pods (Default: `true`).
         :param pulumi.Input[str] value: Value of the key
         """
@@ -271,7 +233,6 @@ class Config(pulumi.CustomResource):
         __props__ = _ConfigState.__new__(_ConfigState)
 
         __props__.__dict__["key"] = key
-        __props__.__dict__["namespace"] = namespace
         __props__.__dict__["restart"] = restart
         __props__.__dict__["value"] = value
         return Config(resource_name, opts=opts, __props__=__props__)
@@ -283,14 +244,6 @@ class Config(pulumi.CustomResource):
         Key of the config
         """
         return pulumi.get(self, "key")
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> pulumi.Output[str]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter

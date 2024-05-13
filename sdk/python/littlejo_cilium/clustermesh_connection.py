@@ -14,17 +14,13 @@ __all__ = ['ClustermeshConnectionArgs', 'ClustermeshConnection']
 @pulumi.input_type
 class ClustermeshConnectionArgs:
     def __init__(__self__, *,
-                 destination_context: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None):
+                 destination_context: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ClustermeshConnection resource.
         :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         """
         if destination_context is not None:
             pulumi.set(__self__, "destination_context", destination_context)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
 
     @property
     @pulumi.getter(name="destinationContext")
@@ -37,34 +33,18 @@ class ClustermeshConnectionArgs:
     @destination_context.setter
     def destination_context(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "destination_context", value)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
 
 @pulumi.input_type
 class _ClustermeshConnectionState:
     def __init__(__self__, *,
-                 destination_context: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None):
+                 destination_context: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ClustermeshConnection resources.
         :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         """
         if destination_context is not None:
             pulumi.set(__self__, "destination_context", destination_context)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
 
     @property
     @pulumi.getter(name="destinationContext")
@@ -77,18 +57,6 @@ class _ClustermeshConnectionState:
     @destination_context.setter
     def destination_context(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "destination_context", value)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
 
 class ClustermeshConnection(pulumi.CustomResource):
@@ -97,24 +65,12 @@ class ClustermeshConnection(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  destination_context: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import littlejo_cilium as cilium
-
-        example = cilium.ClustermeshConnection("example", destination_context="context-2")
-        ```
-
+        Create a ClustermeshConnection resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         """
         ...
     @overload
@@ -123,17 +79,7 @@ class ClustermeshConnection(pulumi.CustomResource):
                  args: Optional[ClustermeshConnectionArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import littlejo_cilium as cilium
-
-        example = cilium.ClustermeshConnection("example", destination_context="context-2")
-        ```
-
+        Create a ClustermeshConnection resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param ClustermeshConnectionArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -150,7 +96,6 @@ class ClustermeshConnection(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  destination_context: Optional[pulumi.Input[str]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -161,7 +106,6 @@ class ClustermeshConnection(pulumi.CustomResource):
             __props__ = ClustermeshConnectionArgs.__new__(ClustermeshConnectionArgs)
 
             __props__.__dict__["destination_context"] = destination_context
-            __props__.__dict__["namespace"] = namespace
         super(ClustermeshConnection, __self__).__init__(
             'cilium:index/clustermeshConnection:ClustermeshConnection',
             resource_name,
@@ -172,8 +116,7 @@ class ClustermeshConnection(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            destination_context: Optional[pulumi.Input[str]] = None,
-            namespace: Optional[pulumi.Input[str]] = None) -> 'ClustermeshConnection':
+            destination_context: Optional[pulumi.Input[str]] = None) -> 'ClustermeshConnection':
         """
         Get an existing ClustermeshConnection resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -182,14 +125,12 @@ class ClustermeshConnection(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ClustermeshConnectionState.__new__(_ClustermeshConnectionState)
 
         __props__.__dict__["destination_context"] = destination_context
-        __props__.__dict__["namespace"] = namespace
         return ClustermeshConnection(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -199,12 +140,4 @@ class ClustermeshConnection(pulumi.CustomResource):
         Kubernetes configuration context of destination cluster
         """
         return pulumi.get(self, "destination_context")
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> pulumi.Output[str]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
 

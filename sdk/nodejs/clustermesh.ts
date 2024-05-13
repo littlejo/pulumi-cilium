@@ -4,28 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cilium from "@littlejo/cilium";
- *
- * const exampleInstall = new cilium.Install("exampleInstall", {
- *     sets: [
- *         "cluster.name=clustermesh1",
- *         "cluster.id=1",
- *         "ipam.mode=kubernetes",
- *     ],
- *     version: "1.14.5",
- * });
- * const exampleClustermesh = new cilium.Clustermesh("exampleClustermesh", {serviceType: "LoadBalancer"}, {
- *     dependsOn: [exampleInstall],
- * });
- * ```
- */
 export class Clustermesh extends pulumi.CustomResource {
     /**
      * Get an existing Clustermesh resource's state with the given name, ID, and optional extra
@@ -63,10 +41,6 @@ export class Clustermesh extends pulumi.CustomResource {
      */
     public readonly enableKvStoreMesh!: pulumi.Output<boolean>;
     /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    public readonly namespace!: pulumi.Output<string>;
-    /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */
     public readonly serviceType!: pulumi.Output<string>;
@@ -90,14 +64,12 @@ export class Clustermesh extends pulumi.CustomResource {
             const state = argsOrState as ClustermeshState | undefined;
             resourceInputs["enableExternalWorkloads"] = state ? state.enableExternalWorkloads : undefined;
             resourceInputs["enableKvStoreMesh"] = state ? state.enableKvStoreMesh : undefined;
-            resourceInputs["namespace"] = state ? state.namespace : undefined;
             resourceInputs["serviceType"] = state ? state.serviceType : undefined;
             resourceInputs["wait"] = state ? state.wait : undefined;
         } else {
             const args = argsOrState as ClustermeshArgs | undefined;
             resourceInputs["enableExternalWorkloads"] = args ? args.enableExternalWorkloads : undefined;
             resourceInputs["enableKvStoreMesh"] = args ? args.enableKvStoreMesh : undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["serviceType"] = args ? args.serviceType : undefined;
             resourceInputs["wait"] = args ? args.wait : undefined;
         }
@@ -118,10 +90,6 @@ export interface ClustermeshState {
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
     enableKvStoreMesh?: pulumi.Input<boolean>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */
@@ -144,10 +112,6 @@ export interface ClustermeshArgs {
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
     enableKvStoreMesh?: pulumi.Input<boolean>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */

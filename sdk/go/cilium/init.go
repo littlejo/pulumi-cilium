@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ClustermeshConnection{}
 	case "cilium:index/config:Config":
 		r = &Config{}
+	case "cilium:index/deploy:Deploy":
+		r = &Deploy{}
 	case "cilium:index/hubble:Hubble":
 		r = &Hubble{}
 	case "cilium:index/install:Install":
@@ -77,6 +79,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"cilium",
 		"index/config",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"cilium",
+		"index/deploy",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

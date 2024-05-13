@@ -41,8 +41,6 @@ import (
 type Hubble struct {
 	pulumi.CustomResourceState
 
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringOutput `pulumi:"namespace"`
 	// Deploy Hubble Relay (Default: `true`).
 	Relay pulumi.BoolOutput `pulumi:"relay"`
 	// Enable Hubble UI (Default: `false`).
@@ -79,8 +77,6 @@ func GetHubble(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Hubble resources.
 type hubbleState struct {
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Deploy Hubble Relay (Default: `true`).
 	Relay *bool `pulumi:"relay"`
 	// Enable Hubble UI (Default: `false`).
@@ -88,8 +84,6 @@ type hubbleState struct {
 }
 
 type HubbleState struct {
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Deploy Hubble Relay (Default: `true`).
 	Relay pulumi.BoolPtrInput
 	// Enable Hubble UI (Default: `false`).
@@ -101,8 +95,6 @@ func (HubbleState) ElementType() reflect.Type {
 }
 
 type hubbleArgs struct {
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Deploy Hubble Relay (Default: `true`).
 	Relay *bool `pulumi:"relay"`
 	// Enable Hubble UI (Default: `false`).
@@ -111,8 +103,6 @@ type hubbleArgs struct {
 
 // The set of arguments for constructing a Hubble resource.
 type HubbleArgs struct {
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Deploy Hubble Relay (Default: `true`).
 	Relay pulumi.BoolPtrInput
 	// Enable Hubble UI (Default: `false`).
@@ -204,11 +194,6 @@ func (o HubbleOutput) ToHubbleOutput() HubbleOutput {
 
 func (o HubbleOutput) ToHubbleOutputWithContext(ctx context.Context) HubbleOutput {
 	return o
-}
-
-// Namespace in which to install (Default: `kube-system`).
-func (o HubbleOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v *Hubble) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
 }
 
 // Deploy Hubble Relay (Default: `true`).

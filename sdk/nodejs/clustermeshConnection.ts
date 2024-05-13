@@ -4,18 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-/**
- * Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cilium from "@littlejo/cilium";
- *
- * const example = new cilium.ClustermeshConnection("example", {destinationContext: "context-2"});
- * ```
- */
 export class ClustermeshConnection extends pulumi.CustomResource {
     /**
      * Get an existing ClustermeshConnection resource's state with the given name, ID, and optional extra
@@ -48,10 +36,6 @@ export class ClustermeshConnection extends pulumi.CustomResource {
      * Kubernetes configuration context of destination cluster
      */
     public readonly destinationContext!: pulumi.Output<string>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    public readonly namespace!: pulumi.Output<string>;
 
     /**
      * Create a ClustermeshConnection resource with the given unique name, arguments, and options.
@@ -67,11 +51,9 @@ export class ClustermeshConnection extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ClustermeshConnectionState | undefined;
             resourceInputs["destinationContext"] = state ? state.destinationContext : undefined;
-            resourceInputs["namespace"] = state ? state.namespace : undefined;
         } else {
             const args = argsOrState as ClustermeshConnectionArgs | undefined;
             resourceInputs["destinationContext"] = args ? args.destinationContext : undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ClustermeshConnection.__pulumiType, name, resourceInputs, opts);
@@ -86,10 +68,6 @@ export interface ClustermeshConnectionState {
      * Kubernetes configuration context of destination cluster
      */
     destinationContext?: pulumi.Input<string>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
 }
 
 /**
@@ -100,8 +78,4 @@ export interface ClustermeshConnectionArgs {
      * Kubernetes configuration context of destination cluster
      */
     destinationContext?: pulumi.Input<string>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
 }

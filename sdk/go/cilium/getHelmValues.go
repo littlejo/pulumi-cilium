@@ -46,59 +46,33 @@ import (
 //	}
 //
 // ```
-func GetHelmValues(ctx *pulumi.Context, args *GetHelmValuesArgs, opts ...pulumi.InvokeOption) (*GetHelmValuesResult, error) {
+func GetHelmValues(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetHelmValuesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHelmValuesResult
-	err := ctx.Invoke("cilium:index/getHelmValues:getHelmValues", args, &rv, opts...)
+	err := ctx.Invoke("cilium:index/getHelmValues:getHelmValues", nil, &rv, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &rv, nil
 }
 
-// A collection of arguments for invoking getHelmValues.
-type GetHelmValuesArgs struct {
-	// Namespace of cilium (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
-	// Helm release (Default: `Install`).
-	Release *string `pulumi:"release"`
-}
-
 // A collection of values returned by getHelmValues.
 type GetHelmValuesResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
-	// Namespace of cilium (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
-	// Helm release (Default: `Install`).
-	Release *string `pulumi:"release"`
 	// Yaml output
 	Yaml string `pulumi:"yaml"`
 }
 
-func GetHelmValuesOutput(ctx *pulumi.Context, args GetHelmValuesOutputArgs, opts ...pulumi.InvokeOption) GetHelmValuesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetHelmValuesResult, error) {
-			args := v.(GetHelmValuesArgs)
-			r, err := GetHelmValues(ctx, &args, opts...)
-			var s GetHelmValuesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
-		}).(GetHelmValuesResultOutput)
-}
-
-// A collection of arguments for invoking getHelmValues.
-type GetHelmValuesOutputArgs struct {
-	// Namespace of cilium (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
-	// Helm release (Default: `Install`).
-	Release pulumi.StringPtrInput `pulumi:"release"`
-}
-
-func (GetHelmValuesOutputArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetHelmValuesArgs)(nil)).Elem()
+func GetHelmValuesOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetHelmValuesResultOutput {
+	return pulumi.ToOutput(0).ApplyT(func(int) (GetHelmValuesResult, error) {
+		r, err := GetHelmValues(ctx, opts...)
+		var s GetHelmValuesResult
+		if r != nil {
+			s = *r
+		}
+		return s, err
+	}).(GetHelmValuesResultOutput)
 }
 
 // A collection of values returned by getHelmValues.
@@ -119,16 +93,6 @@ func (o GetHelmValuesResultOutput) ToGetHelmValuesResultOutputWithContext(ctx co
 // The provider-assigned unique ID for this managed resource.
 func (o GetHelmValuesResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetHelmValuesResult) string { return v.Id }).(pulumi.StringOutput)
-}
-
-// Namespace of cilium (Default: `kube-system`).
-func (o GetHelmValuesResultOutput) Namespace() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetHelmValuesResult) *string { return v.Namespace }).(pulumi.StringPtrOutput)
-}
-
-// Helm release (Default: `Install`).
-func (o GetHelmValuesResultOutput) Release() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetHelmValuesResult) *string { return v.Release }).(pulumi.StringPtrOutput)
 }
 
 // Yaml output

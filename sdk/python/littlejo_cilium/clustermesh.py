@@ -16,14 +16,12 @@ class ClustermeshArgs:
     def __init__(__self__, *,
                  enable_external_workloads: Optional[pulumi.Input[bool]] = None,
                  enable_kv_store_mesh: Optional[pulumi.Input[bool]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  service_type: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a Clustermesh resource.
         :param pulumi.Input[bool] enable_external_workloads: Enable support for external workloads, such as VMs (Default: `false`).
         :param pulumi.Input[bool] enable_kv_store_mesh: Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[str] service_type: Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
         :param pulumi.Input[bool] wait: Wait Cluster Mesh status is ok (Default: `true`).
         """
@@ -31,8 +29,6 @@ class ClustermeshArgs:
             pulumi.set(__self__, "enable_external_workloads", enable_external_workloads)
         if enable_kv_store_mesh is not None:
             pulumi.set(__self__, "enable_kv_store_mesh", enable_kv_store_mesh)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if service_type is not None:
             pulumi.set(__self__, "service_type", service_type)
         if wait is not None:
@@ -61,18 +57,6 @@ class ClustermeshArgs:
     @enable_kv_store_mesh.setter
     def enable_kv_store_mesh(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_kv_store_mesh", value)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
     @property
     @pulumi.getter(name="serviceType")
@@ -104,14 +88,12 @@ class _ClustermeshState:
     def __init__(__self__, *,
                  enable_external_workloads: Optional[pulumi.Input[bool]] = None,
                  enable_kv_store_mesh: Optional[pulumi.Input[bool]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  service_type: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering Clustermesh resources.
         :param pulumi.Input[bool] enable_external_workloads: Enable support for external workloads, such as VMs (Default: `false`).
         :param pulumi.Input[bool] enable_kv_store_mesh: Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[str] service_type: Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
         :param pulumi.Input[bool] wait: Wait Cluster Mesh status is ok (Default: `true`).
         """
@@ -119,8 +101,6 @@ class _ClustermeshState:
             pulumi.set(__self__, "enable_external_workloads", enable_external_workloads)
         if enable_kv_store_mesh is not None:
             pulumi.set(__self__, "enable_kv_store_mesh", enable_kv_store_mesh)
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if service_type is not None:
             pulumi.set(__self__, "service_type", service_type)
         if wait is not None:
@@ -149,18 +129,6 @@ class _ClustermeshState:
     @enable_kv_store_mesh.setter
     def enable_kv_store_mesh(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "enable_kv_store_mesh", value)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
     @property
     @pulumi.getter(name="serviceType")
@@ -194,35 +162,15 @@ class Clustermesh(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  enable_external_workloads: Optional[pulumi.Input[bool]] = None,
                  enable_kv_store_mesh: Optional[pulumi.Input[bool]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  service_type: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
         """
-        Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import littlejo_cilium as cilium
-
-        example_install = cilium.Install("exampleInstall",
-            sets=[
-                "cluster.name=clustermesh1",
-                "cluster.id=1",
-                "ipam.mode=kubernetes",
-            ],
-            version="1.14.5")
-        example_clustermesh = cilium.Clustermesh("exampleClustermesh", service_type="LoadBalancer",
-        opts=pulumi.ResourceOptions(depends_on=[example_install]))
-        ```
-
+        Create a Clustermesh resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] enable_external_workloads: Enable support for external workloads, such as VMs (Default: `false`).
         :param pulumi.Input[bool] enable_kv_store_mesh: Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[str] service_type: Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
         :param pulumi.Input[bool] wait: Wait Cluster Mesh status is ok (Default: `true`).
         """
@@ -233,25 +181,7 @@ class Clustermesh(pulumi.CustomResource):
                  args: Optional[ClustermeshArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import littlejo_cilium as cilium
-
-        example_install = cilium.Install("exampleInstall",
-            sets=[
-                "cluster.name=clustermesh1",
-                "cluster.id=1",
-                "ipam.mode=kubernetes",
-            ],
-            version="1.14.5")
-        example_clustermesh = cilium.Clustermesh("exampleClustermesh", service_type="LoadBalancer",
-        opts=pulumi.ResourceOptions(depends_on=[example_install]))
-        ```
-
+        Create a Clustermesh resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param ClustermeshArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -269,7 +199,6 @@ class Clustermesh(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  enable_external_workloads: Optional[pulumi.Input[bool]] = None,
                  enable_kv_store_mesh: Optional[pulumi.Input[bool]] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  service_type: Optional[pulumi.Input[str]] = None,
                  wait: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -283,7 +212,6 @@ class Clustermesh(pulumi.CustomResource):
 
             __props__.__dict__["enable_external_workloads"] = enable_external_workloads
             __props__.__dict__["enable_kv_store_mesh"] = enable_kv_store_mesh
-            __props__.__dict__["namespace"] = namespace
             __props__.__dict__["service_type"] = service_type
             __props__.__dict__["wait"] = wait
         super(Clustermesh, __self__).__init__(
@@ -298,7 +226,6 @@ class Clustermesh(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             enable_external_workloads: Optional[pulumi.Input[bool]] = None,
             enable_kv_store_mesh: Optional[pulumi.Input[bool]] = None,
-            namespace: Optional[pulumi.Input[str]] = None,
             service_type: Optional[pulumi.Input[str]] = None,
             wait: Optional[pulumi.Input[bool]] = None) -> 'Clustermesh':
         """
@@ -310,7 +237,6 @@ class Clustermesh(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] enable_external_workloads: Enable support for external workloads, such as VMs (Default: `false`).
         :param pulumi.Input[bool] enable_kv_store_mesh: Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[str] service_type: Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
         :param pulumi.Input[bool] wait: Wait Cluster Mesh status is ok (Default: `true`).
         """
@@ -320,7 +246,6 @@ class Clustermesh(pulumi.CustomResource):
 
         __props__.__dict__["enable_external_workloads"] = enable_external_workloads
         __props__.__dict__["enable_kv_store_mesh"] = enable_kv_store_mesh
-        __props__.__dict__["namespace"] = namespace
         __props__.__dict__["service_type"] = service_type
         __props__.__dict__["wait"] = wait
         return Clustermesh(resource_name, opts=opts, __props__=__props__)
@@ -340,14 +265,6 @@ class Clustermesh(pulumi.CustomResource):
         Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
         """
         return pulumi.get(self, "enable_kv_store_mesh")
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> pulumi.Output[str]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter(name="serviceType")
