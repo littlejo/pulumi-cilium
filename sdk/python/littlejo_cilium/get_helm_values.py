@@ -21,16 +21,10 @@ class GetHelmValuesResult:
     """
     A collection of values returned by getHelmValues.
     """
-    def __init__(__self__, id=None, namespace=None, release=None, yaml=None):
+    def __init__(__self__, id=None, yaml=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
-        if namespace and not isinstance(namespace, str):
-            raise TypeError("Expected argument 'namespace' to be a str")
-        pulumi.set(__self__, "namespace", namespace)
-        if release and not isinstance(release, str):
-            raise TypeError("Expected argument 'release' to be a str")
-        pulumi.set(__self__, "release", release)
         if yaml and not isinstance(yaml, str):
             raise TypeError("Expected argument 'yaml' to be a str")
         pulumi.set(__self__, "yaml", yaml)
@@ -42,22 +36,6 @@ class GetHelmValuesResult:
         The provider-assigned unique ID for this managed resource.
         """
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[str]:
-        """
-        Namespace of cilium (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @property
-    @pulumi.getter
-    def release(self) -> Optional[str]:
-        """
-        Helm release (Default: `Install`).
-        """
-        return pulumi.get(self, "release")
 
     @property
     @pulumi.getter
@@ -75,14 +53,10 @@ class AwaitableGetHelmValuesResult(GetHelmValuesResult):
             yield self
         return GetHelmValuesResult(
             id=self.id,
-            namespace=self.namespace,
-            release=self.release,
             yaml=self.yaml)
 
 
-def get_helm_values(namespace: Optional[str] = None,
-                    release: Optional[str] = None,
-                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetHelmValuesResult:
+def get_helm_values(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetHelmValuesResult:
     """
     Helm values of cilium
 
@@ -98,28 +72,18 @@ def get_helm_values(namespace: Optional[str] = None,
         content=example_helm_values.yaml,
         filename=f"{path['module']}/values.yaml")
     ```
-
-
-    :param str namespace: Namespace of cilium (Default: `kube-system`).
-    :param str release: Helm release (Default: `Install`).
     """
     __args__ = dict()
-    __args__['namespace'] = namespace
-    __args__['release'] = release
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('cilium:index/getHelmValues:getHelmValues', __args__, opts=opts, typ=GetHelmValuesResult).value
 
     return AwaitableGetHelmValuesResult(
         id=pulumi.get(__ret__, 'id'),
-        namespace=pulumi.get(__ret__, 'namespace'),
-        release=pulumi.get(__ret__, 'release'),
         yaml=pulumi.get(__ret__, 'yaml'))
 
 
 @_utilities.lift_output_func(get_helm_values)
-def get_helm_values_output(namespace: Optional[pulumi.Input[Optional[str]]] = None,
-                           release: Optional[pulumi.Input[Optional[str]]] = None,
-                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetHelmValuesResult]:
+def get_helm_values_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetHelmValuesResult]:
     """
     Helm values of cilium
 
@@ -135,9 +99,5 @@ def get_helm_values_output(namespace: Optional[pulumi.Input[Optional[str]]] = No
         content=example_helm_values.yaml,
         filename=f"{path['module']}/values.yaml")
     ```
-
-
-    :param str namespace: Namespace of cilium (Default: `kube-system`).
-    :param str release: Helm release (Default: `Install`).
     """
     ...

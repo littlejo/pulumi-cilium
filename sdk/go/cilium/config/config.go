@@ -11,6 +11,11 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+// The content of kube config file (Default: “).
+func GetConfigContent(ctx *pulumi.Context) string {
+	return config.Get(ctx, "cilium:configContent")
+}
+
 // A path to a kube config file (Default: `~/.kube/config`).
 func GetConfigPath(ctx *pulumi.Context) string {
 	return config.Get(ctx, "cilium:configPath")
@@ -19,6 +24,11 @@ func GetConfigPath(ctx *pulumi.Context) string {
 // Context of kubeconfig file (Default: `default context`).
 func GetContext(ctx *pulumi.Context) string {
 	return config.Get(ctx, "cilium:context")
+}
+
+// Helm Release to install cilium (Default: `cilium`).
+func GetHelmRelease(ctx *pulumi.Context) string {
+	return config.Get(ctx, "cilium:helmRelease")
 }
 
 // Namespace to install cilium (Default: `kube-system`).

@@ -14,21 +14,41 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
+                 config_content: Optional[pulumi.Input[str]] = None,
                  config_path: Optional[pulumi.Input[str]] = None,
                  context: Optional[pulumi.Input[str]] = None,
+                 helm_release: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[str] config_content: The content of kube config file (Default: ``).
         :param pulumi.Input[str] config_path: A path to a kube config file (Default: `~/.kube/config`).
         :param pulumi.Input[str] context: Context of kubeconfig file (Default: `default context`).
+        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `cilium`).
         :param pulumi.Input[str] namespace: Namespace to install cilium (Default: `kube-system`).
         """
+        if config_content is not None:
+            pulumi.set(__self__, "config_content", config_content)
         if config_path is not None:
             pulumi.set(__self__, "config_path", config_path)
         if context is not None:
             pulumi.set(__self__, "context", context)
+        if helm_release is not None:
+            pulumi.set(__self__, "helm_release", helm_release)
         if namespace is not None:
             pulumi.set(__self__, "namespace", namespace)
+
+    @property
+    @pulumi.getter(name="configContent")
+    def config_content(self) -> Optional[pulumi.Input[str]]:
+        """
+        The content of kube config file (Default: ``).
+        """
+        return pulumi.get(self, "config_content")
+
+    @config_content.setter
+    def config_content(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "config_content", value)
 
     @property
     @pulumi.getter(name="configPath")
@@ -55,6 +75,18 @@ class ProviderArgs:
         pulumi.set(self, "context", value)
 
     @property
+    @pulumi.getter(name="helmRelease")
+    def helm_release(self) -> Optional[pulumi.Input[str]]:
+        """
+        Helm Release to install cilium (Default: `cilium`).
+        """
+        return pulumi.get(self, "helm_release")
+
+    @helm_release.setter
+    def helm_release(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "helm_release", value)
+
+    @property
     @pulumi.getter
     def namespace(self) -> Optional[pulumi.Input[str]]:
         """
@@ -72,8 +104,10 @@ class Provider(pulumi.ProviderResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 config_content: Optional[pulumi.Input[str]] = None,
                  config_path: Optional[pulumi.Input[str]] = None,
                  context: Optional[pulumi.Input[str]] = None,
+                 helm_release: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -84,8 +118,10 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] config_content: The content of kube config file (Default: ``).
         :param pulumi.Input[str] config_path: A path to a kube config file (Default: `~/.kube/config`).
         :param pulumi.Input[str] context: Context of kubeconfig file (Default: `default context`).
+        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `cilium`).
         :param pulumi.Input[str] namespace: Namespace to install cilium (Default: `kube-system`).
         """
         ...
@@ -115,8 +151,10 @@ class Provider(pulumi.ProviderResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 config_content: Optional[pulumi.Input[str]] = None,
                  config_path: Optional[pulumi.Input[str]] = None,
                  context: Optional[pulumi.Input[str]] = None,
+                 helm_release: Optional[pulumi.Input[str]] = None,
                  namespace: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -127,14 +165,24 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            __props__.__dict__["config_content"] = config_content
             __props__.__dict__["config_path"] = config_path
             __props__.__dict__["context"] = context
+            __props__.__dict__["helm_release"] = helm_release
             __props__.__dict__["namespace"] = namespace
         super(Provider, __self__).__init__(
             'cilium',
             resource_name,
             __props__,
             opts)
+
+    @property
+    @pulumi.getter(name="configContent")
+    def config_content(self) -> pulumi.Output[Optional[str]]:
+        """
+        The content of kube config file (Default: ``).
+        """
+        return pulumi.get(self, "config_content")
 
     @property
     @pulumi.getter(name="configPath")
@@ -151,6 +199,14 @@ class Provider(pulumi.ProviderResource):
         Context of kubeconfig file (Default: `default context`).
         """
         return pulumi.get(self, "context")
+
+    @property
+    @pulumi.getter(name="helmRelease")
+    def helm_release(self) -> pulumi.Output[Optional[str]]:
+        """
+        Helm Release to install cilium (Default: `cilium`).
+        """
+        return pulumi.get(self, "helm_release")
 
     @property
     @pulumi.getter

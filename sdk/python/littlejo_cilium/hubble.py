@@ -14,33 +14,17 @@ __all__ = ['HubbleArgs', 'Hubble']
 @pulumi.input_type
 class HubbleArgs:
     def __init__(__self__, *,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  relay: Optional[pulumi.Input[bool]] = None,
                  ui: Optional[pulumi.Input[bool]] = None):
         """
         The set of arguments for constructing a Hubble resource.
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] relay: Deploy Hubble Relay (Default: `true`).
         :param pulumi.Input[bool] ui: Enable Hubble UI (Default: `false`).
         """
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if relay is not None:
             pulumi.set(__self__, "relay", relay)
         if ui is not None:
             pulumi.set(__self__, "ui", ui)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
     @property
     @pulumi.getter
@@ -70,33 +54,17 @@ class HubbleArgs:
 @pulumi.input_type
 class _HubbleState:
     def __init__(__self__, *,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  relay: Optional[pulumi.Input[bool]] = None,
                  ui: Optional[pulumi.Input[bool]] = None):
         """
         Input properties used for looking up and filtering Hubble resources.
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] relay: Deploy Hubble Relay (Default: `true`).
         :param pulumi.Input[bool] ui: Enable Hubble UI (Default: `false`).
         """
-        if namespace is not None:
-            pulumi.set(__self__, "namespace", namespace)
         if relay is not None:
             pulumi.set(__self__, "relay", relay)
         if ui is not None:
             pulumi.set(__self__, "ui", ui)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> Optional[pulumi.Input[str]]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
-
-    @namespace.setter
-    def namespace(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "namespace", value)
 
     @property
     @pulumi.getter
@@ -128,7 +96,6 @@ class Hubble(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  relay: Optional[pulumi.Input[bool]] = None,
                  ui: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -146,7 +113,6 @@ class Hubble(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] relay: Deploy Hubble Relay (Default: `true`).
         :param pulumi.Input[bool] ui: Enable Hubble UI (Default: `false`).
         """
@@ -183,7 +149,6 @@ class Hubble(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 namespace: Optional[pulumi.Input[str]] = None,
                  relay: Optional[pulumi.Input[bool]] = None,
                  ui: Optional[pulumi.Input[bool]] = None,
                  __props__=None):
@@ -195,7 +160,6 @@ class Hubble(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = HubbleArgs.__new__(HubbleArgs)
 
-            __props__.__dict__["namespace"] = namespace
             __props__.__dict__["relay"] = relay
             __props__.__dict__["ui"] = ui
         super(Hubble, __self__).__init__(
@@ -208,7 +172,6 @@ class Hubble(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            namespace: Optional[pulumi.Input[str]] = None,
             relay: Optional[pulumi.Input[bool]] = None,
             ui: Optional[pulumi.Input[bool]] = None) -> 'Hubble':
         """
@@ -218,7 +181,6 @@ class Hubble(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] namespace: Namespace in which to install (Default: `kube-system`).
         :param pulumi.Input[bool] relay: Deploy Hubble Relay (Default: `true`).
         :param pulumi.Input[bool] ui: Enable Hubble UI (Default: `false`).
         """
@@ -226,18 +188,9 @@ class Hubble(pulumi.CustomResource):
 
         __props__ = _HubbleState.__new__(_HubbleState)
 
-        __props__.__dict__["namespace"] = namespace
         __props__.__dict__["relay"] = relay
         __props__.__dict__["ui"] = ui
         return Hubble(resource_name, opts=opts, __props__=__props__)
-
-    @property
-    @pulumi.getter
-    def namespace(self) -> pulumi.Output[str]:
-        """
-        Namespace in which to install (Default: `kube-system`).
-        """
-        return pulumi.get(self, "namespace")
 
     @property
     @pulumi.getter

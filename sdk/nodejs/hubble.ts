@@ -45,10 +45,6 @@ export class Hubble extends pulumi.CustomResource {
     }
 
     /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    public readonly namespace!: pulumi.Output<string>;
-    /**
      * Deploy Hubble Relay (Default: `true`).
      */
     public readonly relay!: pulumi.Output<boolean>;
@@ -70,12 +66,10 @@ export class Hubble extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as HubbleState | undefined;
-            resourceInputs["namespace"] = state ? state.namespace : undefined;
             resourceInputs["relay"] = state ? state.relay : undefined;
             resourceInputs["ui"] = state ? state.ui : undefined;
         } else {
             const args = argsOrState as HubbleArgs | undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["relay"] = args ? args.relay : undefined;
             resourceInputs["ui"] = args ? args.ui : undefined;
         }
@@ -88,10 +82,6 @@ export class Hubble extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Hubble resources.
  */
 export interface HubbleState {
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Deploy Hubble Relay (Default: `true`).
      */
@@ -106,10 +96,6 @@ export interface HubbleState {
  * The set of arguments for constructing a Hubble resource.
  */
 export interface HubbleArgs {
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Deploy Hubble Relay (Default: `true`).
      */

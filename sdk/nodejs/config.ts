@@ -52,10 +52,6 @@ export class Config extends pulumi.CustomResource {
      */
     public readonly key!: pulumi.Output<string>;
     /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    public readonly namespace!: pulumi.Output<string>;
-    /**
      * Restart Cilium pods (Default: `true`).
      */
     public readonly restart!: pulumi.Output<boolean>;
@@ -78,7 +74,6 @@ export class Config extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ConfigState | undefined;
             resourceInputs["key"] = state ? state.key : undefined;
-            resourceInputs["namespace"] = state ? state.namespace : undefined;
             resourceInputs["restart"] = state ? state.restart : undefined;
             resourceInputs["value"] = state ? state.value : undefined;
         } else {
@@ -90,7 +85,6 @@ export class Config extends pulumi.CustomResource {
                 throw new Error("Missing required property 'value'");
             }
             resourceInputs["key"] = args ? args.key : undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
             resourceInputs["restart"] = args ? args.restart : undefined;
             resourceInputs["value"] = args ? args.value : undefined;
         }
@@ -107,10 +101,6 @@ export interface ConfigState {
      * Key of the config
      */
     key?: pulumi.Input<string>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Restart Cilium pods (Default: `true`).
      */
@@ -129,10 +119,6 @@ export interface ConfigArgs {
      * Key of the config
      */
     key: pulumi.Input<string>;
-    /**
-     * Namespace in which to install (Default: `kube-system`).
-     */
-    namespace?: pulumi.Input<string>;
     /**
      * Restart Cilium pods (Default: `true`).
      */

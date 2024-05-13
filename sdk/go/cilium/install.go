@@ -11,71 +11,15 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
-//	"github.com/pulumi/pulumi-kind/sdk/v1/go/kind"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := index.NewKind_cluster(ctx, "examplekind_cluster", &index.Kind_clusterArgs{
-//				Name: "test-cluster",
-//				KindConfig: []map[string]interface{}{
-//					map[string]interface{}{
-//						"kind":       "Cluster",
-//						"apiVersion": "kind.x-k8s.io/v1alpha4",
-//						"node": []map[string]interface{}{
-//							map[string]interface{}{
-//								"role": "control-plane",
-//							},
-//							map[string]interface{}{
-//								"role": "worker",
-//							},
-//						},
-//						"networking": []map[string]interface{}{
-//							map[string]interface{}{
-//								"disableDefaultCni": true,
-//							},
-//						},
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = cilium.NewInstall(ctx, "exampleInstall", &cilium.InstallArgs{
-//				Sets: pulumi.StringArray{
-//					pulumi.String("ipam.mode=kubernetes"),
-//					pulumi.String("ipam.operator.replicas=1"),
-//					pulumi.String("tunnel=vxlan"),
-//				},
-//				Version: pulumi.String("1.14.5"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type Install struct {
 	pulumi.CustomResourceState
 
+	// Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+	Ca InstallCaOutput `pulumi:"ca"`
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath pulumi.StringOutput `pulumi:"dataPath"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringOutput `pulumi:"namespace"`
+	// Helm values (`helm get values -n kube-system cilium`)
+	HelmValues pulumi.StringOutput `pulumi:"helmValues"`
 	// Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
 	Repository pulumi.StringOutput `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
@@ -99,6 +43,10 @@ func NewInstall(ctx *pulumi.Context,
 		args = &InstallArgs{}
 	}
 
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"ca",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Install
 	err := ctx.RegisterResource("cilium:index/install:Install", name, args, &resource, opts...)
@@ -122,10 +70,12 @@ func GetInstall(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Install resources.
 type installState struct {
+	// Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+	Ca *InstallCa `pulumi:"ca"`
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath *string `pulumi:"dataPath"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
+	// Helm values (`helm get values -n kube-system cilium`)
+	HelmValues *string `pulumi:"helmValues"`
 	// Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
@@ -143,10 +93,12 @@ type installState struct {
 }
 
 type InstallState struct {
+	// Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+	Ca InstallCaPtrInput
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
+	// Helm values (`helm get values -n kube-system cilium`)
+	HelmValues pulumi.StringPtrInput
 	// Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
@@ -170,8 +122,6 @@ func (InstallState) ElementType() reflect.Type {
 type installArgs struct {
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath *string `pulumi:"dataPath"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
@@ -192,8 +142,6 @@ type installArgs struct {
 type InstallArgs struct {
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
@@ -297,14 +245,19 @@ func (o InstallOutput) ToInstallOutputWithContext(ctx context.Context) InstallOu
 	return o
 }
 
+// Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+func (o InstallOutput) Ca() InstallCaOutput {
+	return o.ApplyT(func(v *Install) InstallCaOutput { return v.Ca }).(InstallCaOutput)
+}
+
 // Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 func (o InstallOutput) DataPath() pulumi.StringOutput {
 	return o.ApplyT(func(v *Install) pulumi.StringOutput { return v.DataPath }).(pulumi.StringOutput)
 }
 
-// Namespace in which to install (Default: `kube-system`).
-func (o InstallOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v *Install) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
+// Helm values (`helm get values -n kube-system cilium`)
+func (o InstallOutput) HelmValues() pulumi.StringOutput {
+	return o.ApplyT(func(v *Install) pulumi.StringOutput { return v.HelmValues }).(pulumi.StringOutput)
 }
 
 // Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).

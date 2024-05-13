@@ -11,40 +11,11 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cilium.NewClustermeshConnection(ctx, "example", &cilium.ClustermeshConnectionArgs{
-//				DestinationContext: pulumi.String("context-2"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type ClustermeshConnection struct {
 	pulumi.CustomResourceState
 
 	// Kubernetes configuration context of destination cluster
 	DestinationContext pulumi.StringOutput `pulumi:"destinationContext"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringOutput `pulumi:"namespace"`
 }
 
 // NewClustermeshConnection registers a new resource with the given unique name, arguments, and options.
@@ -79,15 +50,11 @@ func GetClustermeshConnection(ctx *pulumi.Context,
 type clustermeshConnectionState struct {
 	// Kubernetes configuration context of destination cluster
 	DestinationContext *string `pulumi:"destinationContext"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 }
 
 type ClustermeshConnectionState struct {
 	// Kubernetes configuration context of destination cluster
 	DestinationContext pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 }
 
 func (ClustermeshConnectionState) ElementType() reflect.Type {
@@ -97,16 +64,12 @@ func (ClustermeshConnectionState) ElementType() reflect.Type {
 type clustermeshConnectionArgs struct {
 	// Kubernetes configuration context of destination cluster
 	DestinationContext *string `pulumi:"destinationContext"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 }
 
 // The set of arguments for constructing a ClustermeshConnection resource.
 type ClustermeshConnectionArgs struct {
 	// Kubernetes configuration context of destination cluster
 	DestinationContext pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 }
 
 func (ClustermeshConnectionArgs) ElementType() reflect.Type {
@@ -199,11 +162,6 @@ func (o ClustermeshConnectionOutput) ToClustermeshConnectionOutputWithContext(ct
 // Kubernetes configuration context of destination cluster
 func (o ClustermeshConnectionOutput) DestinationContext() pulumi.StringOutput {
 	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringOutput { return v.DestinationContext }).(pulumi.StringOutput)
-}
-
-// Namespace in which to install (Default: `kube-system`).
-func (o ClustermeshConnectionOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
 }
 
 type ClustermeshConnectionArrayOutput struct{ *pulumi.OutputState }

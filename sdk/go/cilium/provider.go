@@ -18,10 +18,14 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
+	// The content of kube config file (Default: ``).
+	ConfigContent pulumi.StringPtrOutput `pulumi:"configContent"`
 	// A path to a kube config file (Default: `~/.kube/config`).
 	ConfigPath pulumi.StringPtrOutput `pulumi:"configPath"`
 	// Context of kubeconfig file (Default: `default context`).
 	Context pulumi.StringPtrOutput `pulumi:"context"`
+	// Helm Release to install cilium (Default: `cilium`).
+	HelmRelease pulumi.StringPtrOutput `pulumi:"helmRelease"`
 	// Namespace to install cilium (Default: `kube-system`).
 	Namespace pulumi.StringPtrOutput `pulumi:"namespace"`
 }
@@ -43,20 +47,28 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
+	// The content of kube config file (Default: ``).
+	ConfigContent *string `pulumi:"configContent"`
 	// A path to a kube config file (Default: `~/.kube/config`).
 	ConfigPath *string `pulumi:"configPath"`
 	// Context of kubeconfig file (Default: `default context`).
 	Context *string `pulumi:"context"`
+	// Helm Release to install cilium (Default: `cilium`).
+	HelmRelease *string `pulumi:"helmRelease"`
 	// Namespace to install cilium (Default: `kube-system`).
 	Namespace *string `pulumi:"namespace"`
 }
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
+	// The content of kube config file (Default: ``).
+	ConfigContent pulumi.StringPtrInput
 	// A path to a kube config file (Default: `~/.kube/config`).
 	ConfigPath pulumi.StringPtrInput
 	// Context of kubeconfig file (Default: `default context`).
 	Context pulumi.StringPtrInput
+	// Helm Release to install cilium (Default: `cilium`).
+	HelmRelease pulumi.StringPtrInput
 	// Namespace to install cilium (Default: `kube-system`).
 	Namespace pulumi.StringPtrInput
 }
@@ -98,6 +110,11 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
+// The content of kube config file (Default: “).
+func (o ProviderOutput) ConfigContent() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ConfigContent }).(pulumi.StringPtrOutput)
+}
+
 // A path to a kube config file (Default: `~/.kube/config`).
 func (o ProviderOutput) ConfigPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.ConfigPath }).(pulumi.StringPtrOutput)
@@ -106,6 +123,11 @@ func (o ProviderOutput) ConfigPath() pulumi.StringPtrOutput {
 // Context of kubeconfig file (Default: `default context`).
 func (o ProviderOutput) Context() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Context }).(pulumi.StringPtrOutput)
+}
+
+// Helm Release to install cilium (Default: `cilium`).
+func (o ProviderOutput) HelmRelease() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.HelmRelease }).(pulumi.StringPtrOutput)
 }
 
 // Namespace to install cilium (Default: `kube-system`).

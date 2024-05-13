@@ -11,46 +11,6 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			exampleInstall, err := cilium.NewInstall(ctx, "exampleInstall", &cilium.InstallArgs{
-//				Sets: pulumi.StringArray{
-//					pulumi.String("cluster.name=clustermesh1"),
-//					pulumi.String("cluster.id=1"),
-//					pulumi.String("ipam.mode=kubernetes"),
-//				},
-//				Version: pulumi.String("1.14.5"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = cilium.NewClustermesh(ctx, "exampleClustermesh", &cilium.ClustermeshArgs{
-//				ServiceType: pulumi.String("LoadBalancer"),
-//			}, pulumi.DependsOn([]pulumi.Resource{
-//				exampleInstall,
-//			}))
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type Clustermesh struct {
 	pulumi.CustomResourceState
 
@@ -58,8 +18,6 @@ type Clustermesh struct {
 	EnableExternalWorkloads pulumi.BoolOutput `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolOutput `pulumi:"enableKvStoreMesh"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringOutput `pulumi:"namespace"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
 	ServiceType pulumi.StringOutput `pulumi:"serviceType"`
 	// Wait Cluster Mesh status is ok (Default: `true`).
@@ -100,8 +58,6 @@ type clustermeshState struct {
 	EnableExternalWorkloads *bool `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh *bool `pulumi:"enableKvStoreMesh"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
 	ServiceType *string `pulumi:"serviceType"`
 	// Wait Cluster Mesh status is ok (Default: `true`).
@@ -113,8 +69,6 @@ type ClustermeshState struct {
 	EnableExternalWorkloads pulumi.BoolPtrInput
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
 	ServiceType pulumi.StringPtrInput
 	// Wait Cluster Mesh status is ok (Default: `true`).
@@ -130,8 +84,6 @@ type clustermeshArgs struct {
 	EnableExternalWorkloads *bool `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh *bool `pulumi:"enableKvStoreMesh"`
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace *string `pulumi:"namespace"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
 	ServiceType *string `pulumi:"serviceType"`
 	// Wait Cluster Mesh status is ok (Default: `true`).
@@ -144,8 +96,6 @@ type ClustermeshArgs struct {
 	EnableExternalWorkloads pulumi.BoolPtrInput
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolPtrInput
-	// Namespace in which to install (Default: `kube-system`).
-	Namespace pulumi.StringPtrInput
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
 	ServiceType pulumi.StringPtrInput
 	// Wait Cluster Mesh status is ok (Default: `true`).
@@ -247,11 +197,6 @@ func (o ClustermeshOutput) EnableExternalWorkloads() pulumi.BoolOutput {
 // Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 func (o ClustermeshOutput) EnableKvStoreMesh() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Clustermesh) pulumi.BoolOutput { return v.EnableKvStoreMesh }).(pulumi.BoolOutput)
-}
-
-// Namespace in which to install (Default: `kube-system`).
-func (o ClustermeshOutput) Namespace() pulumi.StringOutput {
-	return o.ApplyT(func(v *Clustermesh) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
 }
 
 // Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).

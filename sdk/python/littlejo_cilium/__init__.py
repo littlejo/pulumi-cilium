@@ -8,11 +8,14 @@ import typing
 from .clustermesh import *
 from .clustermesh_connection import *
 from .config import *
+from .deploy import *
 from .get_helm_values import *
 from .hubble import *
 from .install import *
 from .kubeproxy_free import *
 from .provider import *
+from ._inputs import *
+from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -46,6 +49,14 @@ _utilities.register(
   "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/config:Config": "Config"
+  }
+ },
+ {
+  "pkg": "cilium",
+  "mod": "index/deploy",
+  "fqn": "littlejo_cilium",
+  "classes": {
+   "cilium:index/deploy:Deploy": "Deploy"
   }
  },
  {

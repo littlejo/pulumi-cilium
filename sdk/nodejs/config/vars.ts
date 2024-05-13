@@ -8,6 +8,17 @@ declare var exports: any;
 const __config = new pulumi.Config("cilium");
 
 /**
+ * The content of kube config file (Default: ``).
+ */
+export declare const configContent: string | undefined;
+Object.defineProperty(exports, "configContent", {
+    get() {
+        return __config.get("configContent");
+    },
+    enumerable: true,
+});
+
+/**
  * A path to a kube config file (Default: `~/.kube/config`).
  */
 export declare const configPath: string | undefined;
@@ -25,6 +36,17 @@ export declare const context: string | undefined;
 Object.defineProperty(exports, "context", {
     get() {
         return __config.get("context");
+    },
+    enumerable: true,
+});
+
+/**
+ * Helm Release to install cilium (Default: `cilium`).
+ */
+export declare const helmRelease: string | undefined;
+Object.defineProperty(exports, "helmRelease", {
+    get() {
+        return __config.get("helmRelease");
     },
     enumerable: true,
 });

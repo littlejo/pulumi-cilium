@@ -9,6 +9,11 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
+configContent: Optional[str]
+"""
+The content of kube config file (Default: ``).
+"""
+
 configPath: Optional[str]
 """
 A path to a kube config file (Default: `~/.kube/config`).
@@ -17,6 +22,11 @@ A path to a kube config file (Default: `~/.kube/config`).
 context: Optional[str]
 """
 Context of kubeconfig file (Default: `default context`).
+"""
+
+helmRelease: Optional[str]
+"""
+Helm Release to install cilium (Default: `cilium`).
 """
 
 namespace: Optional[str]

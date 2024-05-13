@@ -4,6 +4,7 @@
             "cilium:index/clustermesh:Clustermesh": "cilium_clustermesh",
             "cilium:index/clustermeshConnection:ClustermeshConnection": "cilium_clustermesh_connection",
             "cilium:index/config:Config": "cilium_config",
+            "cilium:index/deploy:Deploy": "cilium_deploy",
             "cilium:index/hubble:Hubble": "cilium_hubble",
             "cilium:index/install:Install": "cilium",
             "cilium:index/kubeproxyFree:KubeproxyFree": "cilium_kubeproxy_free"
@@ -20,16 +21,26 @@
             "cilium:index/clustermeshConnection:ClustermeshConnection": {
                 "destinationContext": "destination_context"
             },
+            "cilium:index/deploy:Deploy": {
+                "dataPath": "data_path",
+                "helmValues": "helm_values",
+                "sets": "set"
+            },
             "cilium:index/install:Install": {
                 "dataPath": "data_path",
+                "helmValues": "helm_values",
                 "sets": "set"
             },
             "cilium:index:Provider": {
-                "configPath": "config_path"
+                "configContent": "config_content",
+                "configPath": "config_path",
+                "helmRelease": "helm_release"
             }
         },
         "renamedConfigProperties": {
-            "configPath": "config_path"
+            "configContent": "config_content",
+            "configPath": "config_path",
+            "helmRelease": "helm_release"
         }
     }
 }
