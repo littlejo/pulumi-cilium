@@ -38,7 +38,7 @@ export class Provider extends pulumi.ProviderResource {
      */
     public readonly context!: pulumi.Output<string | undefined>;
     /**
-     * Helm Release to install cilium (Default: `cilium`).
+     * Helm Release to install cilium (Default: `cilium.Install`).
      */
     public readonly helmRelease!: pulumi.Output<string | undefined>;
     /**
@@ -85,7 +85,7 @@ export interface ProviderArgs {
      */
     context?: pulumi.Input<string>;
     /**
-     * Helm Release to install cilium (Default: `cilium`).
+     * Helm Release to install cilium (Default: `cilium.Install`).
      */
     helmRelease?: pulumi.Input<string>;
     /**

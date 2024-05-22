@@ -26,7 +26,7 @@ func GetContext(ctx *pulumi.Context) string {
 	return config.Get(ctx, "cilium:context")
 }
 
-// Helm Release to install cilium (Default: `cilium`).
+// Helm Release to install cilium (Default: `Install`).
 func GetHelmRelease(ctx *pulumi.Context) string {
 	return config.Get(ctx, "cilium:helmRelease")
 }

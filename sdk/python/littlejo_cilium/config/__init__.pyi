@@ -26,7 +26,7 @@ Context of kubeconfig file (Default: `default context`).
 
 helmRelease: Optional[str]
 """
-Helm Release to install cilium (Default: `cilium`).
+Helm Release to install cilium (Default: `Install`).
 """
 
 namespace: Optional[str]
