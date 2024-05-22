@@ -39,7 +39,7 @@ class _ExportableConfig(types.ModuleType):
     @property
     def helm_release(self) -> Optional[str]:
         """
-        Helm Release to install cilium (Default: `cilium`).
+        Helm Release to install cilium (Default: `Install`).
         """
         return __config__.get('helmRelease')
 

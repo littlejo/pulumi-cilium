@@ -41,7 +41,7 @@ Object.defineProperty(exports, "context", {
 });
 
 /**
- * Helm Release to install cilium (Default: `cilium`).
+ * Helm Release to install cilium (Default: `cilium.Install`).
  */
 export declare const helmRelease: string | undefined;
 Object.defineProperty(exports, "helmRelease", {

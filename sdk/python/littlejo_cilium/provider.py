@@ -24,7 +24,7 @@ class ProviderArgs:
         :param pulumi.Input[str] config_content: The content of kube config file (Default: ``).
         :param pulumi.Input[str] config_path: A path to a kube config file (Default: `~/.kube/config`).
         :param pulumi.Input[str] context: Context of kubeconfig file (Default: `default context`).
-        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `cilium`).
+        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `Install`).
         :param pulumi.Input[str] namespace: Namespace to install cilium (Default: `kube-system`).
         """
         if config_content is not None:
@@ -78,7 +78,7 @@ class ProviderArgs:
     @pulumi.getter(name="helmRelease")
     def helm_release(self) -> Optional[pulumi.Input[str]]:
         """
-        Helm Release to install cilium (Default: `cilium`).
+        Helm Release to install cilium (Default: `Install`).
         """
         return pulumi.get(self, "helm_release")
 
@@ -121,7 +121,7 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[str] config_content: The content of kube config file (Default: ``).
         :param pulumi.Input[str] config_path: A path to a kube config file (Default: `~/.kube/config`).
         :param pulumi.Input[str] context: Context of kubeconfig file (Default: `default context`).
-        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `cilium`).
+        :param pulumi.Input[str] helm_release: Helm Release to install cilium (Default: `Install`).
         :param pulumi.Input[str] namespace: Namespace to install cilium (Default: `kube-system`).
         """
         ...
@@ -204,7 +204,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="helmRelease")
     def helm_release(self) -> pulumi.Output[Optional[str]]:
         """
-        Helm Release to install cilium (Default: `cilium`).
+        Helm Release to install cilium (Default: `Install`).
         """
         return pulumi.get(self, "helm_release")
 
