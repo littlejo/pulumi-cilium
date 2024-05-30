@@ -32,7 +32,7 @@ class DeployArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
                `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.5`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         if data_path is not None:
@@ -130,7 +130,7 @@ class DeployArgs:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of Cilium (Default: `v1.15.4`).
+        Version of Cilium (Default: `v1.15.5`).
         """
         return pulumi.get(self, "version")
 
@@ -174,7 +174,7 @@ class _DeployState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
                `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.5`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         if data_path is not None:
@@ -286,7 +286,7 @@ class _DeployState:
     @pulumi.getter
     def version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of Cilium (Default: `v1.15.4`).
+        Version of Cilium (Default: `v1.15.5`).
         """
         return pulumi.get(self, "version")
 
@@ -333,7 +333,7 @@ class Deploy(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
                `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.5`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         ...
@@ -420,7 +420,7 @@ class Deploy(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:
                `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
-        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.4`).
+        :param pulumi.Input[str] version: Version of Cilium (Default: `v1.15.5`).
         :param pulumi.Input[bool] wait: Wait for Cilium status is ok (Default: `true`).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -500,7 +500,7 @@ class Deploy(pulumi.CustomResource):
     @pulumi.getter
     def version(self) -> pulumi.Output[str]:
         """
-        Version of Cilium (Default: `v1.15.4`).
+        Version of Cilium (Default: `v1.15.5`).
         """
         return pulumi.get(self, "version")
 
