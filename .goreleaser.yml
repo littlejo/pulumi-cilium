@@ -1,3 +1,5 @@
+version: 2
+
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
@@ -21,7 +23,7 @@ builds:
       - -X github.com/littlejo/pulumi-cilium/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-cilium/
 changelog:
-  skip: true
+  disable: true
 release:
   disable: false
   prerelease: auto
