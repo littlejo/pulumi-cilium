@@ -96,3 +96,37 @@ jobs:
             git diff
             exit 1
         fi
+
+  goreleaser:
+    name: goreleaser-check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+
+    - name: Install Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{matrix.goversion}}
+
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@v1.12.0
+      with:
+        repo: pulumi/pulumictl
+
+    - name: Set PreRelease Version
+      run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@286f3b13b1b49da4ac219696163fb8c1c93e1200
+      with:
+        args: check
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+          - 1.21.x
