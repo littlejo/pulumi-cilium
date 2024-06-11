@@ -6,7 +6,7 @@ toolchain go1.22.4
 
 require (
 	github.com/ettle/strcase v0.2.0
-	github.com/littlejo/terraform-provider-cilium v0.2.5
+	github.com/littlejo/terraform-provider-cilium v0.2.6
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.37.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.84.0
 	github.com/pulumi/pulumi/sdk/v3 v3.118.0
@@ -98,9 +98,9 @@ require (
 	github.com/charmbracelet/bubbletea v0.24.2 // indirect
 	github.com/charmbracelet/lipgloss v0.7.1 // indirect
 	github.com/cheggaaa/pb v1.0.29 // indirect
-	github.com/cilium/charts v0.0.0-20240517144447-a8ec8771aab8 // indirect
+	github.com/cilium/charts v0.0.0-20240530135756-f365292ba791 // indirect
 	github.com/cilium/cilium v1.16.0-pre.2 // indirect
-	github.com/cilium/cilium-cli v0.16.8 // indirect
+	github.com/cilium/cilium-cli v0.16.9 // indirect
 	github.com/cilium/ebpf v0.15.0 // indirect
 	github.com/cilium/hive v0.0.0-20240425092031-f6d2f20c979b // indirect
 	github.com/cilium/hubble v0.13.3 // indirect
@@ -207,7 +207,7 @@ require (
 	github.com/hashicorp/hcl v1.0.1-vault-5 // indirect
 	github.com/hashicorp/hcl/v2 v2.20.1 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
-	github.com/hashicorp/terraform-plugin-framework v1.8.0 // indirect
+	github.com/hashicorp/terraform-plugin-framework v1.9.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.23.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.3 // indirect
