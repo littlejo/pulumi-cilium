@@ -130,3 +130,52 @@ jobs:
       matrix:
         goversion:
           - 1.21.x
+
+  test:
+    name: "Functionnal test: Install Cilium on one cluster"
+    runs-on: ubuntu-latest
+    env:
+      dir: .github/pulumi/yaml/simple
+      PULUMI_CONFIG_PASSPHRASE: ""
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        goversion:
+          - 1.22.x
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+    - name: Install Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{matrix.goversion}}
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@v1.12.0
+      with:
+        repo: pulumi/pulumictl
+    - name: Install pulumi
+      uses: pulumi/actions@v5
+    - name: Build provider
+      run: make provider
+    - name: Setup kind test1
+      uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
+      with:
+        wait: 0
+        config: .github/config/acceptance_tests_kind_config.yaml
+        cluster_name: "test1"
+    - name: Install cilium
+      run: |
+        pulumi login --local
+        pulumi stack init dev
+        pulumi up --stack dev -y
+      working-directory: ${{ env.dir }}
+    - uses: cilium/cilium-cli@404d52692f62eebb7211fdacd114848995ada1b7
+      with:
+        skip-build: true
+        release-version: v0.16.10
+    - name: Check cilium
+      run: |
+        cilium status --wait

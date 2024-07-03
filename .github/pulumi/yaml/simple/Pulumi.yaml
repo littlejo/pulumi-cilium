@@ -1,0 +1,13 @@
+name: simple
+runtime: yaml
+description: A minimal Cilium Pulumi YAML program
+resources:
+  cilium:
+    type: cilium:index:Install
+    properties:
+      version: "1.15.6"
+
+plugins:
+  providers:
+    - name: cilium
+      path: ../../../../bin
