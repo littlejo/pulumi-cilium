@@ -63,7 +63,7 @@ export class Deploy extends pulumi.CustomResource {
      */
     public readonly values!: pulumi.Output<string>;
     /**
-     * Version of Cilium (Default: `v1.15.5`).
+     * Version of Cilium (Default: `v1.15.6`).
      */
     public readonly version!: pulumi.Output<string>;
     /**
@@ -145,7 +145,7 @@ export interface DeployState {
      */
     values?: pulumi.Input<string>;
     /**
-     * Version of Cilium (Default: `v1.15.5`).
+     * Version of Cilium (Default: `v1.15.6`).
      */
     version?: pulumi.Input<string>;
     /**
@@ -185,7 +185,7 @@ export interface DeployArgs {
      */
     values?: pulumi.Input<string>;
     /**
-     * Version of Cilium (Default: `v1.15.5`).
+     * Version of Cilium (Default: `v1.15.6`).
      */
     version?: pulumi.Input<string>;
     /**

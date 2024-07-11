@@ -30,7 +30,7 @@ type Deploy struct {
 	Sets pulumi.StringArrayOutput `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringOutput `pulumi:"values"`
-	// Version of Cilium (Default: `v1.15.5`).
+	// Version of Cilium (Default: `v1.15.6`).
 	Version pulumi.StringOutput `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolOutput `pulumi:"wait"`
@@ -82,7 +82,7 @@ type deployState struct {
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values *string `pulumi:"values"`
-	// Version of Cilium (Default: `v1.15.5`).
+	// Version of Cilium (Default: `v1.15.6`).
 	Version *string `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait *bool `pulumi:"wait"`
@@ -105,7 +105,7 @@ type DeployState struct {
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringPtrInput
-	// Version of Cilium (Default: `v1.15.5`).
+	// Version of Cilium (Default: `v1.15.6`).
 	Version pulumi.StringPtrInput
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolPtrInput
@@ -130,7 +130,7 @@ type deployArgs struct {
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values *string `pulumi:"values"`
-	// Version of Cilium (Default: `v1.15.5`).
+	// Version of Cilium (Default: `v1.15.6`).
 	Version *string `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait *bool `pulumi:"wait"`
@@ -152,7 +152,7 @@ type DeployArgs struct {
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringPtrInput
-	// Version of Cilium (Default: `v1.15.5`).
+	// Version of Cilium (Default: `v1.15.6`).
 	Version pulumi.StringPtrInput
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolPtrInput
@@ -282,7 +282,7 @@ func (o DeployOutput) Values() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deploy) pulumi.StringOutput { return v.Values }).(pulumi.StringOutput)
 }
 
-// Version of Cilium (Default: `v1.15.5`).
+// Version of Cilium (Default: `v1.15.6`).
 func (o DeployOutput) Version() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deploy) pulumi.StringOutput { return v.Version }).(pulumi.StringOutput)
 }
