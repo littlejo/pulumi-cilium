@@ -335,7 +335,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.15.5`).\n"
+                    "description": "Version of Cilium (Default: `v1.15.6`).\n"
                 },
                 "wait": {
                     "type": "boolean",
@@ -383,7 +383,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.15.5`).\n"
+                    "description": "Version of Cilium (Default: `v1.15.6`).\n"
                 },
                 "wait": {
                     "type": "boolean",
@@ -426,7 +426,7 @@
                     },
                     "version": {
                         "type": "string",
-                        "description": "Version of Cilium (Default: `v1.15.5`).\n"
+                        "description": "Version of Cilium (Default: `v1.15.6`).\n"
                     },
                     "wait": {
                         "type": "boolean",
