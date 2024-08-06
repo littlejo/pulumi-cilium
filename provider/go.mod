@@ -2,7 +2,7 @@ module github.com/littlejo/pulumi-cilium/provider
 
 go 1.22.2
 
-toolchain go1.22.5
+toolchain go1.22.6
 
 require (
 	github.com/ettle/strcase v0.2.0
