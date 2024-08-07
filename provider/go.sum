@@ -742,6 +742,8 @@ github.com/cilium/charts v0.0.0-20240617195019-6931c75d0f5f h1:wRmP5NvHpRgN/QJO0
 github.com/cilium/charts v0.0.0-20240617195019-6931c75d0f5f/go.mod h1:M3C9VOlFvRzuV+a01t07Tw4uFLSfkCH3L542IWjf6BU=
 github.com/cilium/charts v0.0.0-20240628222741-d0ce83a2f483 h1:K+WJPPzdxg0xTyVVuR1oyrgdsqF3j3wVyQCkDWYtlfc=
 github.com/cilium/charts v0.0.0-20240628222741-d0ce83a2f483/go.mod h1:M3C9VOlFvRzuV+a01t07Tw4uFLSfkCH3L542IWjf6BU=
+github.com/cilium/charts v0.0.0-20240724150047-2a1e5b85b669 h1:TF3FtQthnyBDPjVgZEPPy15FJ1NehhRA6Xh+K3qPbdI=
+github.com/cilium/charts v0.0.0-20240724150047-2a1e5b85b669/go.mod h1:M3C9VOlFvRzuV+a01t07Tw4uFLSfkCH3L542IWjf6BU=
 github.com/cilium/checkmate v1.0.3 h1:CQC5eOmlAZeEjPrVZY3ZwEBH64lHlx9mXYdUehEwI5w=
 github.com/cilium/checkmate v1.0.3/go.mod h1:KiBTasf39/F2hf2yAmHw21YFl3hcEyP4Yk6filxc12A=
 github.com/cilium/cilium v1.15.0-pre.3 h1:HuARlBUHQxXaLp1JoCYIv/2iwKZPxcIuQ3TWtjPWKpk=
@@ -756,6 +758,8 @@ github.com/cilium/cilium v1.16.0-rc.1 h1:OxK4SD3jyEQcjSNrNMeADQQ1sb0gO0hy+eXO+8w
 github.com/cilium/cilium v1.16.0-rc.1/go.mod h1:u/Hggj4kmmYtLvZ+wG2nppabk7wpAFn09Sm+Bo1kGvo=
 github.com/cilium/cilium v1.16.0-rc.2 h1:XLF4jebCI0/joV1Ma1+cdiGaokFB0VYLsEgS165I+W4=
 github.com/cilium/cilium v1.16.0-rc.2/go.mod h1:u/Hggj4kmmYtLvZ+wG2nppabk7wpAFn09Sm+Bo1kGvo=
+github.com/cilium/cilium v1.16.0 h1:5NqA2H/7si4KbiMjzqeH130LTox7F2MrKSrS3lUYUTk=
+github.com/cilium/cilium v1.16.0/go.mod h1:u/Hggj4kmmYtLvZ+wG2nppabk7wpAFn09Sm+Bo1kGvo=
 github.com/cilium/cilium-cli v0.15.19 h1:XSSf1KqNyvMqBN2P0bfZT4+moYXsQOiYazEntnSWLiM=
 github.com/cilium/cilium-cli v0.15.19/go.mod h1:ZzWGtTpmZNdjzRKkkxTbZ1faQZG+xWxS46DKsv+ogkw=
 github.com/cilium/cilium-cli v0.15.20 h1:1CPYzyIOvGg/HSGU+9gFzDKmvyK4Q00Om+5V5TQIMGk=
@@ -772,6 +776,8 @@ github.com/cilium/cilium-cli v0.16.11 h1:k7u4JXrpo6db965+mMPjhaEexTmM5AiFPsFErf4
 github.com/cilium/cilium-cli v0.16.11/go.mod h1:hADoyhC7XRwxskx7/VP/sYhPYlYVwS0V6hvpJFBTn5I=
 github.com/cilium/cilium-cli v0.16.12 h1:Arm9EAoXS63m19y/g0Z1yA+7BofdhY1qai5PnTEO+uE=
 github.com/cilium/cilium-cli v0.16.12/go.mod h1:mIl7sKNcg+u1fgEdzJF6cNwMywnoX9cmQn1lKxRB2Hc=
+github.com/cilium/cilium-cli v0.16.14 h1:VNN/rdx2Y1O6y2Pbb2tbu/AE4arlS0bc9FmQeV0fELs=
+github.com/cilium/cilium-cli v0.16.14/go.mod h1:XiP+qstb2lbEk9RQCr6imQwOGs8Xfu1bHqgfRQdeG7s=
 github.com/cilium/ebpf v0.0.0-20200110133405-4032b1d8aae3/go.mod h1:MA5e5Lr8slmEg9bt0VpxxWqJlO4iwu3FBdHUzV7wQVg=
 github.com/cilium/ebpf v0.0.0-20200702112145-1c8d4c9ef775/go.mod h1:7cR51M8ViRLIdUjrmSXlK9pkrsDlLHbO8jiB8X8JnOc=
 github.com/cilium/ebpf v0.2.0/go.mod h1:To2CFviqOWL/M0gIMsvSMlqe7em/l1ALkX1PyjrX2Qs=
@@ -1725,6 +1731,8 @@ github.com/hashicorp/terraform-plugin-framework v1.9.0 h1:caLcDoxiRucNi2hk8+j3kJ
 github.com/hashicorp/terraform-plugin-framework v1.9.0/go.mod h1:qBXLDn69kM97NNVi/MQ9qgd1uWWsVftGSnygYG1tImM=
 github.com/hashicorp/terraform-plugin-framework v1.10.0 h1:xXhICE2Fns1RYZxEQebwkB2+kXouLC932Li9qelozrc=
 github.com/hashicorp/terraform-plugin-framework v1.10.0/go.mod h1:qBXLDn69kM97NNVi/MQ9qgd1uWWsVftGSnygYG1tImM=
+github.com/hashicorp/terraform-plugin-framework v1.11.0 h1:M7+9zBArexHFXDx/pKTxjE6n/2UCXY6b8FIq9ZYhwfE=
+github.com/hashicorp/terraform-plugin-framework v1.11.0/go.mod h1:qBXLDn69kM97NNVi/MQ9qgd1uWWsVftGSnygYG1tImM=
 github.com/hashicorp/terraform-plugin-framework-validators v0.10.0 h1:4L0tmy/8esP6OcvocVymw52lY0HyQ5OxB7VNl7k4bS0=
 github.com/hashicorp/terraform-plugin-framework-validators v0.10.0/go.mod h1:qdQJCdimB9JeX2YwOpItEu+IrfoJjWQ5PhLpAOMDQAE=
 github.com/hashicorp/terraform-plugin-go v0.20.0 h1:oqvoUlL+2EUbKNsJbIt3zqqZ7wi6lzn4ufkn/UA51xQ=
@@ -1960,6 +1968,8 @@ github.com/littlejo/terraform-provider-cilium v0.2.8 h1:cgb8lhaIyOI8Zhm2/q6KQ9hi
 github.com/littlejo/terraform-provider-cilium v0.2.8/go.mod h1:Qq8avhZ8WMZs10EAihfrymv95LxLyBbcqPzly6A6sS8=
 github.com/littlejo/terraform-provider-cilium v0.2.9 h1:0W1lJXJjlU6xlYMPjgnRkvyoKFK+iVE6bn5hxoSBZnM=
 github.com/littlejo/terraform-provider-cilium v0.2.9/go.mod h1:u/k+RYT88gRDbgD0rRZgIvOBgaGVuUO1JRhr41s981k=
+github.com/littlejo/terraform-provider-cilium v0.2.11 h1:J3ozVZwVdpiu12kg5OP01naiyUhg9s3HZa3JgrHSGwA=
+github.com/littlejo/terraform-provider-cilium v0.2.11/go.mod h1:wY8EES0eqfsliCcMuS3S/5uo0d6D9EQ8FSowsR53Hg4=
 github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
 github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0/go.mod h1:zJYVVT2jmtg6P3p1VtQj7WsuWi/y4VnjVBn7F8KPB3I=
