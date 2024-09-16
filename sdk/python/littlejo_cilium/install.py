@@ -406,7 +406,7 @@ class Install(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            ca: Optional[pulumi.Input[pulumi.InputType['InstallCaArgs']]] = None,
+            ca: Optional[pulumi.Input[Union['InstallCaArgs', 'InstallCaArgsDict']]] = None,
             data_path: Optional[pulumi.Input[str]] = None,
             helm_values: Optional[pulumi.Input[str]] = None,
             repository: Optional[pulumi.Input[str]] = None,
@@ -423,7 +423,7 @@ class Install(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['InstallCaArgs']] ca: Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
+        :param pulumi.Input[Union['InstallCaArgs', 'InstallCaArgsDict']] ca: Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] helm_values: Helm values (`helm get values -n kube-system cilium`)
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).

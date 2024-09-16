@@ -7,9 +7,9 @@ toolchain go1.22.6
 require (
 	github.com/ettle/strcase v0.2.0
 	github.com/littlejo/terraform-provider-cilium v0.2.9
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.41.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.88.0
-	github.com/pulumi/pulumi/sdk/v3 v3.126.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.43.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.90.0
+	github.com/pulumi/pulumi/sdk/v3 v3.130.0
 )
 
 require (
@@ -299,10 +299,10 @@ require (
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.9.1 // indirect
 	github.com/pulumi/inflector v0.1.1 // indirect
-	github.com/pulumi/pulumi-java/pkg v0.11.0 // indirect
+	github.com/pulumi/pulumi-java/pkg v0.14.0 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.8 // indirect
-	github.com/pulumi/pulumi-yaml v1.9.1 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.126.0 // indirect
+	github.com/pulumi/pulumi-yaml v1.9.2 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.130.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
@@ -329,6 +329,7 @@ require (
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
+	github.com/teekennedy/goldmark-markdown v0.3.0 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
@@ -347,6 +348,7 @@ require (
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/xlab/treeprint v1.2.0 // indirect
+	github.com/yuin/goldmark v1.7.4 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	github.com/zclconf/go-cty v1.14.4 // indirect
 	github.com/zmap/zcrypto v0.0.0-20230310154051-c8b263fd8300 // indirect
@@ -369,7 +371,7 @@ require (
 	golang.org/x/crypto v0.25.0 // indirect
 	golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8 // indirect
 	golang.org/x/mod v0.18.0 // indirect
-	golang.org/x/net v0.26.0 // indirect
+	golang.org/x/net v0.27.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect

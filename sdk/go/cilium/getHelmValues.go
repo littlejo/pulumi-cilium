@@ -36,7 +36,7 @@ import (
 //			}
 //			_, err = local.NewFile(ctx, "exampleFile", &local.FileArgs{
 //				Content:  pulumi.String(exampleHelmValues.Yaml),
-//				Filename: pulumi.String(fmt.Sprintf("%v/values.yaml", path.Module)),
+//				Filename: pulumi.Sprintf("%v/values.yaml", path.Module),
 //			})
 //			if err != nil {
 //				return err
