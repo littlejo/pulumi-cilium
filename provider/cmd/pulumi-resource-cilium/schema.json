@@ -217,26 +217,48 @@
         },
         "cilium:index/clustermeshConnection:ClustermeshConnection": {
             "properties": {
-                "destinationContext": {
+                "connectionMode": {
                     "type": "string",
-                    "description": "Kubernetes configuration context of destination cluster\n"
+                    "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                },
+                "destinationContexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Kubernetes configuration contexts of destination clusters\n"
                 }
             },
             "required": [
-                "destinationContext"
+                "connectionMode",
+                "destinationContexts"
             ],
             "inputProperties": {
-                "destinationContext": {
+                "connectionMode": {
                     "type": "string",
-                    "description": "Kubernetes configuration context of destination cluster\n"
+                    "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                },
+                "destinationContexts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Kubernetes configuration contexts of destination clusters\n"
                 }
             },
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ClustermeshConnection resources.\n",
                 "properties": {
-                    "destinationContext": {
+                    "connectionMode": {
                         "type": "string",
-                        "description": "Kubernetes configuration context of destination cluster\n"
+                        "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                    },
+                    "destinationContexts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Kubernetes configuration contexts of destination clusters\n"
                     }
                 },
                 "type": "object"
@@ -335,7 +357,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.15.6`).\n"
+                    "description": "Version of Cilium (Default: ``).\n"
                 },
                 "wait": {
                     "type": "boolean",
@@ -383,7 +405,7 @@
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.15.6`).\n"
+                    "description": "Version of Cilium (Default: ``).\n"
                 },
                 "wait": {
                     "type": "boolean",
@@ -426,7 +448,7 @@
                     },
                     "version": {
                         "type": "string",
-                        "description": "Version of Cilium (Default: `v1.15.6`).\n"
+                        "description": "Version of Cilium (Default: ``).\n"
                     },
                     "wait": {
                         "type": "boolean",

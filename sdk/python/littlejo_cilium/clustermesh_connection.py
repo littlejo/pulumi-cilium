@@ -14,49 +14,81 @@ __all__ = ['ClustermeshConnectionArgs', 'ClustermeshConnection']
 @pulumi.input_type
 class ClustermeshConnectionArgs:
     def __init__(__self__, *,
-                 destination_context: Optional[pulumi.Input[str]] = None):
+                 connection_mode: Optional[pulumi.Input[str]] = None,
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a ClustermeshConnection resource.
-        :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
+        :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
         """
-        if destination_context is not None:
-            pulumi.set(__self__, "destination_context", destination_context)
+        if connection_mode is not None:
+            pulumi.set(__self__, "connection_mode", connection_mode)
+        if destination_contexts is not None:
+            pulumi.set(__self__, "destination_contexts", destination_contexts)
 
     @property
-    @pulumi.getter(name="destinationContext")
-    def destination_context(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="connectionMode")
+    def connection_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Kubernetes configuration context of destination cluster
+        Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         """
-        return pulumi.get(self, "destination_context")
+        return pulumi.get(self, "connection_mode")
 
-    @destination_context.setter
-    def destination_context(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "destination_context", value)
+    @connection_mode.setter
+    def connection_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection_mode", value)
+
+    @property
+    @pulumi.getter(name="destinationContexts")
+    def destination_contexts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kubernetes configuration contexts of destination clusters
+        """
+        return pulumi.get(self, "destination_contexts")
+
+    @destination_contexts.setter
+    def destination_contexts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "destination_contexts", value)
 
 
 @pulumi.input_type
 class _ClustermeshConnectionState:
     def __init__(__self__, *,
-                 destination_context: Optional[pulumi.Input[str]] = None):
+                 connection_mode: Optional[pulumi.Input[str]] = None,
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering ClustermeshConnection resources.
-        :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
+        :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
         """
-        if destination_context is not None:
-            pulumi.set(__self__, "destination_context", destination_context)
+        if connection_mode is not None:
+            pulumi.set(__self__, "connection_mode", connection_mode)
+        if destination_contexts is not None:
+            pulumi.set(__self__, "destination_contexts", destination_contexts)
 
     @property
-    @pulumi.getter(name="destinationContext")
-    def destination_context(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="connectionMode")
+    def connection_mode(self) -> Optional[pulumi.Input[str]]:
         """
-        Kubernetes configuration context of destination cluster
+        Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         """
-        return pulumi.get(self, "destination_context")
+        return pulumi.get(self, "connection_mode")
 
-    @destination_context.setter
-    def destination_context(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "destination_context", value)
+    @connection_mode.setter
+    def connection_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "connection_mode", value)
+
+    @property
+    @pulumi.getter(name="destinationContexts")
+    def destination_contexts(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Kubernetes configuration contexts of destination clusters
+        """
+        return pulumi.get(self, "destination_contexts")
+
+    @destination_contexts.setter
+    def destination_contexts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "destination_contexts", value)
 
 
 class ClustermeshConnection(pulumi.CustomResource):
@@ -64,13 +96,15 @@ class ClustermeshConnection(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 destination_context: Optional[pulumi.Input[str]] = None,
+                 connection_mode: Optional[pulumi.Input[str]] = None,
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Create a ClustermeshConnection resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
+        :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
         """
         ...
     @overload
@@ -95,7 +129,8 @@ class ClustermeshConnection(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 destination_context: Optional[pulumi.Input[str]] = None,
+                 connection_mode: Optional[pulumi.Input[str]] = None,
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -105,7 +140,8 @@ class ClustermeshConnection(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClustermeshConnectionArgs.__new__(ClustermeshConnectionArgs)
 
-            __props__.__dict__["destination_context"] = destination_context
+            __props__.__dict__["connection_mode"] = connection_mode
+            __props__.__dict__["destination_contexts"] = destination_contexts
         super(ClustermeshConnection, __self__).__init__(
             'cilium:index/clustermeshConnection:ClustermeshConnection',
             resource_name,
@@ -116,7 +152,8 @@ class ClustermeshConnection(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            destination_context: Optional[pulumi.Input[str]] = None) -> 'ClustermeshConnection':
+            connection_mode: Optional[pulumi.Input[str]] = None,
+            destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'ClustermeshConnection':
         """
         Get an existing ClustermeshConnection resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -124,20 +161,30 @@ class ClustermeshConnection(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] destination_context: Kubernetes configuration context of destination cluster
+        :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ClustermeshConnectionState.__new__(_ClustermeshConnectionState)
 
-        __props__.__dict__["destination_context"] = destination_context
+        __props__.__dict__["connection_mode"] = connection_mode
+        __props__.__dict__["destination_contexts"] = destination_contexts
         return ClustermeshConnection(resource_name, opts=opts, __props__=__props__)
 
     @property
-    @pulumi.getter(name="destinationContext")
-    def destination_context(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="connectionMode")
+    def connection_mode(self) -> pulumi.Output[str]:
         """
-        Kubernetes configuration context of destination cluster
+        Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         """
-        return pulumi.get(self, "destination_context")
+        return pulumi.get(self, "connection_mode")
+
+    @property
+    @pulumi.getter(name="destinationContexts")
+    def destination_contexts(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Kubernetes configuration contexts of destination clusters
+        """
+        return pulumi.get(self, "destination_contexts")
 
