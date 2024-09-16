@@ -14,8 +14,10 @@ import (
 type ClustermeshConnection struct {
 	pulumi.CustomResourceState
 
-	// Kubernetes configuration context of destination cluster
-	DestinationContext pulumi.StringOutput `pulumi:"destinationContext"`
+	// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+	ConnectionMode pulumi.StringOutput `pulumi:"connectionMode"`
+	// Kubernetes configuration contexts of destination clusters
+	DestinationContexts pulumi.StringArrayOutput `pulumi:"destinationContexts"`
 }
 
 // NewClustermeshConnection registers a new resource with the given unique name, arguments, and options.
@@ -48,13 +50,17 @@ func GetClustermeshConnection(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ClustermeshConnection resources.
 type clustermeshConnectionState struct {
-	// Kubernetes configuration context of destination cluster
-	DestinationContext *string `pulumi:"destinationContext"`
+	// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+	ConnectionMode *string `pulumi:"connectionMode"`
+	// Kubernetes configuration contexts of destination clusters
+	DestinationContexts []string `pulumi:"destinationContexts"`
 }
 
 type ClustermeshConnectionState struct {
-	// Kubernetes configuration context of destination cluster
-	DestinationContext pulumi.StringPtrInput
+	// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+	ConnectionMode pulumi.StringPtrInput
+	// Kubernetes configuration contexts of destination clusters
+	DestinationContexts pulumi.StringArrayInput
 }
 
 func (ClustermeshConnectionState) ElementType() reflect.Type {
@@ -62,14 +68,18 @@ func (ClustermeshConnectionState) ElementType() reflect.Type {
 }
 
 type clustermeshConnectionArgs struct {
-	// Kubernetes configuration context of destination cluster
-	DestinationContext *string `pulumi:"destinationContext"`
+	// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+	ConnectionMode *string `pulumi:"connectionMode"`
+	// Kubernetes configuration contexts of destination clusters
+	DestinationContexts []string `pulumi:"destinationContexts"`
 }
 
 // The set of arguments for constructing a ClustermeshConnection resource.
 type ClustermeshConnectionArgs struct {
-	// Kubernetes configuration context of destination cluster
-	DestinationContext pulumi.StringPtrInput
+	// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+	ConnectionMode pulumi.StringPtrInput
+	// Kubernetes configuration contexts of destination clusters
+	DestinationContexts pulumi.StringArrayInput
 }
 
 func (ClustermeshConnectionArgs) ElementType() reflect.Type {
@@ -159,9 +169,14 @@ func (o ClustermeshConnectionOutput) ToClustermeshConnectionOutputWithContext(ct
 	return o
 }
 
-// Kubernetes configuration context of destination cluster
-func (o ClustermeshConnectionOutput) DestinationContext() pulumi.StringOutput {
-	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringOutput { return v.DestinationContext }).(pulumi.StringOutput)
+// Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
+func (o ClustermeshConnectionOutput) ConnectionMode() pulumi.StringOutput {
+	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringOutput { return v.ConnectionMode }).(pulumi.StringOutput)
+}
+
+// Kubernetes configuration contexts of destination clusters
+func (o ClustermeshConnectionOutput) DestinationContexts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringArrayOutput { return v.DestinationContexts }).(pulumi.StringArrayOutput)
 }
 
 type ClustermeshConnectionArrayOutput struct{ *pulumi.OutputState }

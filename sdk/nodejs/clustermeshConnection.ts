@@ -33,9 +33,13 @@ export class ClustermeshConnection extends pulumi.CustomResource {
     }
 
     /**
-     * Kubernetes configuration context of destination cluster
+     * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    public readonly destinationContext!: pulumi.Output<string>;
+    public readonly connectionMode!: pulumi.Output<string>;
+    /**
+     * Kubernetes configuration contexts of destination clusters
+     */
+    public readonly destinationContexts!: pulumi.Output<string[]>;
 
     /**
      * Create a ClustermeshConnection resource with the given unique name, arguments, and options.
@@ -50,10 +54,12 @@ export class ClustermeshConnection extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClustermeshConnectionState | undefined;
-            resourceInputs["destinationContext"] = state ? state.destinationContext : undefined;
+            resourceInputs["connectionMode"] = state ? state.connectionMode : undefined;
+            resourceInputs["destinationContexts"] = state ? state.destinationContexts : undefined;
         } else {
             const args = argsOrState as ClustermeshConnectionArgs | undefined;
-            resourceInputs["destinationContext"] = args ? args.destinationContext : undefined;
+            resourceInputs["connectionMode"] = args ? args.connectionMode : undefined;
+            resourceInputs["destinationContexts"] = args ? args.destinationContexts : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ClustermeshConnection.__pulumiType, name, resourceInputs, opts);
@@ -65,9 +71,13 @@ export class ClustermeshConnection extends pulumi.CustomResource {
  */
 export interface ClustermeshConnectionState {
     /**
-     * Kubernetes configuration context of destination cluster
+     * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    destinationContext?: pulumi.Input<string>;
+    connectionMode?: pulumi.Input<string>;
+    /**
+     * Kubernetes configuration contexts of destination clusters
+     */
+    destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -75,7 +85,11 @@ export interface ClustermeshConnectionState {
  */
 export interface ClustermeshConnectionArgs {
     /**
-     * Kubernetes configuration context of destination cluster
+     * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    destinationContext?: pulumi.Input<string>;
+    connectionMode?: pulumi.Input<string>;
+    /**
+     * Kubernetes configuration contexts of destination clusters
+     */
+    destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
 }
