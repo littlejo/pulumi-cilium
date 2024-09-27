@@ -49,7 +49,7 @@ jobs:
         repo: pulumi/pulumictl
 
     - name: Install pulumi
-      uses: pulumi/actions@v5
+      uses: pulumi/actions@v6
 
     - if: ${{ matrix.language == 'nodejs'}}
       name: Setup Node
@@ -157,7 +157,7 @@ jobs:
       with:
         repo: pulumi/pulumictl
     - name: Install pulumi
-      uses: pulumi/actions@v5
+      uses: pulumi/actions@v6
     - name: Build provider
       run: make provider
     - name: Setup kind test1
