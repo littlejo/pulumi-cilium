@@ -22,6 +22,7 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getHelmValues(opts?: pulumi.InvokeOptions): Promise<GetHelmValuesResult> {
+
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("cilium:index/getHelmValues:getHelmValues", {
     }, opts);
@@ -58,7 +59,5 @@ export interface GetHelmValuesResult {
  * ```
  */
 export function getHelmValuesOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetHelmValuesResult> {
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
-    return pulumi.runtime.invokeOutput("cilium:index/getHelmValues:getHelmValues", {
-    }, opts);
+    return pulumi.output(getHelmValues(opts))
 }

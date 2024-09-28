@@ -65,19 +65,13 @@ type GetHelmValuesResult struct {
 }
 
 func GetHelmValuesOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetHelmValuesResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetHelmValuesResultOutput, error) {
-		opts = internal.PkgInvokeDefaultOpts(opts)
-		var rv GetHelmValuesResult
-		secret, err := ctx.InvokePackageRaw("cilium:index/getHelmValues:getHelmValues", nil, &rv, "", opts...)
-		if err != nil {
-			return GetHelmValuesResultOutput{}, err
+	return pulumi.ToOutput(0).ApplyT(func(int) (GetHelmValuesResult, error) {
+		r, err := GetHelmValues(ctx, opts...)
+		var s GetHelmValuesResult
+		if r != nil {
+			s = *r
 		}
-
-		output := pulumi.ToOutput(rv).(GetHelmValuesResultOutput)
-		if secret {
-			return pulumi.ToSecret(output).(GetHelmValuesResultOutput), nil
-		}
-		return output, nil
+		return s, err
 	}).(GetHelmValuesResultOutput)
 }
 
