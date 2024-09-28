@@ -49,7 +49,7 @@ jobs:
         repo: pulumi/pulumictl
 
     - name: Install pulumi
-      uses: pulumi/actions@v5
+      uses: pulumi/actions@v6
 
     - if: ${{ matrix.language == 'nodejs'}}
       name: Setup Node
@@ -157,7 +157,7 @@ jobs:
       with:
         repo: pulumi/pulumictl
     - name: Install pulumi
-      uses: pulumi/actions@v5
+      uses: pulumi/actions@v6
     - name: Build provider
       run: make provider
     - name: Setup kind test1
@@ -172,7 +172,7 @@ jobs:
         pulumi stack init dev
         pulumi up --stack dev -y
       working-directory: ${{ env.dir }}
-    - uses: cilium/cilium-cli@fff38e882846c03f1720dad476e459323275ab9c
+    - uses: cilium/cilium-cli@ea870caf33eeefaf7587f708538b779b3c7cca2d
       with:
         skip-build: true
         release-version: v0.16.10
