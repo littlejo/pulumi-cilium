@@ -18,6 +18,8 @@ type ClustermeshConnection struct {
 	ConnectionMode pulumi.StringOutput `pulumi:"connectionMode"`
 	// Kubernetes configuration contexts of destination clusters
 	DestinationContexts pulumi.StringArrayOutput `pulumi:"destinationContexts"`
+	// Number of parallel connections of destination clusters (Default: `1`).
+	Parallel pulumi.Float64Output `pulumi:"parallel"`
 }
 
 // NewClustermeshConnection registers a new resource with the given unique name, arguments, and options.
@@ -54,6 +56,8 @@ type clustermeshConnectionState struct {
 	ConnectionMode *string `pulumi:"connectionMode"`
 	// Kubernetes configuration contexts of destination clusters
 	DestinationContexts []string `pulumi:"destinationContexts"`
+	// Number of parallel connections of destination clusters (Default: `1`).
+	Parallel *float64 `pulumi:"parallel"`
 }
 
 type ClustermeshConnectionState struct {
@@ -61,6 +65,8 @@ type ClustermeshConnectionState struct {
 	ConnectionMode pulumi.StringPtrInput
 	// Kubernetes configuration contexts of destination clusters
 	DestinationContexts pulumi.StringArrayInput
+	// Number of parallel connections of destination clusters (Default: `1`).
+	Parallel pulumi.Float64PtrInput
 }
 
 func (ClustermeshConnectionState) ElementType() reflect.Type {
@@ -72,6 +78,8 @@ type clustermeshConnectionArgs struct {
 	ConnectionMode *string `pulumi:"connectionMode"`
 	// Kubernetes configuration contexts of destination clusters
 	DestinationContexts []string `pulumi:"destinationContexts"`
+	// Number of parallel connections of destination clusters (Default: `1`).
+	Parallel *float64 `pulumi:"parallel"`
 }
 
 // The set of arguments for constructing a ClustermeshConnection resource.
@@ -80,6 +88,8 @@ type ClustermeshConnectionArgs struct {
 	ConnectionMode pulumi.StringPtrInput
 	// Kubernetes configuration contexts of destination clusters
 	DestinationContexts pulumi.StringArrayInput
+	// Number of parallel connections of destination clusters (Default: `1`).
+	Parallel pulumi.Float64PtrInput
 }
 
 func (ClustermeshConnectionArgs) ElementType() reflect.Type {
@@ -177,6 +187,11 @@ func (o ClustermeshConnectionOutput) ConnectionMode() pulumi.StringOutput {
 // Kubernetes configuration contexts of destination clusters
 func (o ClustermeshConnectionOutput) DestinationContexts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClustermeshConnection) pulumi.StringArrayOutput { return v.DestinationContexts }).(pulumi.StringArrayOutput)
+}
+
+// Number of parallel connections of destination clusters (Default: `1`).
+func (o ClustermeshConnectionOutput) Parallel() pulumi.Float64Output {
+	return o.ApplyT(func(v *ClustermeshConnection) pulumi.Float64Output { return v.Parallel }).(pulumi.Float64Output)
 }
 
 type ClustermeshConnectionArrayOutput struct{ *pulumi.OutputState }

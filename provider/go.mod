@@ -6,7 +6,7 @@ toolchain go1.24.3
 
 require (
 	github.com/ettle/strcase v0.2.0
-	github.com/littlejo/terraform-provider-cilium v0.2.14
+	github.com/littlejo/terraform-provider-cilium v0.2.15-rc1
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.44.1
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1
 	github.com/pulumi/pulumi/sdk/v3 v3.134.1
@@ -419,3 +419,5 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20211028080628-e2786a622600 // indirect
 )
+
+replace github.com/cilium/cilium => github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871
