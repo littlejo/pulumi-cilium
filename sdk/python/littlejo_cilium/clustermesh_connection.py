@@ -15,16 +15,20 @@ __all__ = ['ClustermeshConnectionArgs', 'ClustermeshConnection']
 class ClustermeshConnectionArgs:
     def __init__(__self__, *,
                  connection_mode: Optional[pulumi.Input[str]] = None,
-                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 parallel: Optional[pulumi.Input[float]] = None):
         """
         The set of arguments for constructing a ClustermeshConnection resource.
         :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
+        :param pulumi.Input[float] parallel: Number of parallel connections of destination clusters (Default: `1`).
         """
         if connection_mode is not None:
             pulumi.set(__self__, "connection_mode", connection_mode)
         if destination_contexts is not None:
             pulumi.set(__self__, "destination_contexts", destination_contexts)
+        if parallel is not None:
+            pulumi.set(__self__, "parallel", parallel)
 
     @property
     @pulumi.getter(name="connectionMode")
@@ -49,22 +53,38 @@ class ClustermeshConnectionArgs:
     @destination_contexts.setter
     def destination_contexts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "destination_contexts", value)
+
+    @property
+    @pulumi.getter
+    def parallel(self) -> Optional[pulumi.Input[float]]:
+        """
+        Number of parallel connections of destination clusters (Default: `1`).
+        """
+        return pulumi.get(self, "parallel")
+
+    @parallel.setter
+    def parallel(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "parallel", value)
 
 
 @pulumi.input_type
 class _ClustermeshConnectionState:
     def __init__(__self__, *,
                  connection_mode: Optional[pulumi.Input[str]] = None,
-                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 parallel: Optional[pulumi.Input[float]] = None):
         """
         Input properties used for looking up and filtering ClustermeshConnection resources.
         :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
+        :param pulumi.Input[float] parallel: Number of parallel connections of destination clusters (Default: `1`).
         """
         if connection_mode is not None:
             pulumi.set(__self__, "connection_mode", connection_mode)
         if destination_contexts is not None:
             pulumi.set(__self__, "destination_contexts", destination_contexts)
+        if parallel is not None:
+            pulumi.set(__self__, "parallel", parallel)
 
     @property
     @pulumi.getter(name="connectionMode")
@@ -89,6 +109,18 @@ class _ClustermeshConnectionState:
     @destination_contexts.setter
     def destination_contexts(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "destination_contexts", value)
+
+    @property
+    @pulumi.getter
+    def parallel(self) -> Optional[pulumi.Input[float]]:
+        """
+        Number of parallel connections of destination clusters (Default: `1`).
+        """
+        return pulumi.get(self, "parallel")
+
+    @parallel.setter
+    def parallel(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "parallel", value)
 
 
 class ClustermeshConnection(pulumi.CustomResource):
@@ -98,6 +130,7 @@ class ClustermeshConnection(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  connection_mode: Optional[pulumi.Input[str]] = None,
                  destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 parallel: Optional[pulumi.Input[float]] = None,
                  __props__=None):
         """
         Create a ClustermeshConnection resource with the given unique name, props, and options.
@@ -105,6 +138,7 @@ class ClustermeshConnection(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
+        :param pulumi.Input[float] parallel: Number of parallel connections of destination clusters (Default: `1`).
         """
         ...
     @overload
@@ -131,6 +165,7 @@ class ClustermeshConnection(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  connection_mode: Optional[pulumi.Input[str]] = None,
                  destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 parallel: Optional[pulumi.Input[float]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -142,6 +177,7 @@ class ClustermeshConnection(pulumi.CustomResource):
 
             __props__.__dict__["connection_mode"] = connection_mode
             __props__.__dict__["destination_contexts"] = destination_contexts
+            __props__.__dict__["parallel"] = parallel
         super(ClustermeshConnection, __self__).__init__(
             'cilium:index/clustermeshConnection:ClustermeshConnection',
             resource_name,
@@ -153,7 +189,8 @@ class ClustermeshConnection(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             connection_mode: Optional[pulumi.Input[str]] = None,
-            destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'ClustermeshConnection':
+            destination_contexts: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            parallel: Optional[pulumi.Input[float]] = None) -> 'ClustermeshConnection':
         """
         Get an existing ClustermeshConnection resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -163,6 +200,7 @@ class ClustermeshConnection(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] connection_mode: Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] destination_contexts: Kubernetes configuration contexts of destination clusters
+        :param pulumi.Input[float] parallel: Number of parallel connections of destination clusters (Default: `1`).
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -170,6 +208,7 @@ class ClustermeshConnection(pulumi.CustomResource):
 
         __props__.__dict__["connection_mode"] = connection_mode
         __props__.__dict__["destination_contexts"] = destination_contexts
+        __props__.__dict__["parallel"] = parallel
         return ClustermeshConnection(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -187,4 +226,12 @@ class ClustermeshConnection(pulumi.CustomResource):
         Kubernetes configuration contexts of destination clusters
         """
         return pulumi.get(self, "destination_contexts")
+
+    @property
+    @pulumi.getter
+    def parallel(self) -> pulumi.Output[float]:
+        """
+        Number of parallel connections of destination clusters (Default: `1`).
+        """
+        return pulumi.get(self, "parallel")
 

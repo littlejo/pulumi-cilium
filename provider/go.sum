@@ -2076,6 +2076,8 @@ github.com/littlejo/terraform-provider-cilium v0.2.13 h1:rCDYJAq0yfcGLr3UI9B7qr+
 github.com/littlejo/terraform-provider-cilium v0.2.13/go.mod h1:9vjKkaT3WNnnJl9C84n2s/Bqujb7gbKWxiMKutvCkVw=
 github.com/littlejo/terraform-provider-cilium v0.2.14 h1:rUD4/BAyXBaqrEWzf6LiBfzQ81Q1zsRy16I5aVPW1kE=
 github.com/littlejo/terraform-provider-cilium v0.2.14/go.mod h1:WrJ6jaEAQi9gzOSyVQemiyUdDewpyeqtOAqwWnaMhck=
+github.com/littlejo/terraform-provider-cilium v0.2.15-rc1 h1:EbBqUdaTE4dJv5O8rv9u5XKNPbTgYBMIaWSYSzTt9us=
+github.com/littlejo/terraform-provider-cilium v0.2.15-rc1/go.mod h1:mQ6jsajdT9WRAjecpCLXA2aJ0LrP9e++LwIfY+SHfI0=
 github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
 github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0/go.mod h1:zJYVVT2jmtg6P3p1VtQj7WsuWi/y4VnjVBn7F8KPB3I=

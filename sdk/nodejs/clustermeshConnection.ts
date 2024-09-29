@@ -40,6 +40,10 @@ export class ClustermeshConnection extends pulumi.CustomResource {
      * Kubernetes configuration contexts of destination clusters
      */
     public readonly destinationContexts!: pulumi.Output<string[]>;
+    /**
+     * Number of parallel connections of destination clusters (Default: `1`).
+     */
+    public readonly parallel!: pulumi.Output<number>;
 
     /**
      * Create a ClustermeshConnection resource with the given unique name, arguments, and options.
@@ -56,10 +60,12 @@ export class ClustermeshConnection extends pulumi.CustomResource {
             const state = argsOrState as ClustermeshConnectionState | undefined;
             resourceInputs["connectionMode"] = state ? state.connectionMode : undefined;
             resourceInputs["destinationContexts"] = state ? state.destinationContexts : undefined;
+            resourceInputs["parallel"] = state ? state.parallel : undefined;
         } else {
             const args = argsOrState as ClustermeshConnectionArgs | undefined;
             resourceInputs["connectionMode"] = args ? args.connectionMode : undefined;
             resourceInputs["destinationContexts"] = args ? args.destinationContexts : undefined;
+            resourceInputs["parallel"] = args ? args.parallel : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ClustermeshConnection.__pulumiType, name, resourceInputs, opts);
@@ -78,6 +84,10 @@ export interface ClustermeshConnectionState {
      * Kubernetes configuration contexts of destination clusters
      */
     destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Number of parallel connections of destination clusters (Default: `1`).
+     */
+    parallel?: pulumi.Input<number>;
 }
 
 /**
@@ -92,4 +102,8 @@ export interface ClustermeshConnectionArgs {
      * Kubernetes configuration contexts of destination clusters
      */
     destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Number of parallel connections of destination clusters (Default: `1`).
+     */
+    parallel?: pulumi.Input<number>;
 }
