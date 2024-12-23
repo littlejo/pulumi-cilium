@@ -161,7 +161,7 @@ jobs:
     - name: Build provider
       run: make provider
     - name: Setup kind test1
-      uses: helm/kind-action@0025e74a8c7512023d06dc019c617aa3cf561fde # v1.10.0
+      uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1.12.0
       with:
         wait: 0
         config: .github/config/acceptance_tests_kind_config.yaml
