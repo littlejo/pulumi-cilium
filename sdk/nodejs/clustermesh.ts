@@ -33,10 +33,6 @@ export class Clustermesh extends pulumi.CustomResource {
     }
 
     /**
-     * Enable support for external workloads, such as VMs (Default: `false`).
-     */
-    public readonly enableExternalWorkloads!: pulumi.Output<boolean>;
-    /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
     public readonly enableKvStoreMesh!: pulumi.Output<boolean>;
@@ -62,13 +58,11 @@ export class Clustermesh extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClustermeshState | undefined;
-            resourceInputs["enableExternalWorkloads"] = state ? state.enableExternalWorkloads : undefined;
             resourceInputs["enableKvStoreMesh"] = state ? state.enableKvStoreMesh : undefined;
             resourceInputs["serviceType"] = state ? state.serviceType : undefined;
             resourceInputs["wait"] = state ? state.wait : undefined;
         } else {
             const args = argsOrState as ClustermeshArgs | undefined;
-            resourceInputs["enableExternalWorkloads"] = args ? args.enableExternalWorkloads : undefined;
             resourceInputs["enableKvStoreMesh"] = args ? args.enableKvStoreMesh : undefined;
             resourceInputs["serviceType"] = args ? args.serviceType : undefined;
             resourceInputs["wait"] = args ? args.wait : undefined;
@@ -82,10 +76,6 @@ export class Clustermesh extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Clustermesh resources.
  */
 export interface ClustermeshState {
-    /**
-     * Enable support for external workloads, such as VMs (Default: `false`).
-     */
-    enableExternalWorkloads?: pulumi.Input<boolean>;
     /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
@@ -104,10 +94,6 @@ export interface ClustermeshState {
  * The set of arguments for constructing a Clustermesh resource.
  */
 export interface ClustermeshArgs {
-    /**
-     * Enable support for external workloads, such as VMs (Default: `false`).
-     */
-    enableExternalWorkloads?: pulumi.Input<boolean>;
     /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */

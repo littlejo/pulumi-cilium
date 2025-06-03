@@ -151,10 +151,6 @@
     "resources": {
         "cilium:index/clustermesh:Clustermesh": {
             "properties": {
-                "enableExternalWorkloads": {
-                    "type": "boolean",
-                    "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
-                },
                 "enableKvStoreMesh": {
                     "type": "boolean",
                     "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
@@ -169,16 +165,11 @@
                 }
             },
             "required": [
-                "enableExternalWorkloads",
                 "enableKvStoreMesh",
                 "serviceType",
                 "wait"
             ],
             "inputProperties": {
-                "enableExternalWorkloads": {
-                    "type": "boolean",
-                    "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
-                },
                 "enableKvStoreMesh": {
                     "type": "boolean",
                     "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
@@ -195,10 +186,6 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Clustermesh resources.\n",
                 "properties": {
-                    "enableExternalWorkloads": {
-                        "type": "boolean",
-                        "description": "Enable support for external workloads, such as VMs (Default: `false`).\n"
-                    },
                     "enableKvStoreMesh": {
                         "type": "boolean",
                         "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
@@ -335,142 +322,6 @@
                 "type": "object"
             }
         },
-        "cilium:index/deploy:Deploy": {
-            "properties": {
-                "dataPath": {
-                    "type": "string",
-                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
-                },
-                "helmValues": {
-                    "type": "string",
-                    "description": "Helm values (`helm get values -n kube-system cilium`)\n"
-                },
-                "repository": {
-                    "type": "string",
-                    "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
-                },
-                "reset": {
-                    "type": "boolean",
-                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
-                },
-                "reuse": {
-                    "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This\noption takes precedence over HelmResetValues (Default: `true`).\n"
-                },
-                "sets": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:\n`[]`).\n"
-                },
-                "values": {
-                    "type": "string",
-                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
-                },
-                "version": {
-                    "type": "string",
-                    "description": "Version of Cilium (Default: ``).\n"
-                },
-                "wait": {
-                    "type": "boolean",
-                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
-                }
-            },
-            "required": [
-                "dataPath",
-                "helmValues",
-                "repository",
-                "reset",
-                "reuse",
-                "sets",
-                "values",
-                "version",
-                "wait"
-            ],
-            "inputProperties": {
-                "dataPath": {
-                    "type": "string",
-                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
-                },
-                "repository": {
-                    "type": "string",
-                    "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
-                },
-                "reset": {
-                    "type": "boolean",
-                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
-                },
-                "reuse": {
-                    "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This\noption takes precedence over HelmResetValues (Default: `true`).\n"
-                },
-                "sets": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:\n`[]`).\n"
-                },
-                "values": {
-                    "type": "string",
-                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
-                },
-                "version": {
-                    "type": "string",
-                    "description": "Version of Cilium (Default: ``).\n"
-                },
-                "wait": {
-                    "type": "boolean",
-                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
-                }
-            },
-            "stateInputs": {
-                "description": "Input properties used for looking up and filtering Deploy resources.\n",
-                "properties": {
-                    "dataPath": {
-                        "type": "string",
-                        "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
-                    },
-                    "helmValues": {
-                        "type": "string",
-                        "description": "Helm values (`helm get values -n kube-system cilium`)\n"
-                    },
-                    "repository": {
-                        "type": "string",
-                        "description": "Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).\n"
-                    },
-                    "reset": {
-                        "type": "boolean",
-                        "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
-                    },
-                    "reuse": {
-                        "type": "boolean",
-                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This\noption takes precedence over HelmResetValues (Default: `true`).\n"
-                    },
-                    "sets": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default:\n`[]`).\n"
-                    },
-                    "values": {
-                        "type": "string",
-                        "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
-                    },
-                    "version": {
-                        "type": "string",
-                        "description": "Version of Cilium (Default: ``).\n"
-                    },
-                    "wait": {
-                        "type": "boolean",
-                        "description": "Wait for Cilium status is ok (Default: `true`).\n"
-                    }
-                },
-                "type": "object"
-            }
-        },
         "cilium:index/hubble:Hubble": {
             "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Hubble;\nimport com.pulumi.cilium.HubbleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()\n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
@@ -537,7 +388,11 @@
                 },
                 "reuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                },
+                "reusethenreuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
                 },
                 "sets": {
                     "type": "array",
@@ -566,6 +421,7 @@
                 "repository",
                 "reset",
                 "reuse",
+                "reusethenreuse",
                 "sets",
                 "values",
                 "version",
@@ -586,7 +442,11 @@
                 },
                 "reuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                },
+                "reusethenreuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
                 },
                 "sets": {
                     "type": "array",
@@ -634,7 +494,11 @@
                     },
                     "reuse": {
                         "type": "boolean",
-                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).\n"
+                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                    },
+                    "reusethenreuse": {
+                        "type": "boolean",
+                        "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
                     },
                     "sets": {
                         "type": "array",

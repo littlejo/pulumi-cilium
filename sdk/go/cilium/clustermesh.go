@@ -14,8 +14,6 @@ import (
 type Clustermesh struct {
 	pulumi.CustomResourceState
 
-	// Enable support for external workloads, such as VMs (Default: `false`).
-	EnableExternalWorkloads pulumi.BoolOutput `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolOutput `pulumi:"enableKvStoreMesh"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
@@ -54,8 +52,6 @@ func GetClustermesh(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Clustermesh resources.
 type clustermeshState struct {
-	// Enable support for external workloads, such as VMs (Default: `false`).
-	EnableExternalWorkloads *bool `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh *bool `pulumi:"enableKvStoreMesh"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
@@ -65,8 +61,6 @@ type clustermeshState struct {
 }
 
 type ClustermeshState struct {
-	// Enable support for external workloads, such as VMs (Default: `false`).
-	EnableExternalWorkloads pulumi.BoolPtrInput
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolPtrInput
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
@@ -80,8 +74,6 @@ func (ClustermeshState) ElementType() reflect.Type {
 }
 
 type clustermeshArgs struct {
-	// Enable support for external workloads, such as VMs (Default: `false`).
-	EnableExternalWorkloads *bool `pulumi:"enableExternalWorkloads"`
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh *bool `pulumi:"enableKvStoreMesh"`
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
@@ -92,8 +84,6 @@ type clustermeshArgs struct {
 
 // The set of arguments for constructing a Clustermesh resource.
 type ClustermeshArgs struct {
-	// Enable support for external workloads, such as VMs (Default: `false`).
-	EnableExternalWorkloads pulumi.BoolPtrInput
 	// Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
 	EnableKvStoreMesh pulumi.BoolPtrInput
 	// Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
@@ -187,11 +177,6 @@ func (o ClustermeshOutput) ToClustermeshOutput() ClustermeshOutput {
 
 func (o ClustermeshOutput) ToClustermeshOutputWithContext(ctx context.Context) ClustermeshOutput {
 	return o
-}
-
-// Enable support for external workloads, such as VMs (Default: `false`).
-func (o ClustermeshOutput) EnableExternalWorkloads() pulumi.BoolOutput {
-	return o.ApplyT(func(v *Clustermesh) pulumi.BoolOutput { return v.EnableExternalWorkloads }).(pulumi.BoolOutput)
 }
 
 // Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
