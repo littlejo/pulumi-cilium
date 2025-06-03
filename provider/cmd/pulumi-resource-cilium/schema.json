@@ -146,6 +146,9 @@
                 "type": "string",
                 "description": "Namespace to install cilium (Default: `kube-system`).\n"
             }
+        },
+        "methods": {
+            "terraformConfig": "pulumi:providers:cilium/terraformConfig"
         }
     },
     "resources": {
@@ -216,7 +219,7 @@
                     "description": "Kubernetes configuration contexts of destination clusters\n"
                 },
                 "parallel": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
                 }
             },
@@ -238,7 +241,7 @@
                     "description": "Kubernetes configuration contexts of destination clusters\n"
                 },
                 "parallel": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
                 }
             },
@@ -257,7 +260,7 @@
                         "description": "Kubernetes configuration contexts of destination clusters\n"
                     },
                     "parallel": {
-                        "type": "number",
+                        "type": "integer",
                         "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
                     }
                 },
@@ -265,7 +268,7 @@
             }
         },
         "cilium:index/config:Config": {
-            "description": "Config resource for Cilium. This is equivalent to cilium cli: `cilium config`: It manages the cilium Kubernetes ConfigMap resource\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Config(\"example\", {\n    key: \"debug\",\n    value: \"true\",\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Config(\"example\",\n    key=\"debug\",\n    value=\"true\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Config(\"example\", new()\n    {\n        Key = \"debug\",\n        Value = \"true\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewConfig(ctx, \"example\", \u0026cilium.ConfigArgs{\n\t\t\tKey:   pulumi.String(\"debug\"),\n\t\t\tValue: pulumi.String(\"true\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Config;\nimport com.pulumi.cilium.ConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Config(\"example\", ConfigArgs.builder()\n            .key(\"debug\")\n            .value(\"true\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Config\n    properties:\n      key: debug\n      value: 'true'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Config resource for Cilium. This is equivalent to cilium cli: `cilium config`: It manages the cilium Kubernetes ConfigMap resource\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Config(\"example\", {\n    key: \"debug\",\n    value: \"true\",\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Config(\"example\",\n    key=\"debug\",\n    value=\"true\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Config(\"example\", new()\n    {\n        Key = \"debug\",\n        Value = \"true\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewConfig(ctx, \"example\", \u0026cilium.ConfigArgs{\n\t\t\tKey:   pulumi.String(\"debug\"),\n\t\t\tValue: pulumi.String(\"true\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.littlejo.cilium.Config;\nimport com.littlejo.cilium.ConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Config(\"example\", ConfigArgs.builder()\n            .key(\"debug\")\n            .value(\"true\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Config\n    properties:\n      key: debug\n      value: 'true'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "key": {
                     "type": "string",
@@ -323,7 +326,7 @@
             }
         },
         "cilium:index/hubble:Hubble": {
-            "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Hubble;\nimport com.pulumi.cilium.HubbleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()\n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.littlejo.cilium.Hubble;\nimport com.littlejo.cilium.HubbleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()\n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "relay": {
                     "type": "boolean",
@@ -567,7 +570,7 @@
     },
     "functions": {
         "cilium:index/getHelmValues:getHelmValues": {
-            "description": "Helm values of cilium\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@pulumi/cilium\";\nimport * as local from \"@pulumi/local\";\n\nconst exampleHelmValues = cilium.getHelmValues({});\nconst exampleFile = new local.File(\"exampleFile\", {\n    content: exampleHelmValues.then(exampleHelmValues =\u003e exampleHelmValues.yaml),\n    filename: `${path.module}/values.yaml`,\n});\n```\n```python\nimport pulumi\nimport pulumi_cilium as cilium\nimport pulumi_local as local\n\nexample_helm_values = cilium.get_helm_values()\nexample_file = local.File(\"exampleFile\",\n    content=example_helm_values.yaml,\n    filename=f\"{path['module']}/values.yaml\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\nusing Local = Pulumi.Local;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleHelmValues = Cilium.GetHelmValues.Invoke();\n\n    var exampleFile = new Local.File(\"exampleFile\", new()\n    {\n        Content = exampleHelmValues.Apply(getHelmValuesResult =\u003e getHelmValuesResult.Yaml),\n        Filename = $\"{path.Module}/values.yaml\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-local/sdk/go/local\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleHelmValues, err := cilium.GetHelmValues(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = local.NewFile(ctx, \"exampleFile\", \u0026local.FileArgs{\n\t\t\tContent:  pulumi.String(exampleHelmValues.Yaml),\n\t\t\tFilename: pulumi.Sprintf(\"%v/values.yaml\", path.Module),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.CiliumFunctions;\nimport com.pulumi.local.File;\nimport com.pulumi.local.FileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var exampleHelmValues = CiliumFunctions.getHelmValues();\n\n        var exampleFile = new File(\"exampleFile\", FileArgs.builder()\n            .content(exampleHelmValues.applyValue(getHelmValuesResult -\u003e getHelmValuesResult.yaml()))\n            .filename(String.format(\"%s/values.yaml\", path.module()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleFile:\n    type: local:File\n    properties:\n      content: ${exampleHelmValues.yaml}\n      filename: ${path.module}/values.yaml\nvariables:\n  exampleHelmValues:\n    fn::invoke:\n      Function: cilium:getHelmValues\n      Arguments: {}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Helm values of cilium\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\nimport * as local from \"@pulumi/local\";\n\nconst exampleHelmValues = cilium.getHelmValues({});\nconst exampleFile = new local.File(\"exampleFile\", {\n    content: exampleHelmValues.then(exampleHelmValues =\u003e exampleHelmValues.yaml),\n    filename: `${path.module}/values.yaml`,\n});\n```\n```python\nimport pulumi\nimport pulumi_cilium as cilium\nimport pulumi_local as local\n\nexample_helm_values = cilium.get_helm_values()\nexample_file = local.File(\"exampleFile\",\n    content=example_helm_values.yaml,\n    filename=f\"{path['module']}/values.yaml\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\nusing Local = Pulumi.Local;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleHelmValues = Cilium.GetHelmValues.Invoke();\n\n    var exampleFile = new Local.File(\"exampleFile\", new()\n    {\n        Content = exampleHelmValues.Apply(getHelmValuesResult =\u003e getHelmValuesResult.Yaml),\n        Filename = $\"{path.Module}/values.yaml\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-local/sdk/go/local\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleHelmValues, err := cilium.GetHelmValues(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = local.NewFile(ctx, \"exampleFile\", \u0026local.FileArgs{\n\t\t\tContent:  pulumi.String(exampleHelmValues.Yaml),\n\t\t\tFilename: pulumi.Sprintf(\"%v/values.yaml\", path.Module),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.CiliumFunctions;\nimport com.pulumi.local.File;\nimport com.pulumi.local.FileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var exampleHelmValues = CiliumFunctions.getHelmValues(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference);\n\n        var exampleFile = new File(\"exampleFile\", FileArgs.builder()\n            .content(exampleHelmValues.yaml())\n            .filename(String.format(\"%s/values.yaml\", path.module()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleFile:\n    type: local:File\n    properties:\n      content: ${exampleHelmValues.yaml}\n      filename: ${path.module}/values.yaml\nvariables:\n  exampleHelmValues:\n    fn::invoke:\n      function: cilium:getHelmValues\n      arguments: {}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "outputs": {
                 "description": "A collection of values returned by getHelmValues.\n",
                 "properties": {
@@ -585,6 +588,35 @@
                     "yaml",
                     "id"
                 ]
+            }
+        },
+        "pulumi:providers:cilium/terraformConfig": {
+            "description": "This function returns a Terraform config object with terraform-namecased keys,to be used with the Terraform Module Provider.",
+            "inputs": {
+                "properties": {
+                    "__self__": {
+                        "type": "ref",
+                        "$ref": "#/resources/pulumi:providers:cilium"
+                    }
+                },
+                "type": "pulumi:providers:cilium/terraformConfig",
+                "required": [
+                    "__self__"
+                ]
+            },
+            "outputs": {
+                "properties": {
+                    "result": {
+                        "additionalProperties": {
+                            "$ref": "pulumi.json#/Any"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "result"
+                ],
+                "type": "object"
             }
         }
     }

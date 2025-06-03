@@ -1,49 +1,45 @@
-# Cilium Resource Provider
+# `pulumictl` - A Swiss Army Knife for Pulumi Development
 
-The Cilium Resource Provider lets you manage [cilium](https://www.pulumi.com/registry/packages/cilium/) resources.
+`pulumictl` is a utility CLI to support publishing Pulumi packages (providers, policy packs, etc.) This tool provides utility functions to replace shell scripts. If you are looking to author programs in Pulumi or find the Pulumi CLI & engine, visit [Pulumi docs](https://www.pulumi.com/docs) or [github.com/pulumi/pulumi](https://github.com/pulumi/pulumi) respectively.
 
-## Installing
+## Usage
 
-This package is available for several languages/platforms:
+```
+$ pulumictl --help
+A swiss army knife for Pulumi development
 
-### Node.js (JavaScript/TypeScript)
+Usage:
+  pulumictl [command]
 
-To use from JavaScript or TypeScript in Node.js, install using either `npm`:
+Available Commands:
+  completion      Generate the autocompletion script for the specified shell
+  convert-version Convert versions
+  copyright       Check copyright notices
+  cover           Manipulate coverage profiles
+  create          Create commands
+  dispatch        Send a command dispatch event with a ref
+  download-binary Downloads a version of a specific binary
+  generate        Runs code generator over a schema
+  get             Get commands
+  help            Help about any command
+  version         Get the current version
+  winget-deploy   Create a WinGet Deployment
 
-```bash
-npm install @littlejo/cilium
+Flags:
+  -D, --debug          enable debug logging
+  -h, --help           help for pulumictl
+  -t, --token string   a github token to use for making API calls to GitHub.
+
+Use "pulumictl [command] --help" for more information about a command.
 ```
 
-or `yarn`:
+## Installation
+
+Add the Pulumi homebrew tap and install:
 
 ```bash
-yarn add @littlejo/cilium
+brew tap pulumi/tap
+brew install pulumictl
 ```
 
-### Python
-
-To use from Python, install using `pip`:
-
-```bash
-pip install littlejo-cilium
-```
-
-### Go
-
-To use from Go, use `go get` to grab the latest version of the library:
-
-```bash
-go get github.com/littlejo/pulumi-cilium/sdk/go/...
-```
-
-### .NET
-
-To use from .NET, install using `dotnet add package`:
-
-```bash
-dotnet add package Littlejo.Cilium
-```
-
-## Reference
-
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/cilium/api-docs/).
+Or download the binary directly from Github releases and place it in your `$PATH`
