@@ -2056,6 +2056,8 @@ github.com/lightstep/lightstep-tracer-go v0.18.1/go.mod h1:jlF1pusYV4pidLvZ+XD0U
 github.com/linode/linodego v1.4.0/go.mod h1:PVsRxSlOiJyvG4/scTszpmZDTdgS+to3X6eS8pRrWI8=
 github.com/linode/linodego v1.8.0/go.mod h1:heqhl91D8QTPVm2k9qZHP78zzbOdTFLXE9NJc3bcc50=
 github.com/linuxkit/virtsock v0.0.0-20201010232012-f8cee7dfc7a3/go.mod h1:3r6x7q95whyfWQpmGZTu3gk3v2YkMi05HEzl7Tf7YEo=
+github.com/littlejo/cilium v0.0.0-20240917121948-0aa9324decaa h1:GZtNGgAoPsS23PDWv034Ft+vuQL2JRgxgsmAIk7dnmE=
+github.com/littlejo/cilium v0.0.0-20240917121948-0aa9324decaa/go.mod h1:UT4v+xoR06bdON+Gjy4fYYgLMu7Hevn33p67aSmy7/A=
 github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871 h1:xRXfgm9C4xXSSBFHPVPCctsSt2E99yyDrS9lg22ITQk=
 github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871/go.mod h1:1OY9G19yQK4YiFvM4qlSzRgnffUqW3aBobAeFiWYLv0=
 github.com/littlejo/terraform-provider-cilium v0.1.2 h1:RyLxvVy3wNQySflz1xVgbUntItqRg37NpOeK3DloDpg=

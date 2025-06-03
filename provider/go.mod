@@ -421,4 +421,4 @@ require (
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20211028080628-e2786a622600 // indirect
 )
 
-replace github.com/cilium/cilium => github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871
+replace github.com/cilium/cilium => github.com/littlejo/cilium v0.0.0-20240917121948-0aa9324decaa
