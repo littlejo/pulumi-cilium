@@ -55,9 +55,15 @@ export class Install extends pulumi.CustomResource {
      */
     public readonly reset!: pulumi.Output<boolean>;
     /**
-     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
     public readonly reuse!: pulumi.Output<boolean>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+     * (Default: `true`).
+     */
+    public readonly reusethenreuse!: pulumi.Output<boolean>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */
@@ -94,6 +100,7 @@ export class Install extends pulumi.CustomResource {
             resourceInputs["repository"] = state ? state.repository : undefined;
             resourceInputs["reset"] = state ? state.reset : undefined;
             resourceInputs["reuse"] = state ? state.reuse : undefined;
+            resourceInputs["reusethenreuse"] = state ? state.reusethenreuse : undefined;
             resourceInputs["sets"] = state ? state.sets : undefined;
             resourceInputs["values"] = state ? state.values : undefined;
             resourceInputs["version"] = state ? state.version : undefined;
@@ -104,6 +111,7 @@ export class Install extends pulumi.CustomResource {
             resourceInputs["repository"] = args ? args.repository : undefined;
             resourceInputs["reset"] = args ? args.reset : undefined;
             resourceInputs["reuse"] = args ? args.reuse : undefined;
+            resourceInputs["reusethenreuse"] = args ? args.reusethenreuse : undefined;
             resourceInputs["sets"] = args ? args.sets : undefined;
             resourceInputs["values"] = args ? args.values : undefined;
             resourceInputs["version"] = args ? args.version : undefined;
@@ -143,9 +151,15 @@ export interface InstallState {
      */
     reset?: pulumi.Input<boolean>;
     /**
-     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
     reuse?: pulumi.Input<boolean>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+     * (Default: `true`).
+     */
+    reusethenreuse?: pulumi.Input<boolean>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */
@@ -181,9 +195,15 @@ export interface InstallArgs {
      */
     reset?: pulumi.Input<boolean>;
     /**
-     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+     * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
     reuse?: pulumi.Input<boolean>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+     * (Default: `true`).
+     */
+    reusethenreuse?: pulumi.Input<boolean>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */

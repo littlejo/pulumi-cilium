@@ -20,11 +20,6 @@ export type Config = import("./config").Config;
 export const Config: typeof import("./config").Config = null as any;
 utilities.lazyLoad(exports, ["Config"], () => require("./config"));
 
-export { DeployArgs, DeployState } from "./deploy";
-export type Deploy = import("./deploy").Deploy;
-export const Deploy: typeof import("./deploy").Deploy = null as any;
-utilities.lazyLoad(exports, ["Deploy"], () => require("./deploy"));
-
 export { GetHelmValuesResult } from "./getHelmValues";
 export const getHelmValues: typeof import("./getHelmValues").getHelmValues = null as any;
 export const getHelmValuesOutput: typeof import("./getHelmValues").getHelmValuesOutput = null as any;
@@ -70,8 +65,6 @@ const _module = {
                 return new ClustermeshConnection(name, <any>undefined, { urn })
             case "cilium:index/config:Config":
                 return new Config(name, <any>undefined, { urn })
-            case "cilium:index/deploy:Deploy":
-                return new Deploy(name, <any>undefined, { urn })
             case "cilium:index/hubble:Hubble":
                 return new Hubble(name, <any>undefined, { urn })
             case "cilium:index/install:Install":
@@ -86,7 +79,6 @@ const _module = {
 pulumi.runtime.registerResourceModule("cilium", "index/clustermesh", _module)
 pulumi.runtime.registerResourceModule("cilium", "index/clustermeshConnection", _module)
 pulumi.runtime.registerResourceModule("cilium", "index/config", _module)
-pulumi.runtime.registerResourceModule("cilium", "index/deploy", _module)
 pulumi.runtime.registerResourceModule("cilium", "index/hubble", _module)
 pulumi.runtime.registerResourceModule("cilium", "index/install", _module)
 pulumi.runtime.registerResourceModule("cilium", "index/kubeproxyFree", _module)

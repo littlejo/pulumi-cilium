@@ -133,8 +133,7 @@ func Provider() tfbridge.ProviderInfo {
 			"cilium_clustermesh_connection": {Tok: makeResource(mainMod, "cilium_clustermesh_connection")},
 			"cilium_config":                 {Tok: makeResource(mainMod, "cilium_config")},
 			"cilium_hubble":                 {Tok: makeResource(mainMod, "cilium_hubble")},
-			"cilium_kubeproxy_free":         {Tok: makeResource(mainMod, "cilium_kubeproxy_free")},
-			"cilium_deploy":                 {Tok: makeResource(mainMod, "cilium_deploy")}},
+			"cilium_kubeproxy_free":         {Tok: makeResource(mainMod, "cilium_kubeproxy_free")}},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each data source in the Terraform provider to a Pulumi function.
 			//

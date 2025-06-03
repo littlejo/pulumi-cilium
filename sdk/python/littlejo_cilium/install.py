@@ -25,6 +25,7 @@ class InstallArgs:
                  repository: Optional[pulumi.Input[str]] = None,
                  reset: Optional[pulumi.Input[bool]] = None,
                  reuse: Optional[pulumi.Input[bool]] = None,
+                 reusethenreuse: Optional[pulumi.Input[bool]] = None,
                  sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  values: Optional[pulumi.Input[str]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -34,7 +35,10 @@ class InstallArgs:
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
+        :param pulumi.Input[bool] reusethenreuse: When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+               overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+               (Default: `true`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
         :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
@@ -48,6 +52,8 @@ class InstallArgs:
             pulumi.set(__self__, "reset", reset)
         if reuse is not None:
             pulumi.set(__self__, "reuse", reuse)
+        if reusethenreuse is not None:
+            pulumi.set(__self__, "reusethenreuse", reusethenreuse)
         if sets is not None:
             pulumi.set(__self__, "sets", sets)
         if values is not None:
@@ -97,13 +103,27 @@ class InstallArgs:
     @pulumi.getter
     def reuse(self) -> Optional[pulumi.Input[bool]]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
         """
         return pulumi.get(self, "reuse")
 
     @reuse.setter
     def reuse(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "reuse", value)
+
+    @property
+    @pulumi.getter
+    def reusethenreuse(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+        overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+        (Default: `true`).
+        """
+        return pulumi.get(self, "reusethenreuse")
+
+    @reusethenreuse.setter
+    def reusethenreuse(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "reusethenreuse", value)
 
     @property
     @pulumi.getter
@@ -163,6 +183,7 @@ class _InstallState:
                  repository: Optional[pulumi.Input[str]] = None,
                  reset: Optional[pulumi.Input[bool]] = None,
                  reuse: Optional[pulumi.Input[bool]] = None,
+                 reusethenreuse: Optional[pulumi.Input[bool]] = None,
                  sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  values: Optional[pulumi.Input[str]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -174,7 +195,10 @@ class _InstallState:
         :param pulumi.Input[str] helm_values: Helm values (`helm get values -n kube-system cilium`)
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
+        :param pulumi.Input[bool] reusethenreuse: When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+               overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+               (Default: `true`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
         :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
@@ -192,6 +216,8 @@ class _InstallState:
             pulumi.set(__self__, "reset", reset)
         if reuse is not None:
             pulumi.set(__self__, "reuse", reuse)
+        if reusethenreuse is not None:
+            pulumi.set(__self__, "reusethenreuse", reusethenreuse)
         if sets is not None:
             pulumi.set(__self__, "sets", sets)
         if values is not None:
@@ -265,13 +291,27 @@ class _InstallState:
     @pulumi.getter
     def reuse(self) -> Optional[pulumi.Input[bool]]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
         """
         return pulumi.get(self, "reuse")
 
     @reuse.setter
     def reuse(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "reuse", value)
+
+    @property
+    @pulumi.getter
+    def reusethenreuse(self) -> Optional[pulumi.Input[bool]]:
+        """
+        When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+        overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+        (Default: `true`).
+        """
+        return pulumi.get(self, "reusethenreuse")
+
+    @reusethenreuse.setter
+    def reusethenreuse(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "reusethenreuse", value)
 
     @property
     @pulumi.getter
@@ -331,6 +371,7 @@ class Install(pulumi.CustomResource):
                  repository: Optional[pulumi.Input[str]] = None,
                  reset: Optional[pulumi.Input[bool]] = None,
                  reuse: Optional[pulumi.Input[bool]] = None,
+                 reusethenreuse: Optional[pulumi.Input[bool]] = None,
                  sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  values: Optional[pulumi.Input[str]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -343,7 +384,10 @@ class Install(pulumi.CustomResource):
         :param pulumi.Input[str] data_path: Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
+        :param pulumi.Input[bool] reusethenreuse: When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+               overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+               (Default: `true`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
         :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
@@ -376,6 +420,7 @@ class Install(pulumi.CustomResource):
                  repository: Optional[pulumi.Input[str]] = None,
                  reset: Optional[pulumi.Input[bool]] = None,
                  reuse: Optional[pulumi.Input[bool]] = None,
+                 reusethenreuse: Optional[pulumi.Input[bool]] = None,
                  sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  values: Optional[pulumi.Input[str]] = None,
                  version: Optional[pulumi.Input[str]] = None,
@@ -393,6 +438,7 @@ class Install(pulumi.CustomResource):
             __props__.__dict__["repository"] = repository
             __props__.__dict__["reset"] = reset
             __props__.__dict__["reuse"] = reuse
+            __props__.__dict__["reusethenreuse"] = reusethenreuse
             __props__.__dict__["sets"] = sets
             __props__.__dict__["values"] = values
             __props__.__dict__["version"] = version
@@ -417,6 +463,7 @@ class Install(pulumi.CustomResource):
             repository: Optional[pulumi.Input[str]] = None,
             reset: Optional[pulumi.Input[bool]] = None,
             reuse: Optional[pulumi.Input[bool]] = None,
+            reusethenreuse: Optional[pulumi.Input[bool]] = None,
             sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             values: Optional[pulumi.Input[str]] = None,
             version: Optional[pulumi.Input[str]] = None,
@@ -433,7 +480,10 @@ class Install(pulumi.CustomResource):
         :param pulumi.Input[str] helm_values: Helm values (`helm get values -n kube-system cilium`)
         :param pulumi.Input[str] repository: Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
         :param pulumi.Input[bool] reset: When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
-        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        :param pulumi.Input[bool] reuse: When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
+        :param pulumi.Input[bool] reusethenreuse: When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+               overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+               (Default: `true`).
         :param pulumi.Input[Sequence[pulumi.Input[str]]] sets: Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
         :param pulumi.Input[str] values: values in raw yaml to pass to helm. (Default: `empty`).
         :param pulumi.Input[str] version: Version of Cilium (Default: `v1.14.5`).
@@ -449,6 +499,7 @@ class Install(pulumi.CustomResource):
         __props__.__dict__["repository"] = repository
         __props__.__dict__["reset"] = reset
         __props__.__dict__["reuse"] = reuse
+        __props__.__dict__["reusethenreuse"] = reusethenreuse
         __props__.__dict__["sets"] = sets
         __props__.__dict__["values"] = values
         __props__.__dict__["version"] = version
@@ -499,9 +550,19 @@ class Install(pulumi.CustomResource):
     @pulumi.getter
     def reuse(self) -> pulumi.Output[bool]:
         """
-        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+        When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
         """
         return pulumi.get(self, "reuse")
+
+    @property
+    @pulumi.getter
+    def reusethenreuse(self) -> pulumi.Output[bool]:
+        """
+        When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+        overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+        (Default: `true`).
+        """
+        return pulumi.get(self, "reusethenreuse")
 
     @property
     @pulumi.getter

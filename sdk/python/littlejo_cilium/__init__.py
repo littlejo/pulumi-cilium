@@ -8,7 +8,6 @@ import typing
 from .clustermesh import *
 from .clustermesh_connection import *
 from .config import *
-from .deploy import *
 from .get_helm_values import *
 from .hubble import *
 from .install import *
@@ -49,14 +48,6 @@ _utilities.register(
   "fqn": "littlejo_cilium",
   "classes": {
    "cilium:index/config:Config": "Config"
-  }
- },
- {
-  "pkg": "cilium",
-  "mod": "index/deploy",
-  "fqn": "littlejo_cilium",
-  "classes": {
-   "cilium:index/deploy:Deploy": "Deploy"
   }
  },
  {

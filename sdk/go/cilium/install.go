@@ -24,8 +24,12 @@ type Install struct {
 	Repository pulumi.StringOutput `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolOutput `pulumi:"reset"`
-	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolOutput `pulumi:"reuse"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+	// (Default: `true`).
+	Reusethenreuse pulumi.BoolOutput `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayOutput `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
@@ -80,8 +84,12 @@ type installState struct {
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset *bool `pulumi:"reset"`
-	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse *bool `pulumi:"reuse"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+	// (Default: `true`).
+	Reusethenreuse *bool `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
@@ -103,8 +111,12 @@ type InstallState struct {
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolPtrInput
-	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolPtrInput
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+	// (Default: `true`).
+	Reusethenreuse pulumi.BoolPtrInput
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
@@ -126,8 +138,12 @@ type installArgs struct {
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset *bool `pulumi:"reset"`
-	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse *bool `pulumi:"reuse"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+	// (Default: `true`).
+	Reusethenreuse *bool `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
@@ -146,8 +162,12 @@ type InstallArgs struct {
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolPtrInput
-	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolPtrInput
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+	// (Default: `true`).
+	Reusethenreuse pulumi.BoolPtrInput
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
@@ -270,9 +290,16 @@ func (o InstallOutput) Reset() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reset }).(pulumi.BoolOutput)
 }
 
-// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `true`).
+// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 func (o InstallOutput) Reuse() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reuse }).(pulumi.BoolOutput)
+}
+
+// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
+// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
+// (Default: `true`).
+func (o InstallOutput) Reusethenreuse() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reusethenreuse }).(pulumi.BoolOutput)
 }
 
 // Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
