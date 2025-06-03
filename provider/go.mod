@@ -7,9 +7,9 @@ toolchain go1.24.3
 require (
 	github.com/ettle/strcase v0.2.0
 	github.com/littlejo/terraform-provider-cilium v0.2.15-rc1
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.44.1
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1
-	github.com/pulumi/pulumi/sdk/v3 v3.134.1
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.96.0
+	github.com/pulumi/pulumi/sdk/v3 v3.140.0
 )
 
 require (
@@ -208,7 +208,7 @@ require (
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
 	github.com/hashicorp/hcl v1.0.1-vault-5 // indirect
-	github.com/hashicorp/hcl/v2 v2.21.0 // indirect
+	github.com/hashicorp/hcl/v2 v2.22.0 // indirect
 	github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 // indirect
 	github.com/hashicorp/terraform-plugin-framework v1.12.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.24.0 // indirect
@@ -277,6 +277,7 @@ require (
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
+	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/opentracing/basictracer-go v1.1.0 // indirect
@@ -302,10 +303,10 @@ require (
 	github.com/pulumi/appdash v0.0.0-20231130102222-75f619a67231 // indirect
 	github.com/pulumi/esc v0.10.0 // indirect
 	github.com/pulumi/inflector v0.1.1 // indirect
-	github.com/pulumi/pulumi-java/pkg v0.16.1 // indirect
+	github.com/pulumi/pulumi-java/pkg v0.17.0 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.8 // indirect
-	github.com/pulumi/pulumi-yaml v1.10.0 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.133.0 // indirect
+	github.com/pulumi/pulumi-yaml v1.11.2 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.140.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
@@ -389,8 +390,8 @@ require (
 	google.golang.org/genproto v0.0.0-20240311173647-c811ad7063a7 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240903143218-8af14fe29dc1 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240924160255-9d4c2d233b61 // indirect
-	google.golang.org/grpc v1.67.0 // indirect
-	google.golang.org/protobuf v1.34.2 // indirect
+	google.golang.org/grpc v1.67.1 // indirect
+	google.golang.org/protobuf v1.35.1 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect

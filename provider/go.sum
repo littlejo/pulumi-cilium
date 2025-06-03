@@ -1799,6 +1799,8 @@ github.com/hashicorp/hcl/v2 v2.20.1 h1:M6hgdyz7HYt1UN9e61j+qKJBqR3orTWbI1HKBJEdx
 github.com/hashicorp/hcl/v2 v2.20.1/go.mod h1:TZDqQ4kNKCbh1iJp99FdPiUaVDDUPivbqxZulxDYqL4=
 github.com/hashicorp/hcl/v2 v2.21.0 h1:lve4q/o/2rqwYOgUg3y3V2YPyD1/zkCLGjIV74Jit14=
 github.com/hashicorp/hcl/v2 v2.21.0/go.mod h1:62ZYHrXgPoX8xBnzl8QzbWq4dyDsDtfCRgIq1rbJEvA=
+github.com/hashicorp/hcl/v2 v2.22.0 h1:hkZ3nCtqeJsDhPRFz5EA9iwcG1hNWGePOTw6oyul12M=
+github.com/hashicorp/hcl/v2 v2.22.0/go.mod h1:62ZYHrXgPoX8xBnzl8QzbWq4dyDsDtfCRgIq1rbJEvA=
 github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93 h1:T1Q6ag9tCwun16AW+XK3tAql24P4uTGUMIn1/92WsQQ=
 github.com/hashicorp/hil v0.0.0-20190212132231-97b3a9cdfa93/go.mod h1:n2TSygSNwsLJ76m8qFXTSc7beTb+auJxYdqrnoqwZWE=
 github.com/hashicorp/logutils v1.0.0 h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=
@@ -2054,6 +2056,8 @@ github.com/lightstep/lightstep-tracer-go v0.18.1/go.mod h1:jlF1pusYV4pidLvZ+XD0U
 github.com/linode/linodego v1.4.0/go.mod h1:PVsRxSlOiJyvG4/scTszpmZDTdgS+to3X6eS8pRrWI8=
 github.com/linode/linodego v1.8.0/go.mod h1:heqhl91D8QTPVm2k9qZHP78zzbOdTFLXE9NJc3bcc50=
 github.com/linuxkit/virtsock v0.0.0-20201010232012-f8cee7dfc7a3/go.mod h1:3r6x7q95whyfWQpmGZTu3gk3v2YkMi05HEzl7Tf7YEo=
+github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871 h1:xRXfgm9C4xXSSBFHPVPCctsSt2E99yyDrS9lg22ITQk=
+github.com/littlejo/cilium v0.0.0-20240925071401-dd6506321871/go.mod h1:1OY9G19yQK4YiFvM4qlSzRgnffUqW3aBobAeFiWYLv0=
 github.com/littlejo/terraform-provider-cilium v0.1.2 h1:RyLxvVy3wNQySflz1xVgbUntItqRg37NpOeK3DloDpg=
 github.com/littlejo/terraform-provider-cilium v0.1.2/go.mod h1:KrvwhF4LuapJqLbHfq2tDcDHyxBL3luM4ohyUc6kR9w=
 github.com/littlejo/terraform-provider-cilium v0.1.3 h1:F027Bhbs8v7J88Rc2GmhVgm2pvYNqWLbaBOlfcm1Qrc=
@@ -2138,6 +2142,7 @@ github.com/mattn/go-localereader v0.0.1 h1:ygSAOl7ZXTx4RdPYinUpg6W99U8jWvWi9Ye2J
 github.com/mattn/go-localereader v0.0.1/go.mod h1:8fBrzywKY7BI3czFoHkuzRoWE9C+EiG4R1k4Cjx5p88=
 github.com/mattn/go-runewidth v0.0.2/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
 github.com/mattn/go-runewidth v0.0.4/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
+github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
 github.com/mattn/go-runewidth v0.0.12/go.mod h1:RAqKPSqVFrSLVXbA8x7dzmKdmGzieGRCM46jaSJTDAk=
 github.com/mattn/go-runewidth v0.0.14 h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWVwUuU=
 github.com/mattn/go-runewidth v0.0.14/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
@@ -2282,6 +2287,8 @@ github.com/oklog/run v1.1.0/go.mod h1:sVPdnTZT1zYwAJeCMu2Th4T21pA3FPOQRfWjQlk7DV
 github.com/oklog/ulid v1.3.1 h1:EGfNDEx6MqHz8B3uNV6QAib1UR2Lm97sHi3ocA6ESJ4=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/olekukonko/tablewriter v0.0.0-20170122224234-a0225b3f23b5/go.mod h1:vsDQFd/mU46D+Z4whnwzcISnGGzXWMclvtLoiIKAKIo=
+github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec=
+github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/onsi/ginkgo v0.0.0-20151202141238-7f8ab55aaf3b/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v0.0.0-20170829012221-11459a886d9c/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
@@ -2535,6 +2542,8 @@ github.com/pulumi/pulumi-java/pkg v0.14.0 h1:CKL7lLF81Fq6VRhA5TNFsSMnHraTNCUzIhq
 github.com/pulumi/pulumi-java/pkg v0.14.0/go.mod h1:VybuJMWJtJc9ZNbt1kcYH4TbpocMx9mEi7YWL2Co99c=
 github.com/pulumi/pulumi-java/pkg v0.16.1 h1:orHnDWFbpOERwaBLry9f+6nqPX7x0MsrIkaa5QDGAns=
 github.com/pulumi/pulumi-java/pkg v0.16.1/go.mod h1:QH0DihZkWYle9XFc+LJ76m4hUo+fA3RdyaM90pqOaSM=
+github.com/pulumi/pulumi-java/pkg v0.17.0 h1:KmaVLrVmlkzShOfaJNJDlckorbFm8dM/C7L4hj6LX8U=
+github.com/pulumi/pulumi-java/pkg v0.17.0/go.mod h1:ji4U4H7t81X4aaE88D9+z5CmKH/QoLwQi9N1iGl+2KQ=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.16.1 h1:fdedACdg9+11sy/0UZoN5sKbhlGsgUOfRyKpfWhaPig=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.16.1/go.mod h1:d/Gr5Q+guqusxOnvqruuxqKqUEI0dCv7g+c6zYHNlE4=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.23.0 h1:j0rOtgpeGn2ZfyEVJtg5QhCEQEiMgz0rmFO6qWUFLzA=
@@ -2557,6 +2566,8 @@ github.com/pulumi/pulumi-terraform-bridge/pf v0.43.0 h1:g15WgVKJBhFtzhLqOky6R77Q
 github.com/pulumi/pulumi-terraform-bridge/pf v0.43.0/go.mod h1:xdU2rcUBjPX/alXMiywUK1GvN4goUHZxos8ZfT6sVXM=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.44.1 h1:39UPLBqbnvylm2heU/Rxa1+G++NZHdtW2Qg+hEhp5Wo=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.44.1/go.mod h1:Zj4XBf+TuV3um7y82X3xk2yQiP+pnQ7YxMc4fq/rVVw=
+github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0 h1:GJ20wQxz5dYbOWdDyDp1E3SuuTuLVdBpnp70FJ+VVpQ=
+github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0/go.mod h1:zDdNBSsrNhUxyeX1MrXr/O71DBpWMFZ8dGIGV0Pbj0c=
 github.com/pulumi/pulumi-terraform-bridge/testing v0.0.1 h1:SCg1gjfY9N4yn8U8peIUYATifjoDABkyR7H9lmefsfc=
 github.com/pulumi/pulumi-terraform-bridge/testing v0.0.1/go.mod h1:7OeUPH8rpt5ipyj9EFcnXpuzQ8SHL0dyqdfa8nOacdk=
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.60.1 h1:+W2JHLi4y+G57jLPLJbDLv1xvm/9L2NO0gWXrtR8MDM=
@@ -2581,6 +2592,8 @@ github.com/pulumi/pulumi-terraform-bridge/v3 v3.90.0 h1:e7xfYAiXCE8LCwfKvbGeNAjd
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.90.0/go.mod h1:dIVp4qG+GsUwmpz40L7Z+PZnzHf3cQq1CAFwhz++ris=
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1 h1:Twh0IKS1pGHP6LHDq1oR0vbHlV52asoUCC7spEJl3Ao=
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.91.1/go.mod h1:DvueDDtOIbf7W1Or4oH0o7F990ozp/ROmlm/vgLoe+g=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.96.0 h1:uJB3tM1j+9SKeXLCAx3DBVHsYk4ddXNrVoiqpgXal2Q=
+github.com/pulumi/pulumi-terraform-bridge/v3 v3.96.0/go.mod h1:WnOTAfdtm5+kW3rIU0rLhxFSEHtJIMf19FdOU6NFXG0=
 github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.6 h1:uy8P3aaAbrOrGvytvCb2KsYqZMA9TJiY8IKeVQgNAJo=
 github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.6/go.mod h1:uw1IN0Mlvi5SL0cmWzmKqZ+ZDNueRIXkr9aE+XQkrug=
 github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.7 h1:Z9vmfVTW0QtJrWh+DRR3UKiRZX23f45lFtdhQiUHEqE=
@@ -2605,6 +2618,8 @@ github.com/pulumi/pulumi-yaml v1.9.2 h1:BCUuRPA1USmFXrExiHRU8yJ+OiphLYnroPxKRgGC
 github.com/pulumi/pulumi-yaml v1.9.2/go.mod h1:sIh/Oa/NLRGTojevh8D2/cPDPvo2j9iXegVDQIKKfw4=
 github.com/pulumi/pulumi-yaml v1.10.0 h1:djbgMJCxJBmYMr4kOpAXH5iauxGohYjEuTLfxD3NUUI=
 github.com/pulumi/pulumi-yaml v1.10.0/go.mod h1://lTvwHpgJ+WBKeMGiLrd/jinc4dl3eWV5LZ3G8iCfE=
+github.com/pulumi/pulumi-yaml v1.11.2 h1:MU7TTNbruGCSgNHhaBygjIbLWm3WSbd1q98GpMIgQzE=
+github.com/pulumi/pulumi-yaml v1.11.2/go.mod h1:RdXRBupRGGAD1kbYNG1V1h6pyFnXisvQsl0AANvVjGI=
 github.com/pulumi/pulumi/pkg/v3 v3.81.0 h1:6rf2farQLszi8inHCu9YdJtDvK0fqNguix51b3FEDRQ=
 github.com/pulumi/pulumi/pkg/v3 v3.81.0/go.mod h1:URXozJB/abhxb2yOwa5ywHjT2dqt9SmAX2iLkdcOOl0=
 github.com/pulumi/pulumi/pkg/v3 v3.99.0 h1:Mal/ncVw16RBw+0M7jwX4mDlma/X324PXotuHJHDa7s=
@@ -2625,6 +2640,8 @@ github.com/pulumi/pulumi/pkg/v3 v3.130.0 h1:lS51XeCnhg72LXkMiw2FP1cGP+Y85wYD3quW
 github.com/pulumi/pulumi/pkg/v3 v3.130.0/go.mod h1:jhZ1Ug5Rl1qivexgEWvmwSWYIT/jRnKSFhLwwv6PrZ0=
 github.com/pulumi/pulumi/pkg/v3 v3.133.0 h1:j1rd7ToLZIQc5H0427ISOXSbOIIemZ6B0MXtRhQ38Yg=
 github.com/pulumi/pulumi/pkg/v3 v3.133.0/go.mod h1:JtMAnrsFIccO138WcMfPdhO0PioDukKihnZC0xTRLwo=
+github.com/pulumi/pulumi/pkg/v3 v3.140.0 h1:/bvHa19HY/6qHWvuAOVII8qr72MDGGczBWlPYlPo3j0=
+github.com/pulumi/pulumi/pkg/v3 v3.140.0/go.mod h1:rcTtSyisd7BzZTugNk/s9zlYgX9S0S10+pha3Tko6yM=
 github.com/pulumi/pulumi/sdk/v3 v3.81.0 h1:d711GUpjZK1beNpIKFReC1LBmHXYE684sYWntJWQ4Q0=
 github.com/pulumi/pulumi/sdk/v3 v3.81.0/go.mod h1:RMilNNVMlmK1h4Nl/qylb9vzbgh4F3mufZoUOnPy98o=
 github.com/pulumi/pulumi/sdk/v3 v3.99.0 h1:vsFoEEdweYg3Hm6/Jlj1sE2cLtauzoqAdVbLMcC7Cw8=
@@ -2647,6 +2664,8 @@ github.com/pulumi/pulumi/sdk/v3 v3.133.0 h1:o+7dbJZY9BVgAjOF5GYIWgjp/zpKAgWZwD4p
 github.com/pulumi/pulumi/sdk/v3 v3.133.0/go.mod h1:J5kQEX8v87aeUhk6NdQXnjCo1DbiOnOiL3Sf2DuDda8=
 github.com/pulumi/pulumi/sdk/v3 v3.134.1 h1:v1zd0d+B9gpUhsdJ483YUMHwHXqDvXvZ+mh/A4HhPWg=
 github.com/pulumi/pulumi/sdk/v3 v3.134.1/go.mod h1:J5kQEX8v87aeUhk6NdQXnjCo1DbiOnOiL3Sf2DuDda8=
+github.com/pulumi/pulumi/sdk/v3 v3.140.0 h1:+Z/RBvdYg7tBNkBwk4p/FzlV7niBT3TbLAICq/Y0LDU=
+github.com/pulumi/pulumi/sdk/v3 v3.140.0/go.mod h1:PvKsX88co8XuwuPdzolMvew5lZV+4JmZfkeSjj7A6dI=
 github.com/pulumi/schema-tools v0.1.2 h1:Fd9xvUjgck4NA+7/jSk7InqCUT4Kj940+EcnbQKpfZo=
 github.com/pulumi/schema-tools v0.1.2/go.mod h1:62lgj52Tzq11eqWTIaKd+EVyYAu5dEcDJxMhTjvMO/k=
 github.com/pulumi/terraform-diff-reader v0.0.2 h1:kTE4nEXU3/SYXESvAIem+wyHMI3abqkI3OhJ0G04LLI=
@@ -4084,6 +4103,8 @@ google.golang.org/grpc v1.66.0 h1:DibZuoBznOxbDQxRINckZcUvnCEvrW9pcWIE2yF9r1c=
 google.golang.org/grpc v1.66.0/go.mod h1:s3/l6xSSCURdVfAnL+TqCNMyTDAGN6+lZeVxnZR128Y=
 google.golang.org/grpc v1.67.0 h1:IdH9y6PF5MPSdAntIcpjQ+tXO41pcQsfZV2RxtQgVcw=
 google.golang.org/grpc v1.67.0/go.mod h1:1gLDyUQU7CTLJI90u3nXZ9ekeghjeM7pTDZlqFNg2AA=
+google.golang.org/grpc v1.67.1 h1:zWnc1Vrcno+lHZCOofnIMvycFcc0QRGIzm9dhnDX68E=
+google.golang.org/grpc v1.67.1/go.mod h1:1gLDyUQU7CTLJI90u3nXZ9ekeghjeM7pTDZlqFNg2AA=
 google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0/go.mod h1:6Kw0yEErY5E/yWrBtf03jp27GLLJujG4z/JK95pnjjw=
 google.golang.org/protobuf v0.0.0-20200109180630-ec00e32a8dfd/go.mod h1:DFci5gLYBciE7Vtevhsrf46CRTquxDuWsQurQQe4oz8=
 google.golang.org/protobuf v0.0.0-20200221191635-4d8936d0db64/go.mod h1:kwYJMbMJ01Woi6D6+Kah6886xMZcty6N08ah7+eCXa0=
@@ -4106,6 +4127,8 @@ google.golang.org/protobuf v1.34.0 h1:Qo/qEd2RZPCf2nKuorzksSknv0d3ERwp1vFG38gSmH
 google.golang.org/protobuf v1.34.0/go.mod h1:c6P6GXX6sHbq/GpV6MGZEdwhWPcYBgnhAHhKbcUYpos=
 google.golang.org/protobuf v1.34.2 h1:6xV6lTsCfpGD21XK49h7MhtcApnLqkfYgPcdHftf6hg=
 google.golang.org/protobuf v1.34.2/go.mod h1:qYOHts0dSfpeUzUFpOMr/WGzszTmLH+DiWniOlNbLDw=
+google.golang.org/protobuf v1.35.1 h1:m3LfL6/Ca+fqnjnlqQXNpFPABW1UD7mjh8KO2mKFytA=
+google.golang.org/protobuf v1.35.1/go.mod h1:9fA7Ob0pmnwhb644+1+CVWFRbNajQ6iRojtC/QF5bRE=
 gopkg.in/airbrake/gobrake.v2 v2.0.9/go.mod h1:/h5ZAUhDkGaJfjzjKLSjv6zCL6O0LLBxU4K+aSYdM/U=
 gopkg.in/alecthomas/kingpin.v2 v2.2.6/go.mod h1:FMv+mEhP44yOT+4EoQTLFTRgOQ1FBLkstjWtayDeSgw=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
