@@ -172,7 +172,7 @@ jobs:
         pulumi stack init dev
         pulumi up --stack dev -y
       working-directory: ${{ env.dir }}
-    - uses: cilium/cilium-cli@c16f5a009976a36defa4ecfc1522d0b01105f1fd
+    - uses: cilium/cilium-cli@193ad243f78c8ac0b3cb4c64dc64d174a163828e
       with:
         skip-build: true
         release-version: v0.16.10
