@@ -9,7 +9,7 @@ require (
 	github.com/littlejo/terraform-provider-cilium v0.3.2
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.49.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.110.0
-	github.com/pulumi/pulumi/sdk/v3 v3.181.0
+	github.com/pulumi/pulumi/sdk/v3 v3.184.0
 )
 
 require (
