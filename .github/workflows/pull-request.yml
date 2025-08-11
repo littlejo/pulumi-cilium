@@ -34,7 +34,7 @@ jobs:
 
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
@@ -104,7 +104,7 @@ jobs:
       contents: write
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
@@ -145,7 +145,7 @@ jobs:
           - 1.23.x
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
     - name: Install Go
