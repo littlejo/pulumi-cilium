@@ -12,40 +12,6 @@ import (
 )
 
 // Helm values of cilium
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"fmt"
-//
-//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
-//	"github.com/pulumi/pulumi-local/sdk/go/local"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			exampleHelmValues, err := cilium.GetHelmValues(ctx, map[string]interface{}{}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = local.NewFile(ctx, "exampleFile", &local.FileArgs{
-//				Content:  pulumi.String(exampleHelmValues.Yaml),
-//				Filename: pulumi.Sprintf("%v/values.yaml", path.Module),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 func GetHelmValues(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetHelmValuesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHelmValuesResult
@@ -58,17 +24,13 @@ func GetHelmValues(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetHelmVa
 
 // A collection of values returned by getHelmValues.
 type GetHelmValuesResult struct {
-	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
 	// Yaml output
 	Yaml string `pulumi:"yaml"`
 }
 
 func GetHelmValuesOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetHelmValuesResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetHelmValuesResultOutput, error) {
-		options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-		return ctx.InvokeOutput("cilium:index/getHelmValues:getHelmValues", nil, GetHelmValuesResultOutput{}, options).(GetHelmValuesResultOutput), nil
-	}).(GetHelmValuesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("cilium:index/getHelmValues:getHelmValues", nil, GetHelmValuesResultOutput{}, options).(GetHelmValuesResultOutput)
 }
 
 // A collection of values returned by getHelmValues.
@@ -84,11 +46,6 @@ func (o GetHelmValuesResultOutput) ToGetHelmValuesResultOutput() GetHelmValuesRe
 
 func (o GetHelmValuesResultOutput) ToGetHelmValuesResultOutputWithContext(ctx context.Context) GetHelmValuesResultOutput {
 	return o
-}
-
-// The provider-assigned unique ID for this managed resource.
-func (o GetHelmValuesResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v GetHelmValuesResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
 // Yaml output

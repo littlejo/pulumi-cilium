@@ -94,6 +94,12 @@ func (HubbleState) ElementType() reflect.Type {
 	return reflect.TypeOf((*hubbleState)(nil)).Elem()
 }
 
+// HubbleExists checks whether an existing Hubble resource with the given ID exists.
+func HubbleExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *HubbleState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("cilium:index/hubble:Hubble", id, state, "", opts...)
+}
+
 type hubbleArgs struct {
 	// Deploy Hubble Relay (Default: `true`).
 	Relay *bool `pulumi:"relay"`

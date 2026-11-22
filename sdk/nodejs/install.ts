@@ -6,6 +6,50 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cilium from "@littlejo/cilium";
+ * import * as kind from "@pulumi/kind";
+ *
+ * const example = new kind.index.Cluster("example", {
+ *     kindConfig: [{
+ *         networking: [{
+ *             disableDefaultCni: true,
+ *         }],
+ *         node: [
+ *             {
+ *                 role: "control-plane",
+ *             },
+ *             {
+ *                 role: "worker",
+ *             },
+ *         ],
+ *         kind: "Cluster",
+ *         apiVersion: "kind.x-k8s.io/v1alpha4",
+ *     }],
+ *     name: "test-cluster",
+ * });
+ * const exampleInstall = new cilium.Install("example", {
+ *     sets: [
+ *         "ipam.mode=kubernetes",
+ *         "ipam.operator.replicas=1",
+ *         "tunnel=vxlan",
+ *     ],
+ *     version: "1.20.4",
+ * });
+ * ```
+ *
+ * * More examples:
+ *   * AWS: https://github.com/tf-cilium/terraform-eks-cilium
+ *   * Azure: https://github.com/tf-cilium/terraform-aks-cilium
+ *   * GCP: https://github.com/tf-cilium/terraform-gke-cilium
+ *   * Kind: https://github.com/tf-cilium/terraform-kind-cilium
+ */
 export class Install extends pulumi.CustomResource {
     /**
      * Get an existing Install resource's state with the given name, ID, and optional extra
@@ -18,6 +62,17 @@ export class Install extends pulumi.CustomResource {
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: InstallState, opts?: pulumi.CustomResourceOptions): Install {
         return new Install(name, <any>state, { ...opts, id: id });
+    }
+
+    /**
+     * Check whether an existing Install resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: InstallState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/install:Install", id, <any>state || {}, { ...opts }, undefined);
     }
 
     /** @internal */
@@ -37,49 +92,53 @@ export class Install extends pulumi.CustomResource {
     /**
      * Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
      */
-    public /*out*/ readonly ca!: pulumi.Output<outputs.InstallCa>;
+    declare public /*out*/ readonly ca: pulumi.Output<outputs.InstallCa>;
     /**
      * Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
      */
-    public readonly dataPath!: pulumi.Output<string>;
+    declare public readonly dataPath: pulumi.Output<string>;
     /**
      * Helm values (`helm get values -n kube-system cilium`)
      */
-    public /*out*/ readonly helmValues!: pulumi.Output<string>;
+    declare public /*out*/ readonly helmValues: pulumi.Output<string>;
     /**
      * Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
      */
-    public readonly repository!: pulumi.Output<string>;
+    declare public readonly repository: pulumi.Output<string>;
     /**
      * When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
      */
-    public readonly reset!: pulumi.Output<boolean>;
+    declare public readonly reset: pulumi.Output<boolean>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+     */
+    declare public readonly resetThenReuse: pulumi.Output<boolean>;
     /**
      * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
-    public readonly reuse!: pulumi.Output<boolean>;
+    declare public readonly reuse: pulumi.Output<boolean>;
     /**
-     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-     * (Default: `true`).
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+     *
+     * @deprecated Use resetThenReuse instead. This attribute will be removed in a future major version.
      */
-    public readonly reusethenreuse!: pulumi.Output<boolean>;
+    declare public readonly reusethenreuse: pulumi.Output<boolean | undefined>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */
-    public readonly sets!: pulumi.Output<string[]>;
+    declare public readonly sets: pulumi.Output<string[]>;
     /**
      * values in raw yaml to pass to helm. (Default: `empty`).
      */
-    public readonly values!: pulumi.Output<string>;
+    declare public readonly values: pulumi.Output<string>;
     /**
-     * Version of Cilium (Default: `v1.14.5`).
+     * Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
      */
-    public readonly version!: pulumi.Output<string>;
+    declare public readonly version: pulumi.Output<string>;
     /**
      * Wait for Cilium status is ok (Default: `true`).
      */
-    public readonly wait!: pulumi.Output<boolean>;
+    declare public readonly wait: pulumi.Output<boolean>;
 
     /**
      * Create a Install resource with the given unique name, arguments, and options.
@@ -94,28 +153,30 @@ export class Install extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstallState | undefined;
-            resourceInputs["ca"] = state ? state.ca : undefined;
-            resourceInputs["dataPath"] = state ? state.dataPath : undefined;
-            resourceInputs["helmValues"] = state ? state.helmValues : undefined;
-            resourceInputs["repository"] = state ? state.repository : undefined;
-            resourceInputs["reset"] = state ? state.reset : undefined;
-            resourceInputs["reuse"] = state ? state.reuse : undefined;
-            resourceInputs["reusethenreuse"] = state ? state.reusethenreuse : undefined;
-            resourceInputs["sets"] = state ? state.sets : undefined;
-            resourceInputs["values"] = state ? state.values : undefined;
-            resourceInputs["version"] = state ? state.version : undefined;
-            resourceInputs["wait"] = state ? state.wait : undefined;
+            resourceInputs["ca"] = state?.ca;
+            resourceInputs["dataPath"] = state?.dataPath;
+            resourceInputs["helmValues"] = state?.helmValues;
+            resourceInputs["repository"] = state?.repository;
+            resourceInputs["reset"] = state?.reset;
+            resourceInputs["resetThenReuse"] = state?.resetThenReuse;
+            resourceInputs["reuse"] = state?.reuse;
+            resourceInputs["reusethenreuse"] = state?.reusethenreuse;
+            resourceInputs["sets"] = state?.sets;
+            resourceInputs["values"] = state?.values;
+            resourceInputs["version"] = state?.version;
+            resourceInputs["wait"] = state?.wait;
         } else {
             const args = argsOrState as InstallArgs | undefined;
-            resourceInputs["dataPath"] = args ? args.dataPath : undefined;
-            resourceInputs["repository"] = args ? args.repository : undefined;
-            resourceInputs["reset"] = args ? args.reset : undefined;
-            resourceInputs["reuse"] = args ? args.reuse : undefined;
-            resourceInputs["reusethenreuse"] = args ? args.reusethenreuse : undefined;
-            resourceInputs["sets"] = args ? args.sets : undefined;
-            resourceInputs["values"] = args ? args.values : undefined;
-            resourceInputs["version"] = args ? args.version : undefined;
-            resourceInputs["wait"] = args ? args.wait : undefined;
+            resourceInputs["dataPath"] = args?.dataPath;
+            resourceInputs["repository"] = args?.repository;
+            resourceInputs["reset"] = args?.reset;
+            resourceInputs["resetThenReuse"] = args?.resetThenReuse;
+            resourceInputs["reuse"] = args?.reuse;
+            resourceInputs["reusethenreuse"] = args?.reusethenreuse;
+            resourceInputs["sets"] = args?.sets;
+            resourceInputs["values"] = args?.values;
+            resourceInputs["version"] = args?.version;
+            resourceInputs["wait"] = args?.wait;
             resourceInputs["ca"] = undefined /*out*/;
             resourceInputs["helmValues"] = undefined /*out*/;
         }
@@ -133,49 +194,53 @@ export interface InstallState {
     /**
      * Cilium certificates value, Format: `{crt: "b64...", key: "b64.."}` (Equivalent to `kubectl get secret cilium-ca -n kube-system -o yaml`)
      */
-    ca?: pulumi.Input<inputs.InstallCa>;
+    ca?: pulumi.Input<inputs.InstallCa | undefined>;
     /**
      * Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
      */
-    dataPath?: pulumi.Input<string>;
+    dataPath?: pulumi.Input<string | undefined>;
     /**
      * Helm values (`helm get values -n kube-system cilium`)
      */
-    helmValues?: pulumi.Input<string>;
+    helmValues?: pulumi.Input<string | undefined>;
     /**
      * Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
      */
-    repository?: pulumi.Input<string>;
+    repository?: pulumi.Input<string | undefined>;
     /**
      * When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
      */
-    reset?: pulumi.Input<boolean>;
+    reset?: pulumi.Input<boolean | undefined>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+     */
+    resetThenReuse?: pulumi.Input<boolean | undefined>;
     /**
      * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
-    reuse?: pulumi.Input<boolean>;
+    reuse?: pulumi.Input<boolean | undefined>;
     /**
-     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-     * (Default: `true`).
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+     *
+     * @deprecated Use resetThenReuse instead. This attribute will be removed in a future major version.
      */
-    reusethenreuse?: pulumi.Input<boolean>;
+    reusethenreuse?: pulumi.Input<boolean | undefined>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */
-    sets?: pulumi.Input<pulumi.Input<string>[]>;
+    sets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * values in raw yaml to pass to helm. (Default: `empty`).
      */
-    values?: pulumi.Input<string>;
+    values?: pulumi.Input<string | undefined>;
     /**
-     * Version of Cilium (Default: `v1.14.5`).
+     * Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
     /**
      * Wait for Cilium status is ok (Default: `true`).
      */
-    wait?: pulumi.Input<boolean>;
+    wait?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -185,39 +250,43 @@ export interface InstallArgs {
     /**
      * Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
      */
-    dataPath?: pulumi.Input<string>;
+    dataPath?: pulumi.Input<string | undefined>;
     /**
      * Helm chart repository to download Cilium charts from (Default: `https://helm.cilium.io`).
      */
-    repository?: pulumi.Input<string>;
+    repository?: pulumi.Input<string | undefined>;
     /**
      * When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
      */
-    reset?: pulumi.Input<boolean>;
+    reset?: pulumi.Input<boolean | undefined>;
+    /**
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+     */
+    resetThenReuse?: pulumi.Input<boolean | undefined>;
     /**
      * When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
      */
-    reuse?: pulumi.Input<boolean>;
+    reuse?: pulumi.Input<boolean | undefined>;
     /**
-     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-     * overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-     * (Default: `true`).
+     * When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+     *
+     * @deprecated Use resetThenReuse instead. This attribute will be removed in a future major version.
      */
-    reusethenreuse?: pulumi.Input<boolean>;
+    reusethenreuse?: pulumi.Input<boolean | undefined>;
     /**
      * Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
      */
-    sets?: pulumi.Input<pulumi.Input<string>[]>;
+    sets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * values in raw yaml to pass to helm. (Default: `empty`).
      */
-    values?: pulumi.Input<string>;
+    values?: pulumi.Input<string | undefined>;
     /**
-     * Version of Cilium (Default: `v1.14.5`).
+     * Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
     /**
      * Wait for Cilium status is ok (Default: `true`).
      */
-    wait?: pulumi.Input<boolean>;
+    wait?: pulumi.Input<boolean | undefined>;
 }

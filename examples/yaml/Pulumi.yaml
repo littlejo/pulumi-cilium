@@ -1,0 +1,19 @@
+name: cilium-yaml
+runtime: yaml
+description: Install Cilium with Pulumi YAML
+
+config:
+  ciliumVersion:
+    type: string
+
+resources:
+  cilium:
+    type: cilium:Install
+    properties:
+      version: ${ciliumVersion}
+      sets:
+        - ipam.mode=kubernetes
+        - operator.replicas=1
+
+outputs:
+  version: ${cilium.version}

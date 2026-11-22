@@ -15,10 +15,10 @@ export type ClustermeshConnection = import("./clustermeshConnection").Clustermes
 export const ClustermeshConnection: typeof import("./clustermeshConnection").ClustermeshConnection = null as any;
 utilities.lazyLoad(exports, ["ClustermeshConnection"], () => require("./clustermeshConnection"));
 
-export { ConfigArgs, ConfigState } from "./config";
-export type Config = import("./config").Config;
-export const Config: typeof import("./config").Config = null as any;
-utilities.lazyLoad(exports, ["Config"], () => require("./config"));
+export { ConfigArgs, ConfigState } from "./config_";
+export type Config = import("./config_").Config;
+export const Config: typeof import("./config_").Config = null as any;
+utilities.lazyLoad(exports, ["Config"], () => require("./config_"));
 
 export { GetHelmValuesResult } from "./getHelmValues";
 export const getHelmValues: typeof import("./getHelmValues").getHelmValues = null as any;

@@ -4,6 +4,32 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cilium from "@littlejo/cilium";
+ *
+ * const example = new cilium.Install("example", {
+ *     sets: [
+ *         "cluster.name=clustermesh1",
+ *         "cluster.id=1",
+ *         "ipam.mode=kubernetes",
+ *     ],
+ *     version: "1.20.4",
+ * });
+ * const exampleClustermesh = new cilium.Clustermesh("example", {serviceType: "LoadBalancer"}, {
+ *     dependsOn: [example],
+ * });
+ * ```
+ *
+ * * More examples:
+ *   * https://github.com/tf-cilium/terraform-kind-cilium-clustermesh
+ *   * https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh
+ */
 export class Clustermesh extends pulumi.CustomResource {
     /**
      * Get an existing Clustermesh resource's state with the given name, ID, and optional extra
@@ -16,6 +42,17 @@ export class Clustermesh extends pulumi.CustomResource {
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ClustermeshState, opts?: pulumi.CustomResourceOptions): Clustermesh {
         return new Clustermesh(name, <any>state, { ...opts, id: id });
+    }
+
+    /**
+     * Check whether an existing Clustermesh resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: ClustermeshState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/clustermesh:Clustermesh", id, <any>state || {}, { ...opts }, undefined);
     }
 
     /** @internal */
@@ -35,15 +72,15 @@ export class Clustermesh extends pulumi.CustomResource {
     /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
-    public readonly enableKvStoreMesh!: pulumi.Output<boolean>;
+    declare public readonly enableKvStoreMesh: pulumi.Output<boolean>;
     /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */
-    public readonly serviceType!: pulumi.Output<string>;
+    declare public readonly serviceType: pulumi.Output<string>;
     /**
      * Wait Cluster Mesh status is ok (Default: `true`).
      */
-    public readonly wait!: pulumi.Output<boolean>;
+    declare public readonly wait: pulumi.Output<boolean>;
 
     /**
      * Create a Clustermesh resource with the given unique name, arguments, and options.
@@ -58,14 +95,14 @@ export class Clustermesh extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClustermeshState | undefined;
-            resourceInputs["enableKvStoreMesh"] = state ? state.enableKvStoreMesh : undefined;
-            resourceInputs["serviceType"] = state ? state.serviceType : undefined;
-            resourceInputs["wait"] = state ? state.wait : undefined;
+            resourceInputs["enableKvStoreMesh"] = state?.enableKvStoreMesh;
+            resourceInputs["serviceType"] = state?.serviceType;
+            resourceInputs["wait"] = state?.wait;
         } else {
             const args = argsOrState as ClustermeshArgs | undefined;
-            resourceInputs["enableKvStoreMesh"] = args ? args.enableKvStoreMesh : undefined;
-            resourceInputs["serviceType"] = args ? args.serviceType : undefined;
-            resourceInputs["wait"] = args ? args.wait : undefined;
+            resourceInputs["enableKvStoreMesh"] = args?.enableKvStoreMesh;
+            resourceInputs["serviceType"] = args?.serviceType;
+            resourceInputs["wait"] = args?.wait;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Clustermesh.__pulumiType, name, resourceInputs, opts);
@@ -79,15 +116,15 @@ export interface ClustermeshState {
     /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
-    enableKvStoreMesh?: pulumi.Input<boolean>;
+    enableKvStoreMesh?: pulumi.Input<boolean | undefined>;
     /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Wait Cluster Mesh status is ok (Default: `true`).
      */
-    wait?: pulumi.Input<boolean>;
+    wait?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -97,13 +134,13 @@ export interface ClustermeshArgs {
     /**
      * Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium >=1.14 only) (Default: `false`).
      */
-    enableKvStoreMesh?: pulumi.Input<boolean>;
+    enableKvStoreMesh?: pulumi.Input<boolean | undefined>;
     /**
      * Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Wait Cluster Mesh status is ok (Default: `true`).
      */
-    wait?: pulumi.Input<boolean>;
+    wait?: pulumi.Input<boolean | undefined>;
 }

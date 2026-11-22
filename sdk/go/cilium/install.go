@@ -11,6 +11,70 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
+//	"github.com/pulumi/pulumi-kind/sdk/go/kind"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kind.NewCluster(ctx, "example", &kind.ClusterArgs{
+//				KindConfig: []map[string]interface{}{
+//					map[string]interface{}{
+//						"networking": []map[string]bool{
+//							{
+//								"disableDefaultCni": true,
+//							},
+//						},
+//						"node": []interface{}{
+//							map[string]string{
+//								"role": "control-plane",
+//							},
+//							map[string]string{
+//								"role": "worker",
+//							},
+//						},
+//						"kind":       "Cluster",
+//						"apiVersion": "kind.x-k8s.io/v1alpha4",
+//					},
+//				},
+//				Name: "test-cluster",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cilium.NewInstall(ctx, "example", &cilium.InstallArgs{
+//				Sets: pulumi.StringArray{
+//					pulumi.String("ipam.mode=kubernetes"),
+//					pulumi.String("ipam.operator.replicas=1"),
+//					pulumi.String("tunnel=vxlan"),
+//				},
+//				Version: pulumi.String("1.20.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// * More examples:
+//   - AWS: https://github.com/tf-cilium/terraform-eks-cilium
+//   - Azure: https://github.com/tf-cilium/terraform-aks-cilium
+//   - GCP: https://github.com/tf-cilium/terraform-gke-cilium
+//   - Kind: https://github.com/tf-cilium/terraform-kind-cilium
 type Install struct {
 	pulumi.CustomResourceState
 
@@ -24,17 +88,19 @@ type Install struct {
 	Repository pulumi.StringOutput `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolOutput `pulumi:"reset"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+	ResetThenReuse pulumi.BoolOutput `pulumi:"resetThenReuse"`
 	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolOutput `pulumi:"reuse"`
-	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-	// (Default: `true`).
-	Reusethenreuse pulumi.BoolOutput `pulumi:"reusethenreuse"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+	//
+	// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
+	Reusethenreuse pulumi.BoolPtrOutput `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayOutput `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringOutput `pulumi:"values"`
-	// Version of Cilium (Default: `v1.14.5`).
+	// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 	Version pulumi.StringOutput `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolOutput `pulumi:"wait"`
@@ -84,17 +150,19 @@ type installState struct {
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset *bool `pulumi:"reset"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+	ResetThenReuse *bool `pulumi:"resetThenReuse"`
 	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse *bool `pulumi:"reuse"`
-	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-	// (Default: `true`).
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+	//
+	// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
 	Reusethenreuse *bool `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values *string `pulumi:"values"`
-	// Version of Cilium (Default: `v1.14.5`).
+	// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 	Version *string `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait *bool `pulumi:"wait"`
@@ -111,17 +179,19 @@ type InstallState struct {
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolPtrInput
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+	ResetThenReuse pulumi.BoolPtrInput
 	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolPtrInput
-	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-	// (Default: `true`).
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+	//
+	// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
 	Reusethenreuse pulumi.BoolPtrInput
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringPtrInput
-	// Version of Cilium (Default: `v1.14.5`).
+	// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 	Version pulumi.StringPtrInput
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolPtrInput
@@ -131,6 +201,12 @@ func (InstallState) ElementType() reflect.Type {
 	return reflect.TypeOf((*installState)(nil)).Elem()
 }
 
+// InstallExists checks whether an existing Install resource with the given ID exists.
+func InstallExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *InstallState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("cilium:index/install:Install", id, state, "", opts...)
+}
+
 type installArgs struct {
 	// Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).
 	DataPath *string `pulumi:"dataPath"`
@@ -138,17 +214,19 @@ type installArgs struct {
 	Repository *string `pulumi:"repository"`
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset *bool `pulumi:"reset"`
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+	ResetThenReuse *bool `pulumi:"resetThenReuse"`
 	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse *bool `pulumi:"reuse"`
-	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-	// (Default: `true`).
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+	//
+	// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
 	Reusethenreuse *bool `pulumi:"reusethenreuse"`
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets []string `pulumi:"sets"`
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values *string `pulumi:"values"`
-	// Version of Cilium (Default: `v1.14.5`).
+	// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 	Version *string `pulumi:"version"`
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait *bool `pulumi:"wait"`
@@ -162,17 +240,19 @@ type InstallArgs struct {
 	Repository pulumi.StringPtrInput
 	// When upgrading, reset the helm values to the ones built into the chart (Default: `false`).
 	Reset pulumi.BoolPtrInput
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+	ResetThenReuse pulumi.BoolPtrInput
 	// When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 	Reuse pulumi.BoolPtrInput
-	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-	// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-	// (Default: `true`).
+	// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+	//
+	// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
 	Reusethenreuse pulumi.BoolPtrInput
 	// Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
 	Sets pulumi.StringArrayInput
 	// values in raw yaml to pass to helm. (Default: `empty`).
 	Values pulumi.StringPtrInput
-	// Version of Cilium (Default: `v1.14.5`).
+	// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 	Version pulumi.StringPtrInput
 	// Wait for Cilium status is ok (Default: `true`).
 	Wait pulumi.BoolPtrInput
@@ -290,16 +370,21 @@ func (o InstallOutput) Reset() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reset }).(pulumi.BoolOutput)
 }
 
+// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: `true`).
+func (o InstallOutput) ResetThenReuse() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.ResetThenReuse }).(pulumi.BoolOutput)
+}
+
 // When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).
 func (o InstallOutput) Reuse() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reuse }).(pulumi.BoolOutput)
 }
 
-// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any
-// overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored
-// (Default: `true`).
-func (o InstallOutput) Reusethenreuse() pulumi.BoolOutput {
-	return o.ApplyT(func(v *Install) pulumi.BoolOutput { return v.Reusethenreuse }).(pulumi.BoolOutput)
+// When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use `resetThenReuse` instead.
+//
+// Deprecated: Use resetThenReuse instead. This attribute will be removed in a future major version.
+func (o InstallOutput) Reusethenreuse() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Install) pulumi.BoolPtrOutput { return v.Reusethenreuse }).(pulumi.BoolPtrOutput)
 }
 
 // Set helm values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2 (Default: `[]`).
@@ -312,7 +397,7 @@ func (o InstallOutput) Values() pulumi.StringOutput {
 	return o.ApplyT(func(v *Install) pulumi.StringOutput { return v.Values }).(pulumi.StringOutput)
 }
 
-// Version of Cilium (Default: `v1.14.5`).
+// Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).
 func (o InstallOutput) Version() pulumi.StringOutput {
 	return o.ApplyT(func(v *Install) pulumi.StringOutput { return v.Version }).(pulumi.StringOutput)
 }

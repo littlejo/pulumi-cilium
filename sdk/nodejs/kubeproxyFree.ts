@@ -21,6 +21,17 @@ export class KubeproxyFree extends pulumi.CustomResource {
         return new KubeproxyFree(name, <any>state, { ...opts, id: id });
     }
 
+    /**
+     * Check whether an existing KubeproxyFree resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: KubeproxyFreeState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/kubeproxyFree:KubeproxyFree", id, <any>state || {}, { ...opts }, undefined);
+    }
+
     /** @internal */
     public static readonly __pulumiType = 'cilium:index/kubeproxyFree:KubeproxyFree';
 
@@ -38,11 +49,11 @@ export class KubeproxyFree extends pulumi.CustomResource {
     /**
      * Name of DaemonSet (Default: `kube-proxy`).
      */
-    public readonly name!: pulumi.Output<string>;
+    declare public readonly name: pulumi.Output<string>;
     /**
-     * Namespace in which to install (Default: `kube-system`).
+     * Namespace of DaemonSet (Default: `kube-system`).
      */
-    public readonly namespace!: pulumi.Output<string>;
+    declare public readonly namespace: pulumi.Output<string>;
 
     /**
      * Create a KubeproxyFree resource with the given unique name, arguments, and options.
@@ -57,12 +68,12 @@ export class KubeproxyFree extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as KubeproxyFreeState | undefined;
-            resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["namespace"] = state ? state.namespace : undefined;
+            resourceInputs["name"] = state?.name;
+            resourceInputs["namespace"] = state?.namespace;
         } else {
             const args = argsOrState as KubeproxyFreeArgs | undefined;
-            resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
+            resourceInputs["name"] = args?.name;
+            resourceInputs["namespace"] = args?.namespace;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(KubeproxyFree.__pulumiType, name, resourceInputs, opts);
@@ -76,11 +87,11 @@ export interface KubeproxyFreeState {
     /**
      * Name of DaemonSet (Default: `kube-proxy`).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
-     * Namespace in which to install (Default: `kube-system`).
+     * Namespace of DaemonSet (Default: `kube-system`).
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -90,9 +101,9 @@ export interface KubeproxyFreeArgs {
     /**
      * Name of DaemonSet (Default: `kube-proxy`).
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
-     * Namespace in which to install (Default: `kube-system`).
+     * Namespace of DaemonSet (Default: `kube-system`).
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }

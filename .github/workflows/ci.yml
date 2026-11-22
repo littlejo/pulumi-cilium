@@ -1,0 +1,175 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # renovate: datasource=github-releases depName=pulumi/pulumi
+  PULUMI_VERSION: 3.277.0
+
+jobs:
+  lint:
+    name: Lint and unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - name: Embed the schema
+        run: make schema_embed
+      - uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
+        with:
+          # renovate: datasource=github-releases depName=golangci/golangci-lint
+          version: v2.15.0
+          working-directory: provider
+          args: -c ../.golangci.yml
+      - name: Unit tests
+        run: make test_provider
+
+  build:
+    name: Build provider and SDKs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: provider/go.mod
+          cache-dependency-path: provider/go.sum
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.x
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - run: python -m pip install build
+      - uses: pulumi/actions@96c7761824268174e0d2a4e8c7d75671eebd24a7 # v7.1.0
+        with:
+          pulumi-version: ${{ env.PULUMI_VERSION }}
+
+      - name: Generate the schema
+        run: make schema
+      - name: Build the provider
+        run: make provider
+      - name: Generate and build the SDKs
+        run: make build_sdks
+
+      - name: Check the generated code is committed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status
+            git diff
+            echo "::error::The generated code is out of date: run 'make schema build_sdks' and commit the result."
+            exit 1
+          fi
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: provider
+          path: bin/pulumi-resource-cilium
+          retention-days: 1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sdk-nodejs
+          path: |
+            sdk/nodejs/bin
+            sdk/nodejs/node_modules
+          retention-days: 1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sdk-python
+          path: sdk/python/bin
+          retention-days: 1
+
+  goreleaser:
+    name: Check GoReleaser configuration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
+        with:
+          version: "~> v2"
+          args: check
+
+  test:
+    name: Test ${{ matrix.test }} (Cilium ${{ matrix.cilium-version || 'default' }})
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        test: [Yaml, Nodejs, Python, Go]
+        # Empty: the default version of examples/examples_test.go.
+        cilium-version: [""]
+        include:
+          - test: Yaml
+            # renovate: datasource=github-releases depName=cilium/cilium
+            cilium-version: 1.18.17
+          - test: Yaml
+            # renovate: datasource=github-releases depName=cilium/cilium
+            cilium-version: 1.19.11
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: examples/go.mod
+          cache-dependency-path: examples/go.sum
+      - if: matrix.test == 'Nodejs'
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.x
+      - if: matrix.test == 'Python'
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+      - uses: pulumi/actions@96c7761824268174e0d2a4e8c7d75671eebd24a7 # v7.1.0
+        with:
+          pulumi-version: ${{ env.PULUMI_VERSION }}
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: provider
+          path: bin
+      - run: chmod +x bin/pulumi-resource-cilium
+      - if: matrix.test == 'Nodejs'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: sdk-nodejs
+          path: sdk/nodejs
+      - if: matrix.test == 'Python'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: sdk-python
+          path: sdk/python/bin
+
+      - uses: helm/kind-action@ea822c7bf1874f08e5a491df991c228edffc3376 # v1.15.2
+        with:
+          config: .github/config/acceptance_tests_kind_config.yaml
+          wait: 0s
+
+      - name: Run the example
+        working-directory: examples
+        env:
+          CILIUM_VERSION: ${{ matrix.cilium-version }}
+          PULUMI_CONFIG_PASSPHRASE: ""
+        run: go test -v -count=1 -timeout 25m -run '^Test${{ matrix.test }}$' .

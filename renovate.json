@@ -1,9 +1,64 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "ignorePaths": [
-      "sdk/**"
+    "sdk/**"
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "packageRules": [
+    {
+      "description": "The bridge, the Pulumi SDK and the test framework are released together",
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchPackageNames": [
+        "github.com/pulumi/**"
+      ],
+      "groupName": "pulumi"
+    },
+    {
+      "description": "Each tested Cilium version stays on its minor: add new minors by hand",
+      "matchDepNames": [
+        "cilium/cilium"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pinDigest"
+      ],
+      "groupName": "github actions",
+      "automerge": true
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "Versions annotated with a '# renovate:' or '// renovate:' comment",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+\\.ya?ml$/",
+        "/^examples/.+_test\\.go$/",
+        "/^\\.devcontainer/post-create\\.sh$/"
+      ],
+      "matchStrings": [
+        "renovate: datasource=(?<datasource>[a-z-]+) depName=(?<depName>\\S+)\\s+[^\\n]*?v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "extractVersionTemplate": "^v?(?<version>.*)$"
+    }
   ]
 }

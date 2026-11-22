@@ -1,0 +1,12 @@
+{
+    "name": "cilium-nodejs",
+    "main": "index.ts",
+    "devDependencies": {
+        "@types/node": "^24.0.0",
+        "typescript": "^5.9.0"
+    },
+    "dependencies": {
+        "@littlejo/cilium": "file:../../sdk/nodejs/bin",
+        "@pulumi/pulumi": "^3.0.0"
+    }
+}

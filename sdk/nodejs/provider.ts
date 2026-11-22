@@ -28,23 +28,23 @@ export class Provider extends pulumi.ProviderResource {
     /**
      * The content of kube config file (Default: ``).
      */
-    public readonly configContent!: pulumi.Output<string | undefined>;
+    declare public readonly configContent: pulumi.Output<string | undefined>;
     /**
      * A path to a kube config file (Default: `~/.kube/config`).
      */
-    public readonly configPath!: pulumi.Output<string | undefined>;
+    declare public readonly configPath: pulumi.Output<string | undefined>;
     /**
      * Context of kubeconfig file (Default: `default context`).
      */
-    public readonly context!: pulumi.Output<string | undefined>;
+    declare public readonly context: pulumi.Output<string | undefined>;
     /**
      * Helm Release to install cilium (Default: `cilium.Install`).
      */
-    public readonly helmRelease!: pulumi.Output<string | undefined>;
+    declare public readonly helmRelease: pulumi.Output<string | undefined>;
     /**
      * Namespace to install cilium (Default: `kube-system`).
      */
-    public readonly namespace!: pulumi.Output<string | undefined>;
+    declare public readonly namespace: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -57,11 +57,11 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["configContent"] = args ? args.configContent : undefined;
-            resourceInputs["configPath"] = args ? args.configPath : undefined;
-            resourceInputs["context"] = args ? args.context : undefined;
-            resourceInputs["helmRelease"] = args ? args.helmRelease : undefined;
-            resourceInputs["namespace"] = args ? args.namespace : undefined;
+            resourceInputs["configContent"] = args?.configContent;
+            resourceInputs["configPath"] = args?.configPath;
+            resourceInputs["context"] = args?.context;
+            resourceInputs["helmRelease"] = args?.helmRelease;
+            resourceInputs["namespace"] = args?.namespace;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
@@ -84,23 +84,23 @@ export interface ProviderArgs {
     /**
      * The content of kube config file (Default: ``).
      */
-    configContent?: pulumi.Input<string>;
+    configContent?: pulumi.Input<string | undefined>;
     /**
      * A path to a kube config file (Default: `~/.kube/config`).
      */
-    configPath?: pulumi.Input<string>;
+    configPath?: pulumi.Input<string | undefined>;
     /**
      * Context of kubeconfig file (Default: `default context`).
      */
-    context?: pulumi.Input<string>;
+    context?: pulumi.Input<string | undefined>;
     /**
      * Helm Release to install cilium (Default: `cilium.Install`).
      */
-    helmRelease?: pulumi.Input<string>;
+    helmRelease?: pulumi.Input<string | undefined>;
     /**
      * Namespace to install cilium (Default: `kube-system`).
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

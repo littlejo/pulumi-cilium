@@ -18,69 +18,51 @@
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
     "language": {
-        "csharp": {
-            "packageReferences": {
-                "Pulumi": "3.*"
-            },
-            "compatibility": "tfbridge20",
-            "rootNamespace": "Littlejo"
-        },
         "go": {
             "importBasePath": "github.com/littlejo/pulumi-cilium/sdk/go/cilium",
             "generateResourceContainerTypes": true,
             "generateExtraInputTypes": true
         },
-        "java": {
-            "basePackage": "com.littlejo",
-            "buildFiles": "",
-            "gradleNexusPublishPluginVersion": "",
-            "gradleTest": ""
-        },
         "nodejs": {
             "packageName": "@littlejo/cilium",
             "packageDescription": "A Pulumi package for creating and managing Cilium resources",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/littlejo/terraform-provider-cilium)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cilium` repo](https://github.com/littlejo/pulumi-cilium/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cilium` repo](https://github.com/littlejo/terraform-provider-cilium/issues).",
-            "dependencies": {
-                "@pulumi/pulumi": "^3.0.0"
-            },
-            "devDependencies": {
-                "@types/mime": "^2.0.0",
-                "@types/node": "^10.0.0"
-            },
             "compatibility": "tfbridge20",
-            "disableUnionOutputTypes": true
+            "disableUnionOutputTypes": true,
+            "respectSchemaVersion": true
         },
         "python": {
             "packageName": "littlejo_cilium",
-            "requires": {
-                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
-            },
+            "pythonRequires": "\u003e=3.10",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/littlejo/terraform-provider-cilium)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-cilium` repo](https://github.com/littlejo/pulumi-cilium/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-cilium` repo](https://github.com/littlejo/terraform-provider-cilium/issues).",
             "compatibility": "tfbridge20",
-            "pyproject": {}
+            "respectSchemaVersion": true,
+            "pyproject": {
+                "enabled": true
+            }
         }
     },
     "config": {
         "variables": {
             "configContent": {
                 "type": "string",
-                "description": "The content of kube config file (Default: ``).\n"
+                "description": "The content of kube config file (Default: ``)."
             },
             "configPath": {
                 "type": "string",
-                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+                "description": "A path to a kube config file (Default: `~/.kube/config`)."
             },
             "context": {
                 "type": "string",
-                "description": "Context of kubeconfig file (Default: `default context`).\n"
+                "description": "Context of kubeconfig file (Default: `default context`)."
             },
             "helmRelease": {
                 "type": "string",
-                "description": "Helm Release to install cilium (Default: `cilium.Install`).\n"
+                "description": "Helm Release to install cilium (Default: \u003cspan pulumi-lang-nodejs=\"`cilium.Install`\" pulumi-lang-dotnet=\"`cilium.Install`\" pulumi-lang-go=\"`Install`\" pulumi-lang-python=\"`Install`\" pulumi-lang-yaml=\"`cilium.Install`\" pulumi-lang-java=\"`cilium.Install`\" pulumi-lang-hcl=\"`cilium`\"\u003e`cilium.Install`\u003c/span\u003e)."
             },
             "namespace": {
                 "type": "string",
-                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+                "description": "Namespace to install cilium (Default: `kube-system`)."
             }
         }
     },
@@ -106,45 +88,45 @@
         "properties": {
             "configContent": {
                 "type": "string",
-                "description": "The content of kube config file (Default: ``).\n"
+                "description": "The content of kube config file (Default: ``)."
             },
             "configPath": {
                 "type": "string",
-                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+                "description": "A path to a kube config file (Default: `~/.kube/config`)."
             },
             "context": {
                 "type": "string",
-                "description": "Context of kubeconfig file (Default: `default context`).\n"
+                "description": "Context of kubeconfig file (Default: `default context`)."
             },
             "helmRelease": {
                 "type": "string",
-                "description": "Helm Release to install cilium (Default: `cilium.Install`).\n"
+                "description": "Helm Release to install cilium (Default: \u003cspan pulumi-lang-nodejs=\"`cilium.Install`\" pulumi-lang-dotnet=\"`cilium.Install`\" pulumi-lang-go=\"`Install`\" pulumi-lang-python=\"`Install`\" pulumi-lang-yaml=\"`cilium.Install`\" pulumi-lang-java=\"`cilium.Install`\" pulumi-lang-hcl=\"`cilium`\"\u003e`cilium.Install`\u003c/span\u003e)."
             },
             "namespace": {
                 "type": "string",
-                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+                "description": "Namespace to install cilium (Default: `kube-system`)."
             }
         },
         "inputProperties": {
             "configContent": {
                 "type": "string",
-                "description": "The content of kube config file (Default: ``).\n"
+                "description": "The content of kube config file (Default: ``)."
             },
             "configPath": {
                 "type": "string",
-                "description": "A path to a kube config file (Default: `~/.kube/config`).\n"
+                "description": "A path to a kube config file (Default: `~/.kube/config`)."
             },
             "context": {
                 "type": "string",
-                "description": "Context of kubeconfig file (Default: `default context`).\n"
+                "description": "Context of kubeconfig file (Default: `default context`)."
             },
             "helmRelease": {
                 "type": "string",
-                "description": "Helm Release to install cilium (Default: `cilium.Install`).\n"
+                "description": "Helm Release to install cilium (Default: \u003cspan pulumi-lang-nodejs=\"`cilium.Install`\" pulumi-lang-dotnet=\"`cilium.Install`\" pulumi-lang-go=\"`Install`\" pulumi-lang-python=\"`Install`\" pulumi-lang-yaml=\"`cilium.Install`\" pulumi-lang-java=\"`cilium.Install`\" pulumi-lang-hcl=\"`cilium`\"\u003e`cilium.Install`\u003c/span\u003e)."
             },
             "namespace": {
                 "type": "string",
-                "description": "Namespace to install cilium (Default: `kube-system`).\n"
+                "description": "Namespace to install cilium (Default: `kube-system`)."
             }
         },
         "methods": {
@@ -153,18 +135,19 @@
     },
     "resources": {
         "cilium:index/clustermesh:Clustermesh": {
+            "description": "Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Install(\"example\", {\n    sets: [\n        \"cluster.name=clustermesh1\",\n        \"cluster.id=1\",\n        \"ipam.mode=kubernetes\",\n    ],\n    version: \"1.20.4\",\n});\nconst exampleClustermesh = new cilium.Clustermesh(\"example\", {serviceType: \"LoadBalancer\"}, {\n    dependsOn: [example],\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Install(\"example\",\n    sets=[\n        \"cluster.name=clustermesh1\",\n        \"cluster.id=1\",\n        \"ipam.mode=kubernetes\",\n    ],\n    version=\"1.20.4\")\nexample_clustermesh = cilium.Clustermesh(\"example\", service_type=\"LoadBalancer\",\nopts = pulumi.ResourceOptions(depends_on=[example]))\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Install(\"example\", new()\n    {\n        Sets = new[]\n        {\n            \"cluster.name=clustermesh1\",\n            \"cluster.id=1\",\n            \"ipam.mode=kubernetes\",\n        },\n        Version = \"1.20.4\",\n    });\n\n    var exampleClustermesh = new Cilium.Clustermesh(\"example\", new()\n    {\n        ServiceType = \"LoadBalancer\",\n    }, new CustomResourceOptions\n    {\n        DependsOn =\n        {\n            example,\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := cilium.NewInstall(ctx, \"example\", \u0026cilium.InstallArgs{\n\t\t\tSets: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"cluster.name=clustermesh1\"),\n\t\t\t\tpulumi.String(\"cluster.id=1\"),\n\t\t\t\tpulumi.String(\"ipam.mode=kubernetes\"),\n\t\t\t},\n\t\t\tVersion: pulumi.String(\"1.20.4\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = cilium.NewClustermesh(ctx, \"example\", \u0026cilium.ClustermeshArgs{\n\t\t\tServiceType: pulumi.String(\"LoadBalancer\"),\n\t\t}, pulumi.DependsOn([]pulumi.Resource{\n\t\t\texample,\n\t\t}))\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    cilium = {\n      source = \"pulumi/cilium\"\n    }\n  }\n}\n\nresource \"cilium_install\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  sets    = [\"cluster.name=clustermesh1\", \"cluster.id=1\", \"ipam.mode=kubernetes\"]\n  version = \"1.20.4\"\n}\nresource \"cilium_clustermesh\" \"example\" {\n  depends_on = [cilium_install.example]\n  lifecycle {\n    create_before_destroy = true\n  }\n  service_type = \"LoadBalancer\"\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Install;\nimport com.pulumi.cilium.InstallArgs;\nimport com.pulumi.cilium.Clustermesh;\nimport com.pulumi.cilium.ClustermeshArgs;\nimport com.pulumi.resources.CustomResourceOptions;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Install(\"example\", InstallArgs.builder()\n            .sets(            \n                \"cluster.name=clustermesh1\",\n                \"cluster.id=1\",\n                \"ipam.mode=kubernetes\")\n            .version(\"1.20.4\")\n            .build());\n\n        var exampleClustermesh = new Clustermesh(\"exampleClustermesh\", ClustermeshArgs.builder()\n            .serviceType(\"LoadBalancer\")\n            .build(), CustomResourceOptions.builder()\n                .dependsOn(example)\n                .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Install\n    properties:\n      sets:\n        - cluster.name=clustermesh1\n        - cluster.id=1\n        - ipam.mode=kubernetes\n      version: 1.20.4\n  exampleClustermesh:\n    type: cilium:Clustermesh\n    name: example\n    properties:\n      serviceType: LoadBalancer\n    options:\n      dependsOn:\n        - ${example}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n* More examples:\n  * https://github.com/tf-cilium/terraform-kind-cilium-clustermesh\n  * https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh\n",
             "properties": {
                 "enableKvStoreMesh": {
                     "type": "boolean",
-                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 },
                 "serviceType": {
                     "type": "string",
-                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                 },
                 "wait": {
                     "type": "boolean",
-                    "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                    "description": "Wait Cluster Mesh status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 }
             },
             "required": [
@@ -175,15 +158,15 @@
             "inputProperties": {
                 "enableKvStoreMesh": {
                     "type": "boolean",
-                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                    "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 },
                 "serviceType": {
                     "type": "string",
-                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                    "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                 },
                 "wait": {
                     "type": "boolean",
-                    "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                    "description": "Wait Cluster Mesh status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 }
             },
             "stateInputs": {
@@ -191,25 +174,26 @@
                 "properties": {
                     "enableKvStoreMesh": {
                         "type": "boolean",
-                        "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: `false`).\n"
+                        "description": "Enable kvstoremesh, an extension which caches remote cluster information in the local kvstore (Cilium \u003e=1.14 only) (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                     },
                     "serviceType": {
                         "type": "string",
-                        "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: `autodetected`).\n"
+                        "description": "Type of Kubernetes service to expose control plane { LoadBalancer | NodePort | ClusterIP } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait Cluster Mesh status is ok (Default: `true`).\n"
+                        "description": "Wait Cluster Mesh status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cilium:index/clustermeshConnection:ClustermeshConnection": {
+            "description": "Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.ClustermeshConnection(\"example\", {destinationContexts: [\"context-2\"]});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.ClustermeshConnection(\"example\", destination_contexts=[\"context-2\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.ClustermeshConnection(\"example\", new()\n    {\n        DestinationContexts = new[]\n        {\n            \"context-2\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewClustermeshConnection(ctx, \"example\", \u0026cilium.ClustermeshConnectionArgs{\n\t\t\tDestinationContexts: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"context-2\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    cilium = {\n      source = \"pulumi/cilium\"\n    }\n  }\n}\n\nresource \"cilium_clustermesh_connection\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  destination_contexts = [\"context-2\"]\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.ClustermeshConnection;\nimport com.pulumi.cilium.ClustermeshConnectionArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ClustermeshConnection(\"example\", ClustermeshConnectionArgs.builder()\n            .destinationContexts(\"context-2\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:ClustermeshConnection\n    properties:\n      destinationContexts:\n        - context-2\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n* More examples:\n  * https://github.com/tf-cilium/terraform-kind-cilium-clustermesh\n  * https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh\n",
             "properties": {
                 "connectionMode": {
                     "type": "string",
-                    "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                    "description": "Connection Mode { \u003cspan pulumi-lang-nodejs=\"`unicast`\" pulumi-lang-dotnet=\"`Unicast`\" pulumi-lang-go=\"`unicast`\" pulumi-lang-python=\"`unicast`\" pulumi-lang-yaml=\"`unicast`\" pulumi-lang-java=\"`unicast`\" pulumi-lang-hcl=\"`unicast`\"\u003e`unicast`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`mesh`\" pulumi-lang-dotnet=\"`Mesh`\" pulumi-lang-go=\"`mesh`\" pulumi-lang-python=\"`mesh`\" pulumi-lang-yaml=\"`mesh`\" pulumi-lang-java=\"`mesh`\" pulumi-lang-hcl=\"`mesh`\"\u003e`mesh`\u003c/span\u003e } (Default: \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e).\n"
                 },
                 "destinationContexts": {
                     "type": "array",
@@ -220,7 +204,7 @@
                 },
                 "parallel": {
                     "type": "integer",
-                    "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
+                    "description": "Number of parallel connections of destination clusters (Default: \u003cspan pulumi-lang-nodejs=\"`1`\" pulumi-lang-dotnet=\"`1`\" pulumi-lang-go=\"`1`\" pulumi-lang-python=\"`1`\" pulumi-lang-yaml=\"`1`\" pulumi-lang-java=\"`1`\" pulumi-lang-hcl=\"`1`\"\u003e`1`\u003c/span\u003e).\n"
                 }
             },
             "required": [
@@ -231,7 +215,7 @@
             "inputProperties": {
                 "connectionMode": {
                     "type": "string",
-                    "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                    "description": "Connection Mode { \u003cspan pulumi-lang-nodejs=\"`unicast`\" pulumi-lang-dotnet=\"`Unicast`\" pulumi-lang-go=\"`unicast`\" pulumi-lang-python=\"`unicast`\" pulumi-lang-yaml=\"`unicast`\" pulumi-lang-java=\"`unicast`\" pulumi-lang-hcl=\"`unicast`\"\u003e`unicast`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`mesh`\" pulumi-lang-dotnet=\"`Mesh`\" pulumi-lang-go=\"`mesh`\" pulumi-lang-python=\"`mesh`\" pulumi-lang-yaml=\"`mesh`\" pulumi-lang-java=\"`mesh`\" pulumi-lang-hcl=\"`mesh`\"\u003e`mesh`\u003c/span\u003e } (Default: \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e).\n"
                 },
                 "destinationContexts": {
                     "type": "array",
@@ -242,7 +226,7 @@
                 },
                 "parallel": {
                     "type": "integer",
-                    "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
+                    "description": "Number of parallel connections of destination clusters (Default: \u003cspan pulumi-lang-nodejs=\"`1`\" pulumi-lang-dotnet=\"`1`\" pulumi-lang-go=\"`1`\" pulumi-lang-python=\"`1`\" pulumi-lang-yaml=\"`1`\" pulumi-lang-java=\"`1`\" pulumi-lang-hcl=\"`1`\"\u003e`1`\u003c/span\u003e).\n"
                 }
             },
             "stateInputs": {
@@ -250,7 +234,7 @@
                 "properties": {
                     "connectionMode": {
                         "type": "string",
-                        "description": "Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).\n"
+                        "description": "Connection Mode { \u003cspan pulumi-lang-nodejs=\"`unicast`\" pulumi-lang-dotnet=\"`Unicast`\" pulumi-lang-go=\"`unicast`\" pulumi-lang-python=\"`unicast`\" pulumi-lang-yaml=\"`unicast`\" pulumi-lang-java=\"`unicast`\" pulumi-lang-hcl=\"`unicast`\"\u003e`unicast`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e | \u003cspan pulumi-lang-nodejs=\"`mesh`\" pulumi-lang-dotnet=\"`Mesh`\" pulumi-lang-go=\"`mesh`\" pulumi-lang-python=\"`mesh`\" pulumi-lang-yaml=\"`mesh`\" pulumi-lang-java=\"`mesh`\" pulumi-lang-hcl=\"`mesh`\"\u003e`mesh`\u003c/span\u003e } (Default: \u003cspan pulumi-lang-nodejs=\"`bidirectional`\" pulumi-lang-dotnet=\"`Bidirectional`\" pulumi-lang-go=\"`bidirectional`\" pulumi-lang-python=\"`bidirectional`\" pulumi-lang-yaml=\"`bidirectional`\" pulumi-lang-java=\"`bidirectional`\" pulumi-lang-hcl=\"`bidirectional`\"\u003e`bidirectional`\u003c/span\u003e).\n"
                     },
                     "destinationContexts": {
                         "type": "array",
@@ -261,14 +245,14 @@
                     },
                     "parallel": {
                         "type": "integer",
-                        "description": "Number of parallel connections of destination clusters (Default: `1`).\n"
+                        "description": "Number of parallel connections of destination clusters (Default: \u003cspan pulumi-lang-nodejs=\"`1`\" pulumi-lang-dotnet=\"`1`\" pulumi-lang-go=\"`1`\" pulumi-lang-python=\"`1`\" pulumi-lang-yaml=\"`1`\" pulumi-lang-java=\"`1`\" pulumi-lang-hcl=\"`1`\"\u003e`1`\u003c/span\u003e).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cilium:index/config:Config": {
-            "description": "Config resource for Cilium. This is equivalent to cilium cli: `cilium config`: It manages the cilium Kubernetes ConfigMap resource\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Config(\"example\", {\n    key: \"debug\",\n    value: \"true\",\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Config(\"example\",\n    key=\"debug\",\n    value=\"true\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Config(\"example\", new()\n    {\n        Key = \"debug\",\n        Value = \"true\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewConfig(ctx, \"example\", \u0026cilium.ConfigArgs{\n\t\t\tKey:   pulumi.String(\"debug\"),\n\t\t\tValue: pulumi.String(\"true\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.littlejo.cilium.Config;\nimport com.littlejo.cilium.ConfigArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Config(\"example\", ConfigArgs.builder()\n            .key(\"debug\")\n            .value(\"true\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Config\n    properties:\n      key: debug\n      value: 'true'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Config resource for Cilium. This is equivalent to cilium cli: `cilium config`: It manages the cilium Kubernetes ConfigMap resource\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Config(\"example\", {\n    key: \"debug\",\n    value: \"true\",\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Config(\"example\",\n    key=\"debug\",\n    value=\"true\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Config(\"example\", new()\n    {\n        Key = \"debug\",\n        Value = \"true\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewConfig(ctx, \"example\", \u0026cilium.ConfigArgs{\n\t\t\tKey:   pulumi.String(\"debug\"),\n\t\t\tValue: pulumi.String(\"true\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    cilium = {\n      source = \"pulumi/cilium\"\n    }\n  }\n}\n\nresource \"cilium_config\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  key   = \"debug\"\n  value = \"true\"\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Config;\nimport com.pulumi.cilium.ConfigArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Config(\"example\", ConfigArgs.builder()\n            .key(\"debug\")\n            .value(\"true\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Config\n    properties:\n      key: debug\n      value: 'true'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "key": {
                     "type": "string",
@@ -276,7 +260,7 @@
                 },
                 "restart": {
                     "type": "boolean",
-                    "description": "Restart Cilium pods (Default: `true`).\n"
+                    "description": "Restart Cilium pods (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "value": {
                     "type": "string",
@@ -295,7 +279,7 @@
                 },
                 "restart": {
                     "type": "boolean",
-                    "description": "Restart Cilium pods (Default: `true`).\n"
+                    "description": "Restart Cilium pods (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "value": {
                     "type": "string",
@@ -315,7 +299,7 @@
                     },
                     "restart": {
                         "type": "boolean",
-                        "description": "Restart Cilium pods (Default: `true`).\n"
+                        "description": "Restart Cilium pods (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                     },
                     "value": {
                         "type": "string",
@@ -326,15 +310,15 @@
             }
         },
         "cilium:index/hubble:Hubble": {
-            "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Littlejo.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.littlejo.cilium.Hubble;\nimport com.littlejo.cilium.HubbleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()\n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Hubble resource for Cilium. This is equivalent to cilium cli: `cilium hubble`: It manages cilium hubble\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\n\nconst example = new cilium.Hubble(\"example\", {ui: true});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\n\nexample = cilium.Hubble(\"example\", ui=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Cilium.Hubble(\"example\", new()\n    {\n        Ui = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := cilium.NewHubble(ctx, \"example\", \u0026cilium.HubbleArgs{\n\t\t\tUi: pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    cilium = {\n      source = \"pulumi/cilium\"\n    }\n  }\n}\n\nresource \"cilium_hubble\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  ui = true\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.Hubble;\nimport com.pulumi.cilium.HubbleArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Hubble(\"example\", HubbleArgs.builder()\n            .ui(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: cilium:Hubble\n    properties:\n      ui: true\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "relay": {
                     "type": "boolean",
-                    "description": "Deploy Hubble Relay (Default: `true`).\n"
+                    "description": "Deploy Hubble Relay (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "ui": {
                     "type": "boolean",
-                    "description": "Enable Hubble UI (Default: `false`).\n"
+                    "description": "Enable Hubble UI (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 }
             },
             "required": [
@@ -344,11 +328,11 @@
             "inputProperties": {
                 "relay": {
                     "type": "boolean",
-                    "description": "Deploy Hubble Relay (Default: `true`).\n"
+                    "description": "Deploy Hubble Relay (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "ui": {
                     "type": "boolean",
-                    "description": "Enable Hubble UI (Default: `false`).\n"
+                    "description": "Enable Hubble UI (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 }
             },
             "stateInputs": {
@@ -356,17 +340,18 @@
                 "properties": {
                     "relay": {
                         "type": "boolean",
-                        "description": "Deploy Hubble Relay (Default: `true`).\n"
+                        "description": "Deploy Hubble Relay (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                     },
                     "ui": {
                         "type": "boolean",
-                        "description": "Enable Hubble UI (Default: `false`).\n"
+                        "description": "Enable Hubble UI (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                     }
                 },
                 "type": "object"
             }
         },
         "cilium:index/install:Install": {
+            "description": "Install resource for Cilium. This is equivalent to cilium cli: `cilium install`, `cilium upgrade` and `cilium uninstall`: It manages cilium helm chart\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\nimport * as kind from \"@pulumi/kind\";\n\nconst example = new kind.index.Cluster(\"example\", {\n    kindConfig: [{\n        networking: [{\n            disableDefaultCni: true,\n        }],\n        node: [\n            {\n                role: \"control-plane\",\n            },\n            {\n                role: \"worker\",\n            },\n        ],\n        kind: \"Cluster\",\n        apiVersion: \"kind.x-k8s.io/v1alpha4\",\n    }],\n    name: \"test-cluster\",\n});\nconst exampleInstall = new cilium.Install(\"example\", {\n    sets: [\n        \"ipam.mode=kubernetes\",\n        \"ipam.operator.replicas=1\",\n        \"tunnel=vxlan\",\n    ],\n    version: \"1.20.4\",\n});\n```\n```python\nimport pulumi\nimport littlejo_cilium as cilium\nimport pulumi_kind as kind\n\nexample = kind.Cluster(\"example\",\n    kind_config=[{\n        networking: [{\n            disableDefaultCni: True,\n        }],\n        node: [\n            {\n                role: control-plane,\n            },\n            {\n                role: worker,\n            },\n        ],\n        kind: Cluster,\n        apiVersion: kind.x-k8s.io/v1alpha4,\n    }],\n    name=test-cluster)\nexample_install = cilium.Install(\"example\",\n    sets=[\n        \"ipam.mode=kubernetes\",\n        \"ipam.operator.replicas=1\",\n        \"tunnel=vxlan\",\n    ],\n    version=\"1.20.4\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\nusing Kind = Pulumi.Kind;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Kind.Cluster(\"example\", new()\n    {\n        KindConfig = new[]\n        {\n            \n            {\n                { \"networking\", new[]\n                {\n                    \n                    {\n                        { \"disableDefaultCni\", true },\n                    },\n                } },\n                { \"node\", new[]\n                {\n                    \n                    {\n                        { \"role\", \"control-plane\" },\n                    },\n                    \n                    {\n                        { \"role\", \"worker\" },\n                    },\n                } },\n                { \"kind\", \"Cluster\" },\n                { \"apiVersion\", \"kind.x-k8s.io/v1alpha4\" },\n            },\n        },\n        Name = \"test-cluster\",\n    });\n\n    var exampleInstall = new Cilium.Install(\"example\", new()\n    {\n        Sets = new[]\n        {\n            \"ipam.mode=kubernetes\",\n            \"ipam.operator.replicas=1\",\n            \"tunnel=vxlan\",\n        },\n        Version = \"1.20.4\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-kind/sdk/go/kind\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := kind.NewCluster(ctx, \"example\", \u0026kind.ClusterArgs{\n\t\t\tKindConfig: []map[string]interface{}{\n\t\t\t\tmap[string]interface{}{\n\t\t\t\t\t\"networking\": []map[string]bool{\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"disableDefaultCni\": true,\n\t\t\t\t\t\t},\n\t\t\t\t\t},\n\t\t\t\t\t\"node\": []interface{}{\n\t\t\t\t\t\tmap[string]string{\n\t\t\t\t\t\t\t\"role\": \"control-plane\",\n\t\t\t\t\t\t},\n\t\t\t\t\t\tmap[string]string{\n\t\t\t\t\t\t\t\"role\": \"worker\",\n\t\t\t\t\t\t},\n\t\t\t\t\t},\n\t\t\t\t\t\"kind\":       \"Cluster\",\n\t\t\t\t\t\"apiVersion\": \"kind.x-k8s.io/v1alpha4\",\n\t\t\t\t},\n\t\t\t},\n\t\t\tName: \"test-cluster\",\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = cilium.NewInstall(ctx, \"example\", \u0026cilium.InstallArgs{\n\t\t\tSets: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"ipam.mode=kubernetes\"),\n\t\t\t\tpulumi.String(\"ipam.operator.replicas=1\"),\n\t\t\t\tpulumi.String(\"tunnel=vxlan\"),\n\t\t\t},\n\t\t\tVersion: pulumi.String(\"1.20.4\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```hcl\nterraform {\n  required_providers {\n    cilium = {\n      source = \"pulumi/cilium\"\n    }\n  }\n}\n\nresource \"kind_cluster\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  kind_config = [{\n    \"networking\" = [{\n      \"disableDefaultCni\" = true\n    }]\n    \"node\" = [{\n      \"role\" = \"control-plane\"\n      }, {\n      \"role\" = \"worker\"\n    }]\n    \"kind\"       = \"Cluster\"\n    \"apiVersion\" = \"kind.x-k8s.io/v1alpha4\"\n  }]\n  name = \"test-cluster\"\n}\nresource \"cilium_install\" \"example\" {\n  lifecycle {\n    create_before_destroy = true\n  }\n  sets    = [\"ipam.mode=kubernetes\", \"ipam.operator.replicas=1\", \"tunnel=vxlan\"]\n  version = \"1.20.4\"\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.kind.Cluster;\nimport com.pulumi.kind.ClusterArgs;\nimport com.pulumi.cilium.Install;\nimport com.pulumi.cilium.InstallArgs;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Cluster(\"example\", ClusterArgs.builder()\n            .kindConfig(Arrays.asList(Map.ofEntries(\n                Map.entry(\"networking\", Arrays.asList(Map.of(\"disableDefaultCni\", true))),\n                Map.entry(\"node\", Arrays.asList(                \n                    Map.of(\"role\", \"control-plane\"),\n                    Map.of(\"role\", \"worker\"))),\n                Map.entry(\"kind\", \"Cluster\"),\n                Map.entry(\"apiVersion\", \"kind.x-k8s.io/v1alpha4\")\n            )))\n            .name(\"test-cluster\")\n            .build());\n\n        var exampleInstall = new Install(\"exampleInstall\", InstallArgs.builder()\n            .sets(            \n                \"ipam.mode=kubernetes\",\n                \"ipam.operator.replicas=1\",\n                \"tunnel=vxlan\")\n            .version(\"1.20.4\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: kind:Cluster\n    properties:\n      kindConfig:\n        - networking:\n            - disableDefaultCni: true\n          node:\n            - role: control-plane\n            - role: worker\n          kind: Cluster\n          apiVersion: kind.x-k8s.io/v1alpha4\n      name: test-cluster\n  exampleInstall:\n    type: cilium:Install\n    name: example\n    properties:\n      sets:\n        - ipam.mode=kubernetes\n        - ipam.operator.replicas=1\n        - tunnel=vxlan\n      version: 1.20.4\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n* More examples:\n  * AWS: https://github.com/tf-cilium/terraform-eks-cilium\n  * Azure: https://github.com/tf-cilium/terraform-aks-cilium\n  * GCP: https://github.com/tf-cilium/terraform-gke-cilium\n  * Kind: https://github.com/tf-cilium/terraform-kind-cilium\n",
             "properties": {
                 "ca": {
                     "$ref": "#/types/cilium:index/InstallCa:InstallCa",
@@ -375,7 +360,7 @@
                 },
                 "dataPath": {
                     "type": "string",
-                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                 },
                 "helmValues": {
                     "type": "string",
@@ -387,15 +372,20 @@
                 },
                 "reset": {
                     "type": "boolean",
-                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                },
+                "resetThenReuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "reuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 },
                 "reusethenreuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use \u003cspan pulumi-lang-nodejs=\"`resetThenReuse`\" pulumi-lang-dotnet=\"`ResetThenReuse`\" pulumi-lang-go=\"`resetThenReuse`\" pulumi-lang-python=\"`reset_then_reuse`\" pulumi-lang-yaml=\"`resetThenReuse`\" pulumi-lang-java=\"`resetThenReuse`\" pulumi-lang-hcl=\"`reset_then_reuse`\"\u003e`resetThenReuse`\u003c/span\u003e instead.\n",
+                    "deprecationMessage": "Use\u003cspan pulumi-lang-nodejs=\" resetThenReuse \" pulumi-lang-dotnet=\" ResetThenReuse \" pulumi-lang-go=\" resetThenReuse \" pulumi-lang-python=\" reset_then_reuse \" pulumi-lang-yaml=\" resetThenReuse \" pulumi-lang-java=\" resetThenReuse \" pulumi-lang-hcl=\" reset_then_reuse \"\u003e resetThenReuse \u003c/span\u003einstead. This attribute will be removed in a future major version."
                 },
                 "sets": {
                     "type": "array",
@@ -406,15 +396,15 @@
                 },
                 "values": {
                     "type": "string",
-                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                    "description": "values in raw yaml to pass to helm. (Default: \u003cspan pulumi-lang-nodejs=\"`empty`\" pulumi-lang-dotnet=\"`Empty`\" pulumi-lang-go=\"`empty`\" pulumi-lang-python=\"`empty`\" pulumi-lang-yaml=\"`empty`\" pulumi-lang-java=\"`empty`\" pulumi-lang-hcl=\"`empty`\"\u003e`empty`\u003c/span\u003e).\n"
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.14.5`).\n"
+                    "description": "Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).\n"
                 },
                 "wait": {
                     "type": "boolean",
-                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                    "description": "Wait for Cilium status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 }
             },
             "required": [
@@ -423,8 +413,8 @@
                 "helmValues",
                 "repository",
                 "reset",
+                "resetThenReuse",
                 "reuse",
-                "reusethenreuse",
                 "sets",
                 "values",
                 "version",
@@ -433,7 +423,7 @@
             "inputProperties": {
                 "dataPath": {
                     "type": "string",
-                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                    "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                 },
                 "repository": {
                     "type": "string",
@@ -441,15 +431,20 @@
                 },
                 "reset": {
                     "type": "boolean",
-                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                    "description": "When upgrading, reset the helm values to the ones built into the chart (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                },
+                "resetThenReuse": {
+                    "type": "boolean",
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 },
                 "reuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                    "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                 },
                 "reusethenreuse": {
                     "type": "boolean",
-                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
+                    "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use \u003cspan pulumi-lang-nodejs=\"`resetThenReuse`\" pulumi-lang-dotnet=\"`ResetThenReuse`\" pulumi-lang-go=\"`resetThenReuse`\" pulumi-lang-python=\"`reset_then_reuse`\" pulumi-lang-yaml=\"`resetThenReuse`\" pulumi-lang-java=\"`resetThenReuse`\" pulumi-lang-hcl=\"`reset_then_reuse`\"\u003e`resetThenReuse`\u003c/span\u003e instead.\n",
+                    "deprecationMessage": "Use\u003cspan pulumi-lang-nodejs=\" resetThenReuse \" pulumi-lang-dotnet=\" ResetThenReuse \" pulumi-lang-go=\" resetThenReuse \" pulumi-lang-python=\" reset_then_reuse \" pulumi-lang-yaml=\" resetThenReuse \" pulumi-lang-java=\" resetThenReuse \" pulumi-lang-hcl=\" reset_then_reuse \"\u003e resetThenReuse \u003c/span\u003einstead. This attribute will be removed in a future major version."
                 },
                 "sets": {
                     "type": "array",
@@ -460,15 +455,15 @@
                 },
                 "values": {
                     "type": "string",
-                    "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                    "description": "values in raw yaml to pass to helm. (Default: \u003cspan pulumi-lang-nodejs=\"`empty`\" pulumi-lang-dotnet=\"`Empty`\" pulumi-lang-go=\"`empty`\" pulumi-lang-python=\"`empty`\" pulumi-lang-yaml=\"`empty`\" pulumi-lang-java=\"`empty`\" pulumi-lang-hcl=\"`empty`\"\u003e`empty`\u003c/span\u003e).\n"
                 },
                 "version": {
                     "type": "string",
-                    "description": "Version of Cilium (Default: `v1.14.5`).\n"
+                    "description": "Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).\n"
                 },
                 "wait": {
                     "type": "boolean",
-                    "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                    "description": "Wait for Cilium status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                 }
             },
             "stateInputs": {
@@ -481,7 +476,7 @@
                     },
                     "dataPath": {
                         "type": "string",
-                        "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: `autodetected`).\n"
+                        "description": "Datapath mode to use { tunnel | native | aws-eni | gke | azure | aks-byocni } (Default: \u003cspan pulumi-lang-nodejs=\"`autodetected`\" pulumi-lang-dotnet=\"`Autodetected`\" pulumi-lang-go=\"`autodetected`\" pulumi-lang-python=\"`autodetected`\" pulumi-lang-yaml=\"`autodetected`\" pulumi-lang-java=\"`autodetected`\" pulumi-lang-hcl=\"`autodetected`\"\u003e`autodetected`\u003c/span\u003e).\n"
                     },
                     "helmValues": {
                         "type": "string",
@@ -493,15 +488,20 @@
                     },
                     "reset": {
                         "type": "boolean",
-                        "description": "When upgrading, reset the helm values to the ones built into the chart (Default: `false`).\n"
+                        "description": "When upgrading, reset the helm values to the ones built into the chart (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
+                    },
+                    "resetThenReuse": {
+                        "type": "boolean",
+                        "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                     },
                     "reuse": {
                         "type": "boolean",
-                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: `false`).\n"
+                        "description": "When upgrading, reuse the helm values from the latest release unless any overrides from are set from other flags. This option takes precedence over HelmResetValues (Default: \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\" pulumi-lang-hcl=\"`false`\"\u003e`false`\u003c/span\u003e).\n"
                     },
                     "reusethenreuse": {
                         "type": "boolean",
-                        "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any\noverrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored\n(Default: `true`).\n"
+                        "description": "When upgrading, reset the values to the ones built into the chart, apply the last release's values and merge in any overrides from the command line via --set and -f. If '--reset-values' or '--reuse-values' is specified, this is ignored. **Deprecated**: use \u003cspan pulumi-lang-nodejs=\"`resetThenReuse`\" pulumi-lang-dotnet=\"`ResetThenReuse`\" pulumi-lang-go=\"`resetThenReuse`\" pulumi-lang-python=\"`reset_then_reuse`\" pulumi-lang-yaml=\"`resetThenReuse`\" pulumi-lang-java=\"`resetThenReuse`\" pulumi-lang-hcl=\"`reset_then_reuse`\"\u003e`resetThenReuse`\u003c/span\u003e instead.\n",
+                        "deprecationMessage": "Use\u003cspan pulumi-lang-nodejs=\" resetThenReuse \" pulumi-lang-dotnet=\" ResetThenReuse \" pulumi-lang-go=\" resetThenReuse \" pulumi-lang-python=\" reset_then_reuse \" pulumi-lang-yaml=\" resetThenReuse \" pulumi-lang-java=\" resetThenReuse \" pulumi-lang-hcl=\" reset_then_reuse \"\u003e resetThenReuse \u003c/span\u003einstead. This attribute will be removed in a future major version."
                     },
                     "sets": {
                         "type": "array",
@@ -512,15 +512,15 @@
                     },
                     "values": {
                         "type": "string",
-                        "description": "values in raw yaml to pass to helm. (Default: `empty`).\n"
+                        "description": "values in raw yaml to pass to helm. (Default: \u003cspan pulumi-lang-nodejs=\"`empty`\" pulumi-lang-dotnet=\"`Empty`\" pulumi-lang-go=\"`empty`\" pulumi-lang-python=\"`empty`\" pulumi-lang-yaml=\"`empty`\" pulumi-lang-java=\"`empty`\" pulumi-lang-hcl=\"`empty`\"\u003e`empty`\u003c/span\u003e).\n"
                     },
                     "version": {
                         "type": "string",
-                        "description": "Version of Cilium (Default: `v1.14.5`).\n"
+                        "description": "Version of Cilium. When not set, new installations use the default version and existing installations keep their current version (Default: `1.20.4`).\n"
                     },
                     "wait": {
                         "type": "boolean",
-                        "description": "Wait for Cilium status is ok (Default: `true`).\n"
+                        "description": "Wait for Cilium status is ok (Default: \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\" pulumi-lang-hcl=\"`true`\"\u003e`true`\u003c/span\u003e).\n"
                     }
                 },
                 "type": "object"
@@ -535,7 +535,7 @@
                 },
                 "namespace": {
                     "type": "string",
-                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    "description": "Namespace of DaemonSet (Default: `kube-system`).\n"
                 }
             },
             "required": [
@@ -549,7 +549,7 @@
                 },
                 "namespace": {
                     "type": "string",
-                    "description": "Namespace in which to install (Default: `kube-system`).\n"
+                    "description": "Namespace of DaemonSet (Default: `kube-system`).\n"
                 }
             },
             "stateInputs": {
@@ -561,7 +561,7 @@
                     },
                     "namespace": {
                         "type": "string",
-                        "description": "Namespace in which to install (Default: `kube-system`).\n"
+                        "description": "Namespace of DaemonSet (Default: `kube-system`).\n"
                     }
                 },
                 "type": "object"
@@ -570,24 +570,19 @@
     },
     "functions": {
         "cilium:index/getHelmValues:getHelmValues": {
-            "description": "Helm values of cilium\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as cilium from \"@littlejo/cilium\";\nimport * as local from \"@pulumi/local\";\n\nconst exampleHelmValues = cilium.getHelmValues({});\nconst exampleFile = new local.File(\"exampleFile\", {\n    content: exampleHelmValues.then(exampleHelmValues =\u003e exampleHelmValues.yaml),\n    filename: `${path.module}/values.yaml`,\n});\n```\n```python\nimport pulumi\nimport pulumi_cilium as cilium\nimport pulumi_local as local\n\nexample_helm_values = cilium.get_helm_values()\nexample_file = local.File(\"exampleFile\",\n    content=example_helm_values.yaml,\n    filename=f\"{path['module']}/values.yaml\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Cilium = Pulumi.Cilium;\nusing Local = Pulumi.Local;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleHelmValues = Cilium.GetHelmValues.Invoke();\n\n    var exampleFile = new Local.File(\"exampleFile\", new()\n    {\n        Content = exampleHelmValues.Apply(getHelmValuesResult =\u003e getHelmValuesResult.Yaml),\n        Filename = $\"{path.Module}/values.yaml\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/littlejo/pulumi-cilium/sdk/go/cilium\"\n\t\"github.com/pulumi/pulumi-local/sdk/go/local\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleHelmValues, err := cilium.GetHelmValues(ctx, map[string]interface{}{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = local.NewFile(ctx, \"exampleFile\", \u0026local.FileArgs{\n\t\t\tContent:  pulumi.String(exampleHelmValues.Yaml),\n\t\t\tFilename: pulumi.Sprintf(\"%v/values.yaml\", path.Module),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.cilium.CiliumFunctions;\nimport com.pulumi.local.File;\nimport com.pulumi.local.FileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var exampleHelmValues = CiliumFunctions.getHelmValues(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference);\n\n        var exampleFile = new File(\"exampleFile\", FileArgs.builder()\n            .content(exampleHelmValues.yaml())\n            .filename(String.format(\"%s/values.yaml\", path.module()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleFile:\n    type: local:File\n    properties:\n      content: ${exampleHelmValues.yaml}\n      filename: ${path.module}/values.yaml\nvariables:\n  exampleHelmValues:\n    fn::invoke:\n      function: cilium:getHelmValues\n      arguments: {}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Helm values of cilium\n\n",
             "outputs": {
                 "description": "A collection of values returned by getHelmValues.\n",
                 "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "The provider-assigned unique ID for this managed resource.\n"
-                    },
                     "yaml": {
-                        "type": "string",
-                        "description": "Yaml output\n"
+                        "description": "Yaml output\n",
+                        "type": "string"
                     }
                 },
-                "type": "object",
                 "required": [
-                    "yaml",
-                    "id"
-                ]
+                    "yaml"
+                ],
+                "type": "object"
             }
         },
         "pulumi:providers:cilium/terraformConfig": {
@@ -596,7 +591,7 @@
                 "properties": {
                     "__self__": {
                         "type": "ref",
-                        "$ref": "#/resources/pulumi:providers:cilium"
+                        "$ref": "#/provider"
                     }
                 },
                 "type": "pulumi:providers:cilium/terraformConfig",

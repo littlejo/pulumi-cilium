@@ -17,7 +17,7 @@ type KubeproxyFree struct {
 
 	// Name of DaemonSet (Default: `kube-proxy`).
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Namespace in which to install (Default: `kube-system`).
+	// Namespace of DaemonSet (Default: `kube-system`).
 	Namespace pulumi.StringOutput `pulumi:"namespace"`
 }
 
@@ -53,14 +53,14 @@ func GetKubeproxyFree(ctx *pulumi.Context,
 type kubeproxyFreeState struct {
 	// Name of DaemonSet (Default: `kube-proxy`).
 	Name *string `pulumi:"name"`
-	// Namespace in which to install (Default: `kube-system`).
+	// Namespace of DaemonSet (Default: `kube-system`).
 	Namespace *string `pulumi:"namespace"`
 }
 
 type KubeproxyFreeState struct {
 	// Name of DaemonSet (Default: `kube-proxy`).
 	Name pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
+	// Namespace of DaemonSet (Default: `kube-system`).
 	Namespace pulumi.StringPtrInput
 }
 
@@ -68,10 +68,16 @@ func (KubeproxyFreeState) ElementType() reflect.Type {
 	return reflect.TypeOf((*kubeproxyFreeState)(nil)).Elem()
 }
 
+// KubeproxyFreeExists checks whether an existing KubeproxyFree resource with the given ID exists.
+func KubeproxyFreeExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *KubeproxyFreeState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("cilium:index/kubeproxyFree:KubeproxyFree", id, state, "", opts...)
+}
+
 type kubeproxyFreeArgs struct {
 	// Name of DaemonSet (Default: `kube-proxy`).
 	Name *string `pulumi:"name"`
-	// Namespace in which to install (Default: `kube-system`).
+	// Namespace of DaemonSet (Default: `kube-system`).
 	Namespace *string `pulumi:"namespace"`
 }
 
@@ -79,7 +85,7 @@ type kubeproxyFreeArgs struct {
 type KubeproxyFreeArgs struct {
 	// Name of DaemonSet (Default: `kube-proxy`).
 	Name pulumi.StringPtrInput
-	// Namespace in which to install (Default: `kube-system`).
+	// Namespace of DaemonSet (Default: `kube-system`).
 	Namespace pulumi.StringPtrInput
 }
 
@@ -175,7 +181,7 @@ func (o KubeproxyFreeOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *KubeproxyFree) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Namespace in which to install (Default: `kube-system`).
+// Namespace of DaemonSet (Default: `kube-system`).
 func (o KubeproxyFreeOutput) Namespace() pulumi.StringOutput {
 	return o.ApplyT(func(v *KubeproxyFree) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
 }

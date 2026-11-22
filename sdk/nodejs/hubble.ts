@@ -30,6 +30,17 @@ export class Hubble extends pulumi.CustomResource {
         return new Hubble(name, <any>state, { ...opts, id: id });
     }
 
+    /**
+     * Check whether an existing Hubble resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: HubbleState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/hubble:Hubble", id, <any>state || {}, { ...opts }, undefined);
+    }
+
     /** @internal */
     public static readonly __pulumiType = 'cilium:index/hubble:Hubble';
 
@@ -47,11 +58,11 @@ export class Hubble extends pulumi.CustomResource {
     /**
      * Deploy Hubble Relay (Default: `true`).
      */
-    public readonly relay!: pulumi.Output<boolean>;
+    declare public readonly relay: pulumi.Output<boolean>;
     /**
      * Enable Hubble UI (Default: `false`).
      */
-    public readonly ui!: pulumi.Output<boolean>;
+    declare public readonly ui: pulumi.Output<boolean>;
 
     /**
      * Create a Hubble resource with the given unique name, arguments, and options.
@@ -66,12 +77,12 @@ export class Hubble extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as HubbleState | undefined;
-            resourceInputs["relay"] = state ? state.relay : undefined;
-            resourceInputs["ui"] = state ? state.ui : undefined;
+            resourceInputs["relay"] = state?.relay;
+            resourceInputs["ui"] = state?.ui;
         } else {
             const args = argsOrState as HubbleArgs | undefined;
-            resourceInputs["relay"] = args ? args.relay : undefined;
-            resourceInputs["ui"] = args ? args.ui : undefined;
+            resourceInputs["relay"] = args?.relay;
+            resourceInputs["ui"] = args?.ui;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Hubble.__pulumiType, name, resourceInputs, opts);
@@ -85,11 +96,11 @@ export interface HubbleState {
     /**
      * Deploy Hubble Relay (Default: `true`).
      */
-    relay?: pulumi.Input<boolean>;
+    relay?: pulumi.Input<boolean | undefined>;
     /**
      * Enable Hubble UI (Default: `false`).
      */
-    ui?: pulumi.Input<boolean>;
+    ui?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -99,9 +110,9 @@ export interface HubbleArgs {
     /**
      * Deploy Hubble Relay (Default: `true`).
      */
-    relay?: pulumi.Input<boolean>;
+    relay?: pulumi.Input<boolean | undefined>;
     /**
      * Enable Hubble UI (Default: `false`).
      */
-    ui?: pulumi.Input<boolean>;
+    ui?: pulumi.Input<boolean | undefined>;
 }

@@ -11,6 +11,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cilium.NewClustermeshConnection(ctx, "example", &cilium.ClustermeshConnectionArgs{
+//				DestinationContexts: pulumi.StringArray{
+//					pulumi.String("context-2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// * More examples:
+//   - https://github.com/tf-cilium/terraform-kind-cilium-clustermesh
+//   - https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh
 type ClustermeshConnection struct {
 	pulumi.CustomResourceState
 
@@ -71,6 +104,12 @@ type ClustermeshConnectionState struct {
 
 func (ClustermeshConnectionState) ElementType() reflect.Type {
 	return reflect.TypeOf((*clustermeshConnectionState)(nil)).Elem()
+}
+
+// ClustermeshConnectionExists checks whether an existing ClustermeshConnection resource with the given ID exists.
+func ClustermeshConnectionExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ClustermeshConnectionState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("cilium:index/clustermeshConnection:ClustermeshConnection", id, state, "", opts...)
 }
 
 type clustermeshConnectionArgs struct {

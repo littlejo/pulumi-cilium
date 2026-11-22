@@ -1,8 +1,28 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.3/containers/hugo
+// See https://containers.dev/implementors/json_reference/ for the format.
 {
-  "name": "TFProvider",
-  "build": {
-      "dockerfile": "Dockerfile"
+  "name": "pulumi-cilium",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.27",
+      "golangciLintVersion": "2.15.0"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13"
+    },
+    // kind runs the clusters of the examples in Docker.
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "helm": "none",
+      "minikube": "none"
+    }
+  },
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  // Linking the provider needs a lot of memory.
+  "hostRequirements": {
+    "memory": "16gb"
   }
 }

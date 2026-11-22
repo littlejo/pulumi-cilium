@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Command pulumi-tfgen-cilium generates the Pulumi schema and SDKs from the Terraform provider.
 package main
 
 import (
 	cilium "github.com/littlejo/pulumi-cilium/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 )
 
 func main() {

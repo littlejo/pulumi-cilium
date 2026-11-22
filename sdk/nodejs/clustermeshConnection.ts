@@ -4,6 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Cluster Mesh connection resource. This is equivalent to cilium cli: `cilium clustermesh connect` and `cilium clustermesh disconnect`: It manages the connections between two Kubernetes clusters.
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as cilium from "@littlejo/cilium";
+ *
+ * const example = new cilium.ClustermeshConnection("example", {destinationContexts: ["context-2"]});
+ * ```
+ *
+ * * More examples:
+ *   * https://github.com/tf-cilium/terraform-kind-cilium-clustermesh
+ *   * https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh
+ */
 export class ClustermeshConnection extends pulumi.CustomResource {
     /**
      * Get an existing ClustermeshConnection resource's state with the given name, ID, and optional extra
@@ -16,6 +32,17 @@ export class ClustermeshConnection extends pulumi.CustomResource {
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ClustermeshConnectionState, opts?: pulumi.CustomResourceOptions): ClustermeshConnection {
         return new ClustermeshConnection(name, <any>state, { ...opts, id: id });
+    }
+
+    /**
+     * Check whether an existing ClustermeshConnection resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: ClustermeshConnectionState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/clustermeshConnection:ClustermeshConnection", id, <any>state || {}, { ...opts }, undefined);
     }
 
     /** @internal */
@@ -35,15 +62,15 @@ export class ClustermeshConnection extends pulumi.CustomResource {
     /**
      * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    public readonly connectionMode!: pulumi.Output<string>;
+    declare public readonly connectionMode: pulumi.Output<string>;
     /**
      * Kubernetes configuration contexts of destination clusters
      */
-    public readonly destinationContexts!: pulumi.Output<string[]>;
+    declare public readonly destinationContexts: pulumi.Output<string[]>;
     /**
      * Number of parallel connections of destination clusters (Default: `1`).
      */
-    public readonly parallel!: pulumi.Output<number>;
+    declare public readonly parallel: pulumi.Output<number>;
 
     /**
      * Create a ClustermeshConnection resource with the given unique name, arguments, and options.
@@ -58,14 +85,14 @@ export class ClustermeshConnection extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClustermeshConnectionState | undefined;
-            resourceInputs["connectionMode"] = state ? state.connectionMode : undefined;
-            resourceInputs["destinationContexts"] = state ? state.destinationContexts : undefined;
-            resourceInputs["parallel"] = state ? state.parallel : undefined;
+            resourceInputs["connectionMode"] = state?.connectionMode;
+            resourceInputs["destinationContexts"] = state?.destinationContexts;
+            resourceInputs["parallel"] = state?.parallel;
         } else {
             const args = argsOrState as ClustermeshConnectionArgs | undefined;
-            resourceInputs["connectionMode"] = args ? args.connectionMode : undefined;
-            resourceInputs["destinationContexts"] = args ? args.destinationContexts : undefined;
-            resourceInputs["parallel"] = args ? args.parallel : undefined;
+            resourceInputs["connectionMode"] = args?.connectionMode;
+            resourceInputs["destinationContexts"] = args?.destinationContexts;
+            resourceInputs["parallel"] = args?.parallel;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ClustermeshConnection.__pulumiType, name, resourceInputs, opts);
@@ -79,15 +106,15 @@ export interface ClustermeshConnectionState {
     /**
      * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    connectionMode?: pulumi.Input<string>;
+    connectionMode?: pulumi.Input<string | undefined>;
     /**
      * Kubernetes configuration contexts of destination clusters
      */
-    destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
+    destinationContexts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of parallel connections of destination clusters (Default: `1`).
      */
-    parallel?: pulumi.Input<number>;
+    parallel?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -97,13 +124,13 @@ export interface ClustermeshConnectionArgs {
     /**
      * Connection Mode { `unicast` | `bidirectional` | `mesh` } (Default: `bidirectional`).
      */
-    connectionMode?: pulumi.Input<string>;
+    connectionMode?: pulumi.Input<string | undefined>;
     /**
      * Kubernetes configuration contexts of destination clusters
      */
-    destinationContexts?: pulumi.Input<pulumi.Input<string>[]>;
+    destinationContexts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of parallel connections of destination clusters (Default: `1`).
      */
-    parallel?: pulumi.Input<number>;
+    parallel?: pulumi.Input<number | undefined>;
 }
