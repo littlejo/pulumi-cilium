@@ -15,5 +15,6 @@
 // Package version holds the version of the provider, set at build time.
 package version
 
-// Version is initialized by the Go linker to contain the semver of this build.
-var Version string
+// Version is the semver of this build. The linker sets it with -ldflags "-X ...version.Version=<version>";
+// builds without it get the development version used by the Makefile.
+var Version = "0.0.0-alpha.0+dev"

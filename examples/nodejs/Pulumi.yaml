@@ -1,0 +1,6 @@
+name: cilium-nodejs
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+description: Install Cilium with Pulumi and TypeScript

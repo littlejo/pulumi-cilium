@@ -1,0 +1,7 @@
+name: cilium-python
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: Install Cilium with Pulumi and Python
