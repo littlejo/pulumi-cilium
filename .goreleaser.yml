@@ -1,31 +1,51 @@
 version: 2
 
-archives:
-  - id: archive
-    name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
 before:
   hooks:
-    - make tfgen
+    - make schema_embed PROVIDER_VERSION={{ .Version }}
+
 builds:
   - binary: pulumi-resource-cilium
     dir: provider
+    main: ./cmd/pulumi-resource-cilium/
     env:
       - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
     goarch:
       - amd64
       - arm64
-    goos:
-      - darwin
-      - windows
-      - linux
+    flags:
+      - -trimpath
     ldflags:
-      # The line below MUST align with the module in current provider/go.mod
-      - -X github.com/littlejo/pulumi-cilium/provider/pkg/version.Version={{.Tag }}
-    main: ./cmd/pulumi-resource-cilium/
+      # Must match the module of provider/go.mod.
+      - -s -w -X github.com/littlejo/pulumi-cilium/provider/pkg/version.Version={{ .Version }}
+
+archives:
+  # Pulumi downloads the plugin from the release with this name.
+  - name_template: "{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}"
+
+checksum:
+  name_template: checksums.txt
+
+signs:
+  # Keyless signature of the checksums with the OIDC token of the release workflow.
+  - cmd: cosign
+    artifacts: checksum
+    signature: ${artifact}.sigstore.json
+    args:
+      - sign-blob
+      - --bundle=${signature}
+      - ${artifact}
+      - --yes
+
 changelog:
-  disable: true
+  use: github-native
+
 release:
-  disable: false
   prerelease: auto
+
 snapshot:
-  version_template: '{{ .Tag }}-SNAPSHOT'
+  version_template: "{{ incpatch .Version }}-SNAPSHOT"
