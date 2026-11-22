@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package cilium maps the Cilium Terraform provider to a Pulumi provider.
 package cilium
 
 import (

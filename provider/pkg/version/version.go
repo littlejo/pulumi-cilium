@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package version holds the version of the provider, set at build time.
 package version
 
 // Version is initialized by the Go linker to contain the semver of this build.

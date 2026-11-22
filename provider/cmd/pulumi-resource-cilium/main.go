@@ -14,6 +14,7 @@
 
 //go:generate go run ./generate.go
 
+// Command pulumi-resource-cilium is the Pulumi resource provider for Cilium.
 package main
 
 import (

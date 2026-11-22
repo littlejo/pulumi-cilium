@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Command pulumi-tfgen-cilium generates the Pulumi schema and SDKs from the Terraform provider.
 package main
 
 import (
