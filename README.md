@@ -1,45 +1,91 @@
-# `pulumictl` - A Swiss Army Knife for Pulumi Development
+# Cilium Resource Provider
 
-`pulumictl` is a utility CLI to support publishing Pulumi packages (providers, policy packs, etc.) This tool provides utility functions to replace shell scripts. If you are looking to author programs in Pulumi or find the Pulumi CLI & engine, visit [Pulumi docs](https://www.pulumi.com/docs) or [github.com/pulumi/pulumi](https://github.com/pulumi/pulumi) respectively.
+[![CI](https://github.com/littlejo/pulumi-cilium/actions/workflows/ci.yml/badge.svg)](https://github.com/littlejo/pulumi-cilium/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/littlejo-cilium)](https://pypi.org/project/littlejo-cilium/)
+[![npm](https://img.shields.io/npm/v/@littlejo/cilium)](https://www.npmjs.com/package/@littlejo/cilium)
 
-## Usage
+The Cilium resource provider for Pulumi installs and manages [Cilium](https://cilium.io) on Kubernetes clusters.
+It does what the `cilium` CLI does: install and upgrade Cilium, configure it, enable Hubble, Cluster Mesh and
+kube-proxy replacement.
 
-```
-$ pulumictl --help
-A swiss army knife for Pulumi development
+It is built from the [`cilium` Terraform provider](https://github.com/littlejo/terraform-provider-cilium) and supports
+Cilium 1.17 and newer.
 
-Usage:
-  pulumictl [command]
+## Installing
 
-Available Commands:
-  completion      Generate the autocompletion script for the specified shell
-  convert-version Convert versions
-  copyright       Check copyright notices
-  cover           Manipulate coverage profiles
-  create          Create commands
-  dispatch        Send a command dispatch event with a ref
-  download-binary Downloads a version of a specific binary
-  generate        Runs code generator over a schema
-  get             Get commands
-  help            Help about any command
-  version         Get the current version
-  winget-deploy   Create a WinGet Deployment
+The provider is available in these languages:
 
-Flags:
-  -D, --debug          enable debug logging
-  -h, --help           help for pulumictl
-  -t, --token string   a github token to use for making API calls to GitHub.
+| Language   | Package                                                                                              | Install                                                  |
+|------------|------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| Python     | [`littlejo-cilium`](https://pypi.org/project/littlejo-cilium/)                                       | `pip install littlejo-cilium`                            |
+| TypeScript | [`@littlejo/cilium`](https://www.npmjs.com/package/@littlejo/cilium)                                 | `npm install @littlejo/cilium`                           |
+| Go         | [`github.com/littlejo/pulumi-cilium/sdk`](https://pkg.go.dev/github.com/littlejo/pulumi-cilium/sdk) | `go get github.com/littlejo/pulumi-cilium/sdk@latest`    |
+| YAML       | -                                                                                                    | -                                                        |
 
-Use "pulumictl [command] --help" for more information about a command.
-```
-
-## Installation
-
-Add the Pulumi homebrew tap and install:
+Pulumi downloads the provider plugin from the
+[GitHub releases](https://github.com/littlejo/pulumi-cilium/releases) of this repository. To install it by hand:
 
 ```bash
-brew tap pulumi/tap
-brew install pulumictl
+pulumi plugin install resource cilium <version> --server github://api.github.com/littlejo
 ```
 
-Or download the binary directly from Github releases and place it in your `$PATH`
+## Example
+
+```typescript
+import * as cilium from "@littlejo/cilium";
+
+const install = new cilium.Install("cilium", {
+    version: "1.20.5",
+    sets: [
+        "ipam.mode=kubernetes",
+        "operator.replicas=1",
+    ],
+});
+
+new cilium.Hubble("hubble", { ui: true }, { dependsOn: install });
+```
+
+```python
+import littlejo_cilium as cilium
+
+install = cilium.Install(
+    "cilium",
+    version="1.20.5",
+    sets=[
+        "ipam.mode=kubernetes",
+        "operator.replicas=1",
+    ],
+)
+```
+
+The [examples](examples) directory has a complete program for each language.
+
+## Resources
+
+| Resource                | `cilium` CLI equivalent                          |
+|-------------------------|--------------------------------------------------|
+| `Install`               | `cilium install`, `cilium upgrade`, `cilium uninstall` |
+| `Config`                | `cilium config`                                  |
+| `Hubble`                | `cilium hubble enable`, `cilium hubble disable`  |
+| `Clustermesh`           | `cilium clustermesh enable`, `cilium clustermesh disable` |
+| `ClustermeshConnection` | `cilium clustermesh connect`, `cilium clustermesh disconnect` |
+| `KubeproxyFree`         | Disables the kube-proxy DaemonSet                |
+| `getHelmValues`         | Reads the Helm values of the Cilium release      |
+
+## Configuration
+
+| Option                 | Description                                                        |
+|------------------------|--------------------------------------------------------------------|
+| `cilium:configPath`    | Path of the kubeconfig file (default: `~/.kube/config`)            |
+| `cilium:configContent` | Content of the kubeconfig file, instead of `configPath`            |
+| `cilium:context`       | Context of the kubeconfig file (default: the current context)      |
+| `cilium:namespace`     | Namespace where Cilium is installed (default: `kube-system`)       |
+| `cilium:helmRelease`   | Name of the Helm release of Cilium (default: `cilium`)             |
+
+```bash
+pulumi config set cilium:context kind-test
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) to build and test the provider.
