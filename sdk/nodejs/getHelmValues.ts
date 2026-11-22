@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Helm values of cilium
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cilium from "@littlejo/cilium";
- * import * as local from "@pulumi/local";
- *
- * const exampleHelmValues = cilium.getHelmValues({});
- * const exampleFile = new local.File("exampleFile", {
- *     content: exampleHelmValues.then(exampleHelmValues => exampleHelmValues.yaml),
- *     filename: `${path.module}/values.yaml`,
- * });
- * ```
  */
 export function getHelmValues(opts?: pulumi.InvokeOptions): Promise<GetHelmValuesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -32,30 +18,12 @@ export function getHelmValues(opts?: pulumi.InvokeOptions): Promise<GetHelmValue
  */
 export interface GetHelmValuesResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
-     */
-    readonly id: string;
-    /**
      * Yaml output
      */
     readonly yaml: string;
 }
 /**
  * Helm values of cilium
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as cilium from "@littlejo/cilium";
- * import * as local from "@pulumi/local";
- *
- * const exampleHelmValues = cilium.getHelmValues({});
- * const exampleFile = new local.File("exampleFile", {
- *     content: exampleHelmValues.then(exampleHelmValues => exampleHelmValues.yaml),
- *     filename: `${path.module}/values.yaml`,
- * });
- * ```
  */
 export function getHelmValuesOutput(opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetHelmValuesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

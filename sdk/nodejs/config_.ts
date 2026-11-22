@@ -33,6 +33,17 @@ export class Config extends pulumi.CustomResource {
         return new Config(name, <any>state, { ...opts, id: id });
     }
 
+    /**
+     * Check whether an existing Config resource with the given ID exists.
+     *
+     * @param id The _unique_ provider ID of the resource to check.
+     * @param state Any extra arguments used during the lookup.
+     * @param opts Optional settings to control the behavior of the CustomResource.
+     */
+    public static exists(id: pulumi.Input<string>, state?: ConfigState, opts?: pulumi.CustomResourceOptions): pulumi.Output<boolean> {
+        return pulumi.runtime.existsResource("cilium:index/config:Config", id, <any>state || {}, { ...opts }, undefined);
+    }
+
     /** @internal */
     public static readonly __pulumiType = 'cilium:index/config:Config';
 
@@ -50,15 +61,15 @@ export class Config extends pulumi.CustomResource {
     /**
      * Key of the config
      */
-    public readonly key!: pulumi.Output<string>;
+    declare public readonly key: pulumi.Output<string>;
     /**
      * Restart Cilium pods (Default: `true`).
      */
-    public readonly restart!: pulumi.Output<boolean>;
+    declare public readonly restart: pulumi.Output<boolean>;
     /**
      * Value of the key
      */
-    public readonly value!: pulumi.Output<string>;
+    declare public readonly value: pulumi.Output<string>;
 
     /**
      * Create a Config resource with the given unique name, arguments, and options.
@@ -73,20 +84,20 @@ export class Config extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ConfigState | undefined;
-            resourceInputs["key"] = state ? state.key : undefined;
-            resourceInputs["restart"] = state ? state.restart : undefined;
-            resourceInputs["value"] = state ? state.value : undefined;
+            resourceInputs["key"] = state?.key;
+            resourceInputs["restart"] = state?.restart;
+            resourceInputs["value"] = state?.value;
         } else {
             const args = argsOrState as ConfigArgs | undefined;
-            if ((!args || args.key === undefined) && !opts.urn) {
+            if (args?.key === undefined && !opts.urn) {
                 throw new Error("Missing required property 'key'");
             }
-            if ((!args || args.value === undefined) && !opts.urn) {
+            if (args?.value === undefined && !opts.urn) {
                 throw new Error("Missing required property 'value'");
             }
-            resourceInputs["key"] = args ? args.key : undefined;
-            resourceInputs["restart"] = args ? args.restart : undefined;
-            resourceInputs["value"] = args ? args.value : undefined;
+            resourceInputs["key"] = args?.key;
+            resourceInputs["restart"] = args?.restart;
+            resourceInputs["value"] = args?.value;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Config.__pulumiType, name, resourceInputs, opts);
@@ -100,15 +111,15 @@ export interface ConfigState {
     /**
      * Key of the config
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Restart Cilium pods (Default: `true`).
      */
-    restart?: pulumi.Input<boolean>;
+    restart?: pulumi.Input<boolean | undefined>;
     /**
      * Value of the key
      */
-    value?: pulumi.Input<string>;
+    value?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -122,7 +133,7 @@ export interface ConfigArgs {
     /**
      * Restart Cilium pods (Default: `true`).
      */
-    restart?: pulumi.Input<boolean>;
+    restart?: pulumi.Input<boolean | undefined>;
     /**
      * Value of the key
      */

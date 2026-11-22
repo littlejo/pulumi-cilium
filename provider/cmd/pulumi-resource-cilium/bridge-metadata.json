@@ -1,46 +1,50 @@
 {
-    "renames": {
+    "auto-aliasing": {
         "resources": {
-            "cilium:index/clustermesh:Clustermesh": "cilium_clustermesh",
-            "cilium:index/clustermeshConnection:ClustermeshConnection": "cilium_clustermesh_connection",
-            "cilium:index/config:Config": "cilium_config",
-            "cilium:index/deploy:Deploy": "cilium_deploy",
-            "cilium:index/hubble:Hubble": "cilium_hubble",
-            "cilium:index/install:Install": "cilium",
-            "cilium:index/kubeproxyFree:KubeproxyFree": "cilium_kubeproxy_free"
-        },
-        "functions": {
-            "cilium:index/getHelmValues:getHelmValues": "cilium_helm_values"
-        },
-        "renamedProperties": {
-            "cilium:index/clustermesh:Clustermesh": {
-                "enableExternalWorkloads": "enable_external_workloads",
-                "enableKvStoreMesh": "enable_kv_store_mesh",
-                "serviceType": "service_type"
+            "cilium": {
+                "current": "cilium:index/install:Install",
+                "fields": {
+                    "set": {
+                        "maxItemsOne": false
+                    }
+                }
             },
-            "cilium:index/clustermeshConnection:ClustermeshConnection": {
-                "destinationContext": "destination_context"
+            "cilium_clustermesh": {
+                "current": "cilium:index/clustermesh:Clustermesh"
             },
-            "cilium:index/deploy:Deploy": {
-                "dataPath": "data_path",
-                "helmValues": "helm_values",
-                "sets": "set"
+            "cilium_clustermesh_connection": {
+                "current": "cilium:index/clustermeshConnection:ClustermeshConnection",
+                "fields": {
+                    "destination_contexts": {
+                        "maxItemsOne": false
+                    }
+                }
             },
-            "cilium:index/install:Install": {
-                "dataPath": "data_path",
-                "helmValues": "helm_values",
-                "sets": "set"
+            "cilium_config": {
+                "current": "cilium:index/config:Config"
             },
-            "cilium:index:Provider": {
-                "configContent": "config_content",
-                "configPath": "config_path",
-                "helmRelease": "helm_release"
+            "cilium_hubble": {
+                "current": "cilium:index/hubble:Hubble"
+            },
+            "cilium_kubeproxy_free": {
+                "current": "cilium:index/kubeproxyFree:KubeproxyFree"
             }
         },
-        "renamedConfigProperties": {
-            "configContent": "config_content",
-            "configPath": "config_path",
-            "helmRelease": "helm_release"
+        "datasources": {
+            "cilium_helm_values": {
+                "current": "cilium:index/getHelmValues:getHelmValues"
+            }
+        }
+    },
+    "auto-settings": {},
+    "default-resource-schema-fixups": {
+        "resources": {
+            "cilium": {},
+            "cilium_clustermesh": {},
+            "cilium_clustermesh_connection": {},
+            "cilium_config": {},
+            "cilium_hubble": {},
+            "cilium_kubeproxy_free": {}
         }
     }
 }

@@ -16,7 +16,7 @@ package main
 
 import (
 	cilium "github.com/littlejo/pulumi-cilium/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 )
 
 func main() {

@@ -11,6 +11,50 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Cluster Mesh resource. This is equivalent to cilium cli: `cilium clustermesh enable` and `cilium clustermesh disable`: It manages the activation of Cluster Mesh on one Kubernetes cluster.
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/littlejo/pulumi-cilium/sdk/go/cilium"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := cilium.NewInstall(ctx, "example", &cilium.InstallArgs{
+//				Sets: pulumi.StringArray{
+//					pulumi.String("cluster.name=clustermesh1"),
+//					pulumi.String("cluster.id=1"),
+//					pulumi.String("ipam.mode=kubernetes"),
+//				},
+//				Version: pulumi.String("1.20.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cilium.NewClustermesh(ctx, "example", &cilium.ClustermeshArgs{
+//				ServiceType: pulumi.String("LoadBalancer"),
+//			}, pulumi.DependsOn([]pulumi.Resource{
+//				example,
+//			}))
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// * More examples:
+//   - https://github.com/tf-cilium/terraform-kind-cilium-clustermesh
+//   - https://github.com/littlejo/terraform-provider-cilium/tree/main/.github/tf/clustermesh
 type Clustermesh struct {
 	pulumi.CustomResourceState
 
@@ -71,6 +115,12 @@ type ClustermeshState struct {
 
 func (ClustermeshState) ElementType() reflect.Type {
 	return reflect.TypeOf((*clustermeshState)(nil)).Elem()
+}
+
+// ClustermeshExists checks whether an existing Clustermesh resource with the given ID exists.
+func ClustermeshExists(ctx *pulumi.Context,
+	id pulumi.StringInput, state *ClustermeshState, opts ...pulumi.ResourceOption) pulumi.BoolOutput {
+	return ctx.ExistsResource("cilium:index/clustermesh:Clustermesh", id, state, "", opts...)
 }
 
 type clustermeshArgs struct {
